@@ -6,6 +6,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const userRoute = require("./routes/userRoute");
+app.use("/api/v1", userRoute);
+
 const connectDB = require("./config/dbConnection");
 connectDB();
 
