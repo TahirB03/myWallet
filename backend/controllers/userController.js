@@ -32,23 +32,29 @@ const getUserById = async (req, res) => {
 //create new user
 
 const postUser = async (req, res) => {
-  const newUser = new User({
-    name: req.body.name,
-    surname: req.body.surname,
-    age: req.body.age,
-    email: req.body.email,
-    phoneNumber: req.body.phoneNumber,
-    balance: req.body.balance,
-    nrOfDeposits: req.body.nrOfDeposits,
-  });
-  try {
-    await newUser.save();
-    res.status(200).json(newUser);
-  } catch (error) {
-    res.status(401).json({
-      message: error,
-    });
-  }
+  req.body.name?.length<3 && res.status(400).json("Name should be longer than 3 characters")
+  req.body.name?.length>20 && res.status(400).json("Name should be shorter than 20 characters")
+  req.body.surname?.length<3 && res.status(400).json("Name should be longer than 3 characters")
+  req.body.surname?.length>20 && res.status(400).json("Name should be shorter than 20 characters")
+  // if (req.body.name.length>=20 || req.body.length<=3) res.status(400).json("Name should be longer than 3 and shorter than 20")
+  console.log("passed");
+  // console.log(req.body);
+  // const newUser = new User({
+  //   name: req.body.name,
+  //   surname: req.body.surname,
+  //   age: req.body.age,
+  //   email: req.body.email,
+  //   phoneNumber: req.body.phoneNumber,
+  //   balance: req.body.balance,
+  // });
+  // try {
+  //   await newUser.save();
+  //   res.status(200).json(newUser);
+  // } catch (error) {
+  //   res.status(401).json({
+  //     message: error,
+  //   });
+  // }
 };
 
 //update user
