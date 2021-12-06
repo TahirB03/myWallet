@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "email-validator": "^2.0.4",
-    "phone": "^3.1.10"
-  }
-}
