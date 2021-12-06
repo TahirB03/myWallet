@@ -32,7 +32,7 @@ const userSchema = mongoose.Schema(
     biggestDeposit: { type: Number, min: 0, default: 0 },
     biggestWithdraw: { type: Number, min: 0, default: 0 },
   },
-  { timestamp: true }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("User", userSchema);

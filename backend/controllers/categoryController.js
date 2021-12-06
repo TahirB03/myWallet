@@ -1,7 +1,7 @@
 const Category = require("../models/category");
 const ObjectId = require("mongodb").ObjectId;
 
-exports.addCategory = async (req, res) => {
+const addCategory = async (req, res) => {
   const categoryName = new Category({
     categoryName: req.body.categoryName,
   });
@@ -14,12 +14,14 @@ exports.addCategory = async (req, res) => {
   }
 };
 
-exports.getAllCategories = async (req, res) => {
+const getAllCategories = async (req, res) => {
   try {
     const allCategories = await Category.find({});
     res.status(200).json(allCategories);
   } catch (error) {
-      console.log(error);
+    console.log(error);
     res.status(400).json(error);
   }
 };
+
+module.exports = { addCategory, getAllCategories };
