@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 const categorySchema = mongoose.Schema(
   {
-    _id: mongoose.Schema.Types.ObjectId,
     categoryName: {
       type: String,
       enum: [
@@ -13,6 +12,8 @@ const categorySchema = mongoose.Schema(
         'Fun',
         'Transportation',
         'Maintenance',
+        'Gift',
+        'Apparel'
       ],
       required: true,
     },

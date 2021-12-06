@@ -7,7 +7,9 @@ app.use(express.json());
 app.use(cors());
 
 const userRoute = require("./routes/userRoute");
-app.use("/api/v1", userRoute);
+const categoryRoute = require("./routes/categoryRoute");
+app.use('/api/v1/category',categoryRoute)
+app.use("/api/v1/user", userRoute);
 
 const connectDB = require("./config/dbConnection");
 connectDB();
