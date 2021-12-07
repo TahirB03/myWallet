@@ -9,6 +9,7 @@ app.use(cors());
 const userRoute = require("./routes/userRoute");
 const categoryRoute = require("./routes/categoryRoute");
 const eventRoute = require("./routes/eventRoute");
+
 app.use("/api/v1/category", categoryRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/event", eventRoute);

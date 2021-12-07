@@ -5,6 +5,7 @@ const userSchema = mongoose.Schema(
     //_id: mongoose.Schema.Types.ObjectId,
     name: { type: String, required: true, minLength: 3, maxLength: 20 },
     surname: { type: String, required: true, minLength: 3, maxLength: 20 },
+    // userName: {type: String, required: true, unique: true, minLength: 3, maxLength: 20},
     age: {
       type: Number,
       required: true,

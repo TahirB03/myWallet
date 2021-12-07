@@ -6,7 +6,7 @@ const eventSchema = mongoose.Schema(
     category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
     amount: { type: Number, required: true },
     isDeposit: { type: Boolean, required: true },
-    description: { type: String, required: true, maxLength: 100 },
+    description: { type: String, maxLength: 100 }, // Ska nevoje qe nje description te jete required eshte opcionale
   },
   { timestamps: true }
 );

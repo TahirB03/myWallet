@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 
 const getEvents = async (req, res) => {
   try {
-    const events = await Event.find({}).populate("user", req.body.id).exec();
+    const events = await Event.find({}).populate("user category", req.body.id).exec();
     res.status(200).json(events);
   } catch (err) {
     res.status(400).json({ message: err });
@@ -31,7 +31,7 @@ const getEventById = async (req, res) => {
 
 const addEvent = async (req, res) => {
   const newEvent = new Event({
-    user: req.body.id,
+    user: mongoose.Types.ObjectId(req.body.user),
     category: mongoose.Types.ObjectId(req.body.category),
     amount: req.body.amount,
     isDeposit: req.body.isDeposit,
@@ -52,8 +52,8 @@ const deleteEvent = async (req, res) => {
   const paramID = req.params.id;
 
   try {
-    const removeEvent = await Event.deleteOne({ _id: paramID });
-    res.status(200).json(removeEvent);
+    await Event.deleteOne({ _id: paramID });
+    res.status(200).json("Event was succesfully removed");
   } catch (err) {
     res.status(400).json({ message: err });
   }
