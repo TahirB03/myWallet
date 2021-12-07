@@ -5,10 +5,13 @@ const {
   addEvent,
   deleteEvent,
   getEventById,
+  getEventByUser
 } = require("../controllers/eventController");
 
 router.get("/", getEvents); //localhost:8080/api/v1/event
 router.get("/:id", getEventById); //localhost:8080/api/v1/event/:id
+router.get("/getEventByUser/:id", getEventByUser) // localhost:8080/api/v1/event/getEventByUser/:id
 router.post("/add", addEvent); //localhost:8080/api/v1/event/add
 router.delete("/delete/:id", deleteEvent); //localhost:8080/api/v1/event/delete/:id
+
 module.exports = router;

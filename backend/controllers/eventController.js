@@ -59,4 +59,14 @@ const deleteEvent = async (req, res) => {
   }
 };
 
-module.exports = { getEvents, getEventById, addEvent, deleteEvent };
+const getEventByUser = async (req,res)=>{
+  const id = req.params.id;
+  try {
+    const response = await Event.find({user:id}).populate('category').exec();
+    res.status(200).json(response)
+  } catch (error) {
+    res.status(502).json("Bad request")
+  }
+}
+
+module.exports = { getEvents, getEventById, addEvent, deleteEvent , getEventByUser};
