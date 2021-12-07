@@ -1,22 +1,24 @@
 const Event = require("../models/event");
+const User = require("../models/user");
+const Category = require("../models/category");
 const ObjectId = require("mongodb").ObjectId;
 const mongoose = require("mongoose");
 
-// get all bills
-
+// get all events
 const getEvents = async (req, res) => {
   try {
-    const events = await Event.find({}).populate("user category", req.body.id).exec();
+    const events = await Event.find({})
+      .populate("user category", req.body.id)
+      .exec();
     res.status(200).json(events);
   } catch (err) {
     res.status(400).json({ message: err });
   }
 };
 
-// get bill by id
+// get event by id
 const getEventById = async (req, res) => {
   const paramID = req.params.id;
-
   if (ObjectId.isValid(req.params.id)) {
     try {
       const event = await Event.findById({ _id: paramID });
@@ -29,7 +31,27 @@ const getEventById = async (req, res) => {
   }
 };
 
+// Crate an event
 const addEvent = async (req, res) => {
+  if (
+    ObjectId.isValid(req.body.user) === false ||
+    ObjectId.isValid(req.body.category) === false
+  ) {
+    res.status(400).json("Id was invalid");
+    return;
+  }
+  if ((await User.exists({ _id: req.body.user })) === false) {
+    res.status(200).json("User is not found in database");
+    return;
+  }
+  if ((await Category.exists({ _id: req.body.category })) === false) {
+    res.status(200).json("Category is not found in database");
+    return;
+  }
+  if (req.body.amount<=0){
+    res.status(400).json("Amount must be greater than 0");
+    return;
+  }
   const newEvent = new Event({
     user: mongoose.Types.ObjectId(req.body.user),
     category: mongoose.Types.ObjectId(req.body.category),
@@ -46,8 +68,7 @@ const addEvent = async (req, res) => {
   }
 };
 
-//delete bill
-
+//delete event
 const deleteEvent = async (req, res) => {
   const paramID = req.params.id;
 
@@ -59,14 +80,128 @@ const deleteEvent = async (req, res) => {
   }
 };
 
-const getEventByUser = async (req,res)=>{
-  const id = req.params.id;
-  try {
-    const response = await Event.find({user:id}).populate('category').exec();
-    res.status(200).json(response)
-  } catch (error) {
-    res.status(502).json("Bad request")
+const getEventByUser = async (req, res) => {
+  //E kontrollon ne fillim nqs id eshte valide
+  if (ObjectId.isValid(req.params.id) === false) {
+    res.status(400).json("Id was invalid");
+    return;
   }
-}
+  //E kontrollon nqs useri ekzison ne databaz
+  if ((await User.exists({ _id: req.params.id })) === false) {
+    res.status(200).json("User is not found in database");
+    return;
+  }
+  try {
+    // Marrim reponse nga databza
+    const response = await Event.find({ user: req.params.id })
+      .populate("category", "categoryName")
+      .exec();
+    if (response[0] === undefined) {
+      // Nqs eshte liste boshe atehere japim response qe ska event
+      res.status(404).json("No events were found");
+      return;
+    }
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(400).json("Bad request");
+  }
+};
 
-module.exports = { getEvents, getEventById, addEvent, deleteEvent , getEventByUser};
+const getEventByUserCategory = async (req, res) => {
+  if (
+    ObjectId.isValid(req.params.userId) === false ||
+    ObjectId.isValid(req.params.categoryId) === false
+  ) {
+    res.status(400).json("Id was invalid");
+    return;
+  }
+  if ((await User.exists({ _id: req.params.userId })) === false) {
+    res.status(400).json("User is not found in database");
+    return;
+  }
+  if ((await Category.exists({ _id: req.params.categoryId })) === false) {
+    res.status(400).json("Category is not found in database");
+    return;
+  }
+  try {
+    const response = await Event.find({
+      user: req.params.userId,
+      category: req.params.categoryId,
+    })
+      .populate("category", "categoryName")
+      .exec();
+    if (response[0] === undefined) {
+      // Nqs eshte liste boshe atehere japim response qe ska event
+      res.status(404).json("No events were found");
+      return;
+    }
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(400).json("Bad request");
+  }
+};
+
+const getAllEventsDeposit = async (req, res) => {
+  if (ObjectId.isValid(req.params.userId) === false) {
+    res.status(400).json("Id was invalid");
+    return;
+  }
+  //E kontrollon nqs useri ekzison ne databaz
+  if ((await User.exists({ _id: req.params.userId })) === false) {
+    res.status(200).json("User is not found in database");
+    return;
+  }
+  try {
+    const response = await Event.find({
+      user: req.params.userId,
+      isDeposit: true,
+    }).populate("user category", req.body.id)
+    .exec();;
+    if (response[0] === undefined) {
+      // Nqs eshte liste boshe atehere japim response qe ska event
+      res.status(404).json("No events were found");
+      return;
+    }
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(400).json("Bad request");
+  }
+};
+
+const getAllEventsWithdraw = async (req, res) => {
+  if (ObjectId.isValid(req.params.userId) === false) {
+    res.status(400).json("Id was invalid");
+    return;
+  }
+  //E kontrollon nqs useri ekzison ne databaz
+  if ((await User.exists({ _id: req.params.userId })) === false) {
+    res.status(200).json("User is not found in database");
+    return;
+  }
+  try {
+    const response = await Event.find({
+      user: req.params.userId,
+      isDeposit: false,
+    }).populate("user category", req.body.id)
+    .exec();;
+    if (response[0] === undefined) {
+      // Nqs eshte liste boshe atehere japim response qe ska event
+      res.status(404).json("No events were found");
+      return;
+    }
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(400).json("Bad request");
+  }
+};
+
+module.exports = {
+  getEvents,
+  getEventById,
+  addEvent,
+  deleteEvent,
+  getEventByUser,
+  getEventByUserCategory,
+  getAllEventsDeposit,
+  getAllEventsWithdraw,
+};

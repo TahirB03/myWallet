@@ -4,21 +4,10 @@ const categorySchema = mongoose.Schema(
   {
     categoryName: {
       type: String,
-      enum: [
-        "Wage",
-        "Tips/Lottary",
-        "Monthly Bills",
-        "Healthcare",
-        "Fun",
-        "Transportation",
-        "Maintenance",
-        "Gift",
-        "Apparel",
-      ],
+      unique: true,
       required: true,
     },
-  },
-  { timestamps: true }
+  }
 );
 
 module.exports = mongoose.model("Category", categorySchema);
