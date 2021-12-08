@@ -8,7 +8,7 @@ const {
   deleteUser,
 } = require("../controllers/userController");
 
-router.get("/", getUsers); //localhost:8080/api/v1/users
+router.get("/", getUsers); //localhost:8080/api/v1/user
 router.get("/:id", getUserById); //localhost:8080/api/v1/user/:id
 router.post("/add", postUser); //localhost:8080/api/v1/user/add
 router.patch("/update/:id", updateUser); //localhost:8080/api/v1/user/update/:id
