@@ -1,9 +1,7 @@
 const User = require("../models/user");
 const ObjectId = require("mongodb").ObjectId;
 var validator = require("email-validator");
-const {phone} = require('phone');
-
-
+const { phone } = require("phone");
 
 const getUsers = async (req, res) => {
   try {
@@ -13,8 +11,6 @@ const getUsers = async (req, res) => {
     res.status(400).json({ message: err });
   }
 };
-
-
 
 const getUserById = async (req, res) => {
   const paramID = req.params.id;
@@ -34,14 +30,33 @@ const getUserById = async (req, res) => {
 //create new user
 
 const postUser = async (req, res) => {
-  const data = req.body
-  data.name?.length<3 && res.status(400).json("Name should be longer than 3 characters")
-  data.name?.length>20 && res.status(400).json("Name should be shorter than 20 characters") 
-  data.surname?.length<3 && res.status(400).json("Name should be longer than 3 characters")
-  data.surname?.length>20 && res.status(400).json("Name should be shorter than 20 characters")
-  !validator.validate(data.email) && res.status(400).json("Bad email was given")
-  !phone(data.phoneNumber).isValid && res.status(400).json("Bad phone number was given")
-  data.balance<0 && res.status(400).json("You need more money than 0")
+  const data = req.body;
+  if (
+    !req?.body?.name ||
+    !req?.body?.surname ||
+    !req?.body?.age ||
+    !req?.body?.emai ||
+    !req?.body?.phoneNumber ||
+    !req?.body?.balance
+  ) {
+    return res
+      .status(400)
+      .json({ message: "You need to fill the requried information" });
+  }
+  if (data.name?.length < 3 || data.name?.length > 20)
+    res
+      .status(400)
+      .json("Name should be longer than 3 characters and shorter than 20");
+  else if (data.surname?.length < 3 || data.name?.length > 20)
+    res
+      .status(400)
+      .json("Surname should be longer than 3 characters and shorter than 20");
+
+  !validator.validate(data.email) &&
+    res.status(400).json("Bad email was given");
+  !phone(data.phoneNumber).isValid &&
+    res.status(400).json("Bad phone number was given");
+  data.balance < 0 && res.status(400).json("You need more money than 0");
 
   const newUser = new User({
     name: req.body.name,
@@ -61,32 +76,7 @@ const postUser = async (req, res) => {
   }
 };
 
-
-
 const updateUser = async (req, res) => {
-  // const paramID = req.params.id;
-  // const name = req.body.name;
-  // const surname = req.body.surname;
-  // const age = req.body.age;
-  // const email = req.body.email;
-  // const phoneNumber = req.body.phoneNumber;
-  // const balance = req.body.balance;
-  //console.log(req.body);
-  //res.send("hey");
-  // try {
-  //   const updateUserData = await User.findById(
-  //     { _id: paramID },
-  //     { name: name },
-  //     { surname: surname },
-  //     { age: age },
-  //     { email: email },
-  //     { phoneNumber: phoneNumber },
-  //     { balance: balance }
-  //   );
-  //   res.status(200).json(updateUserData);
-  // } catch (err) {
-  //   res.status(400).json({ message: err });
-  // }
   if (!ObjectId.isValid(req.params.id)) {
     res.status(400).json("Id is not valid");
   } else {
@@ -95,11 +85,18 @@ const updateUser = async (req, res) => {
         req.params.id,
         {
           email: req.body.email,
-          phoneNumber: req.body.phoneNumber
+          phoneNumber: req.body.phoneNumber,
         },
         { new: true }
       );
-      res.status(200).json(updateUserData);
+      if (req.body.email && !validator.validate(updateUserData.email))
+        res.status(400).json("Bad email was given");
+      else if (
+        req.body.phoneNumber &&
+        !phone(updateUserData.phoneNumber).isValid
+      )
+        res.status(400).json("Bad phone number was given");
+      else res.status(200).json(updateUserData);
     } catch (err) {
       res.status(400).json({ message: err });
     }

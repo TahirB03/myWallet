@@ -33,6 +33,10 @@ const getEventById = async (req, res) => {
 
 // Crate an event
 const addEvent = async (req, res) => {
+  if (!req?.body?.amount) {
+    return res.status(400).json({ message: "You need to give an amount" });
+  }
+
   if (
     ObjectId.isValid(req.body.user) === false ||
     ObjectId.isValid(req.body.category) === false
@@ -100,6 +104,7 @@ const addEvent = async (req, res) => {
     console.log(error);
     await session.abortTransaction();
     res.status(400).json({ message: error });
+    console.log(error);
   }
   session.endSession(); 
 };

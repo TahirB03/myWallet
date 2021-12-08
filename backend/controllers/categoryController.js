@@ -25,4 +25,18 @@ const getAllCategories = async (req, res) => {
   }
 };
 
-module.exports = { addCategory, getAllCategories };
+const deleteCategory = async (req, res) => {
+  if (ObjectId.isValid(req.params.id) === false) {
+    res.status(400).json("Id was invalid");
+    return;
+  }
+  try {
+    await Category.findByIdAndDelete(req.params.id);
+    res.status(200).json("Category deleted");
+  } catch (error) {
+    console.log(error);
+    res.status(400).json(error);
+  }
+};
+
+module.exports = { addCategory, getAllCategories, deleteCategory };
