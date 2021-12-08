@@ -33,6 +33,10 @@ const getEventById = async (req, res) => {
 
 // Crate an event
 const addEvent = async (req, res) => {
+  if (!req?.body?.amount) {
+    return res.status(400).json({ message: "You need to give an amount" });
+  }
+
   if (
     ObjectId.isValid(req.body.user) === false ||
     ObjectId.isValid(req.body.category) === false
@@ -56,14 +60,15 @@ const addEvent = async (req, res) => {
     user: mongoose.Types.ObjectId(req.body.user),
     category: mongoose.Types.ObjectId(req.body.category),
     amount: req.body.amount,
-    isDeposit: req.body.isDeposit,
     description: req.body.description,
   });
   try {
     await newEvent.save();
+
     res.status(201).json("Succes");
   } catch (error) {
     res.status(400).json({ message: error });
+    console.log(error);
   }
 };
 
