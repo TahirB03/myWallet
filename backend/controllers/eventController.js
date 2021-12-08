@@ -52,19 +52,56 @@ const addEvent = async (req, res) => {
     res.status(400).json("Amount must be greater than 0");
     return;
   }
-  const newEvent = new Event({
-    user: mongoose.Types.ObjectId(req.body.user),
-    category: mongoose.Types.ObjectId(req.body.category),
-    amount: req.body.amount,
-    isDeposit: req.body.isDeposit,
-    description: req.body.description,
-  });
+  //E fillojme sessionin e mongoosit
+  const session = await mongoose.startSession();
+  const typeOfCategory = await Category.findById(req.body.category)
+  const userDetails = await User.findById(req.body.user)
+  const biggestValue = {biggestDeposit: userDetails.biggestDeposit,biggestWithdraw:userDetails.biggestWithdraw}
+  if (typeOfCategory.isDeposit===true){
+    biggestValue.biggestDeposit = req.body.amount>=biggestValue.biggestDeposit ? req.body.amount : biggestValue.biggestDeposit;
+  }else{
+    biggestValue.biggestWithdraw = req.body.amount>=biggestValue.biggestWithdraw ? req.body.amount : biggestValue.biggestWithdraw;
+
+  }
+  if (typeOfCategory.isDeposit===false){
+  if (req.body.amount>userDetails.balance){
+    res.status(400).json("Amount is greater than you balance, please check you balance")
+    return;
+  }}
   try {
-    await newEvent.save();
+    session.startTransaction();
+     await User.findByIdAndUpdate(
+      req.body.user,
+        { 
+          $set:biggestValue,
+          $inc: { 
+            "balance": typeOfCategory.isDeposit===true ? req.body.amount : -1*req.body.amount,
+            "nrOfDeposits": typeOfCategory.isDeposit===true ? 1 : 0,
+            "nrOfWithdraws": typeOfCategory.isDeposit===false ? 1 : 0,
+          },
+        },
+      { session: session }
+    ).exec();
+    await Event.create(
+      [
+        {
+          user: mongoose.Types.ObjectId(req.body.user),
+          category: mongoose.Types.ObjectId(req.body.category),
+          amount: req.body.amount,
+          isDeposit: req.body.isDeposit,
+          description: req.body.description,
+        },
+      ],
+      { session: session }
+    );
+    await session.commitTransaction();
     res.status(201).json("Succes");
   } catch (error) {
+    console.log(error);
+    await session.abortTransaction();
     res.status(400).json({ message: error });
   }
+  session.endSession(); 
 };
 
 //delete event
