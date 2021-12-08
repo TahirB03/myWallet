@@ -41,14 +41,14 @@ const addEvent = async (req, res) => {
     return;
   }
   if ((await User.exists({ _id: req.body.user })) === false) {
-    res.status(200).json("User is not found in database");
+    res.status(400).json("User is not found in database");
     return;
   }
   if ((await Category.exists({ _id: req.body.category })) === false) {
-    res.status(200).json("Category is not found in database");
+    res.status(400).json("Category is not found in database");
     return;
   }
-  if (req.body.amount<=0){
+  if (req.body.amount <= 0) {
     res.status(400).json("Amount must be greater than 0");
     return;
   }
@@ -63,20 +63,21 @@ const addEvent = async (req, res) => {
     await newEvent.save();
     res.status(201).json("Succes");
   } catch (error) {
-    console.log(error);
     res.status(400).json({ message: error });
   }
 };
 
 //delete event
 const deleteEvent = async (req, res) => {
-  const paramID = req.params.id;
-
-  try {
-    await Event.deleteOne({ _id: paramID });
-    res.status(200).json("Event was succesfully removed");
-  } catch (err) {
-    res.status(400).json({ message: err });
+  if (ObjectId.isValid(req.params.id)) {
+    try {
+      await Event.deleteOne({ _id: paramID });
+      res.status(200).json("Event was succesfully removed");
+    } catch (err) {
+      res.status(400).json({ message: err });
+    }
+  } else {
+    res.status(400).json("Id was invalid");
   }
 };
 
@@ -128,7 +129,10 @@ const getEventByUserCategory = async (req, res) => {
       user: req.params.userId,
       category: req.params.categoryId,
     })
-      .populate("category", "categoryName")
+      .populate({
+        path: "category",
+        select: "categoryName",
+      })
       .exec();
     if (response[0] === undefined) {
       // Nqs eshte liste boshe atehere japim response qe ska event
@@ -154,13 +158,23 @@ const getAllEventsDeposit = async (req, res) => {
   try {
     const response = await Event.find({
       user: req.params.userId,
-      isDeposit: true,
-    }).populate("user category", req.body.id)
-    .exec();;
+    })
+      .populate({
+        path: "category",
+        match: { isDeposit: true },
+        select: "categoryName",
+      })
+      .exec();
     if (response[0] === undefined) {
       // Nqs eshte liste boshe atehere japim response qe ska event
       res.status(404).json("No events were found");
       return;
+    }
+    var i = response.length;
+    while (i--) {
+      if (response[i].category == null) {
+        response.splice(i, 1);
+      }
     }
     res.status(200).json(response);
   } catch (error) {
@@ -181,13 +195,23 @@ const getAllEventsWithdraw = async (req, res) => {
   try {
     const response = await Event.find({
       user: req.params.userId,
-      isDeposit: false,
-    }).populate("user category", req.body.id)
-    .exec();;
+    })
+      .populate({
+        path: "category",
+        match: { isDeposit: false },
+        select: "isDeposit",
+      })
+      .exec();
     if (response[0] === undefined) {
       // Nqs eshte liste boshe atehere japim response qe ska event
       res.status(404).json("No events were found");
       return;
+    }
+    var i = response.length;
+    while (i--) {
+      if (response[i].category == null) {
+        response.splice(i, 1);
+      }
     }
     res.status(200).json(response);
   } catch (error) {

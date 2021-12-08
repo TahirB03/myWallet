@@ -7,6 +7,7 @@ const categorySchema = mongoose.Schema(
       unique: true,
       required: true,
     },
+    isDeposit: { type: Boolean, required: true },
   }
 );
 
