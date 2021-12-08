@@ -110,7 +110,6 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   const paramID = req.params.id;
-
   try {
     const removeUser = await User.deleteOne({ _id: paramID });
     res.status(200).json(removeUser);

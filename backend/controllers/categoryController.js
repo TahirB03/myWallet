@@ -4,6 +4,7 @@ const ObjectId = require("mongodb").ObjectId;
 const addCategory = async (req, res) => {
   const categoryName = new Category({
     categoryName: req.body.categoryName,
+    isDeposit: req.body.isDeposit
   });
   try {
     await categoryName.save();
