@@ -8,7 +8,8 @@ const {
   getEventByUser,
   getEventByUserCategory,
   getAllEventsDeposit,
-  getAllEventsWithdraw
+  getAllEventsWithdraw,
+  getEventsByDate
 } = require("../controllers/eventController");
 
 router.get("/", getEvents); //localhost:8080/api/v1/event
@@ -17,8 +18,9 @@ router.get("/getEventByUser/:id", getEventByUser) // localhost:8080/api/v1/event
 router.get('/getEventByUserCategory/:userId/:categoryId', getEventByUserCategory) // localhost:8080/api/v1/event/getEventByUserCategory
 router.get('/getAllEventsDeposit/:userId', getAllEventsDeposit) // localhost:8080/api/v1/event/getAllEventsDeposit
 router.get('/getAllEventsWithdraw/:userId', getAllEventsWithdraw) // localhost:8080/api/v1/event/getAllEventsWithdraw
+router.get('/getEventsByDate/:id',getEventsByDate) // localhost:8080/api/v1/event/getEventsByDate
 router.post("/add", addEvent); // localhost:8080/api/v1/event/add
-router.delete("/delete/:id", deleteEvent); // localhost:8080/api/v1/event/delete/:id
+router.delete("/delete", deleteEvent); // localhost:8080/api/v1/event/delete/:id
 
 
 module.exports = router;

@@ -36,7 +36,6 @@ const addEvent = async (req, res) => {
   if (!req?.body?.amount) {
     return res.status(400).json({ message: "You need to give an amount" });
   }
-
   if (
     ObjectId.isValid(req.body.user) === false ||
     ObjectId.isValid(req.body.category) === false
@@ -58,32 +57,46 @@ const addEvent = async (req, res) => {
   }
   //E fillojme sessionin e mongoosit
   const session = await mongoose.startSession();
-  const typeOfCategory = await Category.findById(req.body.category)
-  const userDetails = await User.findById(req.body.user)
-  const biggestValue = {biggestDeposit: userDetails.biggestDeposit,biggestWithdraw:userDetails.biggestWithdraw}
-  if (typeOfCategory.isDeposit===true){
-    biggestValue.biggestDeposit = req.body.amount>=biggestValue.biggestDeposit ? req.body.amount : biggestValue.biggestDeposit;
-  }else{
-    biggestValue.biggestWithdraw = req.body.amount>=biggestValue.biggestWithdraw ? req.body.amount : biggestValue.biggestWithdraw;
-
+  const typeOfCategory = await Category.findById(req.body.category);
+  const userDetails = await User.findById(req.body.user);
+  const biggestValue = {
+    biggestDeposit: userDetails.biggestDeposit,
+    biggestWithdraw: userDetails.biggestWithdraw,
+  };
+  if (typeOfCategory.isDeposit === true) {
+    biggestValue.biggestDeposit =
+      req.body.amount >= biggestValue.biggestDeposit
+        ? req.body.amount
+        : biggestValue.biggestDeposit;
+  } else {
+    biggestValue.biggestWithdraw =
+      req.body.amount >= biggestValue.biggestWithdraw
+        ? req.body.amount
+        : biggestValue.biggestWithdraw;
   }
-  if (typeOfCategory.isDeposit===false){
-  if (req.body.amount>userDetails.balance){
-    res.status(400).json("Amount is greater than you balance, please check you balance")
-    return;
-  }}
+  if (typeOfCategory.isDeposit === false) {
+    if (req.body.amount > userDetails.balance) {
+      res
+        .status(400)
+        .json("Amount is greater than you balance, please check you balance");
+      return;
+    }
+  }
   try {
     session.startTransaction();
-     await User.findByIdAndUpdate(
+    await User.findByIdAndUpdate(
       req.body.user,
-        { 
-          $set:biggestValue,
-          $inc: { 
-            "balance": typeOfCategory.isDeposit===true ? req.body.amount : -1*req.body.amount,
-            "nrOfDeposits": typeOfCategory.isDeposit===true ? 1 : 0,
-            "nrOfWithdraws": typeOfCategory.isDeposit===false ? 1 : 0,
-          },
+      {
+        $set: biggestValue,
+        $inc: {
+          balance:
+            typeOfCategory.isDeposit === true
+              ? req.body.amount
+              : -1 * req.body.amount,
+          nrOfDeposits: typeOfCategory.isDeposit === true ? 1 : 0,
+          nrOfWithdraws: typeOfCategory.isDeposit === false ? 1 : 0,
         },
+      },
       { session: session }
     ).exec();
     await Event.create(
@@ -106,21 +119,60 @@ const addEvent = async (req, res) => {
     res.status(400).json({ message: error });
     console.log(error);
   }
-  session.endSession(); 
+  session.endSession();
 };
 
-//delete event
+// Delete an event
 const deleteEvent = async (req, res) => {
-  if (ObjectId.isValid(req.params.id)) {
-    try {
-      await Event.deleteOne({ _id: paramID });
-      res.status(200).json("Event was succesfully removed");
-    } catch (err) {
-      res.status(400).json({ message: err });
-    }
-  } else {
+  if (
+    ObjectId.isValid(req.body.event) === false ||
+    ObjectId.isValid(req.body.user) === false ||
+    ObjectId.isValid(req.body.category) === false
+  ) {
     res.status(400).json("Id was invalid");
+    return;
   }
+  const typeOfCategory = await Category.findById(req.body.category);
+  const userDetails = await User.findById(req.body.user);
+  const biggestValue = {
+    biggestDeposit: userDetails.biggestDeposit,
+    biggestWithdraw: userDetails.biggestWithdraw,
+  };
+  const event = await Event.findById(req.body.event);
+  if (event === null) {
+    res.status(400).json("Event wasnt found!");
+    return;
+  }
+  //E fillojme sessionin e mongoosit
+  const session = await mongoose.startSession();
+
+  try {
+    session.startTransaction();
+    await User.findByIdAndUpdate(
+      req.body.user,
+      {
+        $set: biggestValue,
+        $inc: {
+          balance:
+            typeOfCategory.isDeposit === true
+              ? -1 * event.amount
+              : event.amount,
+          nrOfDeposits: typeOfCategory.isDeposit === true ? -1 : 0,
+          nrOfWithdraws: typeOfCategory.isDeposit === false ? -1 : 0,
+        },
+      },
+      { session: session }
+    ).exec();
+    await Event.findByIdAndDelete(req.body.event, { session: session });
+    await session.commitTransaction();
+    res.status(201).json("Succes");
+  } catch (error) {
+    console.log(error);
+    await session.abortTransaction();
+    res.status(400).json({ message: error });
+    console.log(error);
+  }
+  session.endSession();
 };
 
 const getEventByUser = async (req, res) => {
@@ -260,6 +312,30 @@ const getAllEventsWithdraw = async (req, res) => {
     res.status(400).json("Bad request");
   }
 };
+//Merr daten
+const getEventsByDate = async (req, res) => {
+  if (ObjectId.isValid(req.params.id) === false) {
+    res.status(400).json("Id was invalid");
+    return;
+  }
+  const startingDate = req.body.startDate;
+  console.log(startingDate);
+  if (startingDate === undefined) {
+    res.status(400).json("Please give a starting date!");
+  }
+  const endingDate = req.body.endDate || new Date();
+  try {
+    const filteredItems = await Event.find({
+      createdAt: {
+        $gte: startingDate,
+        $lte: endingDate,
+      },
+    });
+    res.status(200).json(filteredItems);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 module.exports = {
   getEvents,
@@ -270,4 +346,5 @@ module.exports = {
   getEventByUserCategory,
   getAllEventsDeposit,
   getAllEventsWithdraw,
+  getEventsByDate,
 };

@@ -35,7 +35,7 @@ const postUser = async (req, res) => {
     !req?.body?.name ||
     !req?.body?.surname ||
     !req?.body?.age ||
-    !req?.body?.emai ||
+    !req?.body?.email ||
     !req?.body?.phoneNumber ||
     !req?.body?.balance
   ) {
