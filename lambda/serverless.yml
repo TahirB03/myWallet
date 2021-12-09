@@ -1,0 +1,29 @@
+service: myWallet
+frameworkVersion: "2"
+provider:
+  name: aws
+  region: eu-south-1
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+functions:
+  getAllUsers:
+    handler: app.getAllUsers
+    events:
+      - http:
+          path: /users/getAllUsers
+          method: GET
+          cors: true
+  getUserById:
+    handler: app.getUserById
+    events:
+      - http:
+          path: /users/getUserById/{id}
+          method: GET
+          cors: true
+  createUser:
+    handler: app.createUser
+    events:
+      - http:
+          path: /users/addUser
+          method: POST
+          cors: true
