@@ -62,3 +62,45 @@ functions:
           path: /category/deleteCategory/{id}
           method: DELETE
           cors: true
+  getAllEvents:
+    handler: app.getAllEvents
+    events:
+      - http:
+          path: /events/
+          method: GET
+          cors: true
+  getEventById:
+    handler: app.getEventById
+    events:
+      - http:
+          path: /events/{id}
+          method: GET
+          cors: true
+  getEventbyUser:
+    handler: app.getEventbyUser
+    events:
+      - http:
+          path: /events/getEventByUser/{id}
+          method: GET
+          cors: true
+  getEventsByuserCategory:
+    handler: app.getEventsByUserCategory
+    events:
+      - http:
+          path: /events/getEventByUser/{id}/{categoryId}
+          method: GET
+          cors: true
+  getAllDeposit:
+    handler: app.getAllDeposit
+    events:
+      - http:
+          path: /events/getDeposits/{id}
+          method: GET
+          cors: true
+  getAllWithdraws:
+    handler: app.getAllWithdraws
+    events:
+      - http:
+          path: /events/getAllWithdraws/{id}
+          method: GET
+          cors: true

@@ -119,6 +119,42 @@
         "LogGroupName": "/aws/lambda/myWallet-dev-deleteCategory"
       }
     },
+    "GetAllEventsLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/myWallet-dev-getAllEvents"
+      }
+    },
+    "GetEventByIdLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/myWallet-dev-getEventById"
+      }
+    },
+    "GetEventbyUserLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/myWallet-dev-getEventbyUser"
+      }
+    },
+    "GetEventsByuserCategoryLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/myWallet-dev-getEventsByuserCategory"
+      }
+    },
+    "GetAllDepositLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/myWallet-dev-getAllDeposit"
+      }
+    },
+    "GetAllWithdrawsLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/myWallet-dev-getAllWithdraws"
+      }
+    },
     "IamRoleLambdaExecution": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -203,7 +239,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639135396891-2021-12-10T11:23:16.891Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639139979692-2021-12-10T12:39:39.692Z/myWallet.zip"
         },
         "Handler": "app.getAllUsers",
         "Runtime": "nodejs12.x",
@@ -228,7 +264,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639135396891-2021-12-10T11:23:16.891Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639139979692-2021-12-10T12:39:39.692Z/myWallet.zip"
         },
         "Handler": "app.getUserById",
         "Runtime": "nodejs12.x",
@@ -253,7 +289,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639135396891-2021-12-10T11:23:16.891Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639139979692-2021-12-10T12:39:39.692Z/myWallet.zip"
         },
         "Handler": "app.createUser",
         "Runtime": "nodejs12.x",
@@ -278,7 +314,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639135396891-2021-12-10T11:23:16.891Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639139979692-2021-12-10T12:39:39.692Z/myWallet.zip"
         },
         "Handler": "app.updateUser",
         "Runtime": "nodejs12.x",
@@ -303,7 +339,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639135396891-2021-12-10T11:23:16.891Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639139979692-2021-12-10T12:39:39.692Z/myWallet.zip"
         },
         "Handler": "app.deleteUser",
         "Runtime": "nodejs12.x",
@@ -328,7 +364,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639135396891-2021-12-10T11:23:16.891Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639139979692-2021-12-10T12:39:39.692Z/myWallet.zip"
         },
         "Handler": "app.getAllCategories",
         "Runtime": "nodejs12.x",
@@ -353,7 +389,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639135396891-2021-12-10T11:23:16.891Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639139979692-2021-12-10T12:39:39.692Z/myWallet.zip"
         },
         "Handler": "app.getCategoryFromId",
         "Runtime": "nodejs12.x",
@@ -378,7 +414,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639135396891-2021-12-10T11:23:16.891Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639139979692-2021-12-10T12:39:39.692Z/myWallet.zip"
         },
         "Handler": "app.deleteCategory",
         "Runtime": "nodejs12.x",
@@ -396,84 +432,294 @@
         "DeleteCategoryLogGroup"
       ]
     },
-    "GetAllUsersLambdaVersion6YyQiT8CTPmN5gHB7GKoKfKXvz9QAM45Fx4qPRYPJ5g": {
+    "GetAllEventsLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/myWallet/dev/1639139979692-2021-12-10T12:39:39.692Z/myWallet.zip"
+        },
+        "Handler": "app.getAllEvents",
+        "Runtime": "nodejs12.x",
+        "FunctionName": "myWallet-dev-getAllEvents",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetAllEventsLogGroup"
+      ]
+    },
+    "GetEventByIdLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/myWallet/dev/1639139979692-2021-12-10T12:39:39.692Z/myWallet.zip"
+        },
+        "Handler": "app.getEventById",
+        "Runtime": "nodejs12.x",
+        "FunctionName": "myWallet-dev-getEventById",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetEventByIdLogGroup"
+      ]
+    },
+    "GetEventbyUserLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/myWallet/dev/1639139979692-2021-12-10T12:39:39.692Z/myWallet.zip"
+        },
+        "Handler": "app.getEventbyUser",
+        "Runtime": "nodejs12.x",
+        "FunctionName": "myWallet-dev-getEventbyUser",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetEventbyUserLogGroup"
+      ]
+    },
+    "GetEventsByuserCategoryLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/myWallet/dev/1639139979692-2021-12-10T12:39:39.692Z/myWallet.zip"
+        },
+        "Handler": "app.getEventsByUserCategory",
+        "Runtime": "nodejs12.x",
+        "FunctionName": "myWallet-dev-getEventsByuserCategory",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetEventsByuserCategoryLogGroup"
+      ]
+    },
+    "GetAllDepositLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/myWallet/dev/1639139979692-2021-12-10T12:39:39.692Z/myWallet.zip"
+        },
+        "Handler": "app.getAllDeposit",
+        "Runtime": "nodejs12.x",
+        "FunctionName": "myWallet-dev-getAllDeposit",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetAllDepositLogGroup"
+      ]
+    },
+    "GetAllWithdrawsLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/myWallet/dev/1639139979692-2021-12-10T12:39:39.692Z/myWallet.zip"
+        },
+        "Handler": "app.getAllWithdraws",
+        "Runtime": "nodejs12.x",
+        "FunctionName": "myWallet-dev-getAllWithdraws",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetAllWithdrawsLogGroup"
+      ]
+    },
+    "GetAllUsersLambdaVersionrZ9PG6n2YcPPn3UdgaAUT4FS9rZZtT0xl1jIIm2Gcw": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetAllUsersLambdaFunction"
         },
-        "CodeSha256": "sRXRcjI2sQjT+6D0gIJTT7DoxFgwuxiCXHBV4yO2qd4="
+        "CodeSha256": "WJkcMvtdO/qMyeXhHgJJUgbWS164TKogt9QDrRUWFac="
       }
     },
-    "GetUserByIdLambdaVersionlfhomlIJWNzwaTbXGKUjYvxff7E5rdK2mBXrLsmyO0": {
+    "GetUserByIdLambdaVersionGjQ8jc91HQJTmphkfqnPPyTnHly2xVBX0DsCmKNk8tU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetUserByIdLambdaFunction"
         },
-        "CodeSha256": "sRXRcjI2sQjT+6D0gIJTT7DoxFgwuxiCXHBV4yO2qd4="
+        "CodeSha256": "WJkcMvtdO/qMyeXhHgJJUgbWS164TKogt9QDrRUWFac="
       }
     },
-    "CreateUserLambdaVersionaghHW3EreePomgq01m5pEg6hkWnxsuvGToYItHS7s": {
+    "CreateUserLambdaVersionnmKC5L7pHeAFQuDKQejdMlSkHo5kuvuke2jPvwOfdKU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CreateUserLambdaFunction"
         },
-        "CodeSha256": "sRXRcjI2sQjT+6D0gIJTT7DoxFgwuxiCXHBV4yO2qd4="
+        "CodeSha256": "WJkcMvtdO/qMyeXhHgJJUgbWS164TKogt9QDrRUWFac="
       }
     },
-    "UpdateUserLambdaVersionwO6qKDwhkdabYinN2Dg6RKeeWDwNWN7xc0qmYpDDCg": {
+    "UpdateUserLambdaVersionLoqoLnwVfkELQtdjNtjsteRS1BOjbrd6zjI7vKbrW0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UpdateUserLambdaFunction"
         },
-        "CodeSha256": "sRXRcjI2sQjT+6D0gIJTT7DoxFgwuxiCXHBV4yO2qd4="
+        "CodeSha256": "WJkcMvtdO/qMyeXhHgJJUgbWS164TKogt9QDrRUWFac="
       }
     },
-    "DeleteUserLambdaVersionmuTYRZk5YkAgjlf8Qd6c1LMmmHFoRU9JjztA7XBybM": {
+    "DeleteUserLambdaVersion5txcFSYi5DnMGrVSWjBBdQK9XHxYw21udsAJVC9TIk": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "DeleteUserLambdaFunction"
         },
-        "CodeSha256": "sRXRcjI2sQjT+6D0gIJTT7DoxFgwuxiCXHBV4yO2qd4="
+        "CodeSha256": "WJkcMvtdO/qMyeXhHgJJUgbWS164TKogt9QDrRUWFac="
       }
     },
-    "GetAllCategoriesLambdaVersionGXuTIz3Tp0XY07zojOd8Pix4XMS14lujzcl6QTFzE": {
+    "GetAllCategoriesLambdaVersionwLfwv1EbKvrLY9HVjLTa9AltUEniaLkCRjCNL7jlhJ0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetAllCategoriesLambdaFunction"
         },
-        "CodeSha256": "sRXRcjI2sQjT+6D0gIJTT7DoxFgwuxiCXHBV4yO2qd4="
+        "CodeSha256": "WJkcMvtdO/qMyeXhHgJJUgbWS164TKogt9QDrRUWFac="
       }
     },
-    "GetCategoryFromIdLambdaVersionVyeEXHeEhiPbf448SR1KRhvB3XgCEkVBBvqiMmFs": {
+    "GetCategoryFromIdLambdaVersionjnmo5BfiG1VVQgW67THTw9DCKWj9MbXNBmEqlmawcI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetCategoryFromIdLambdaFunction"
         },
-        "CodeSha256": "sRXRcjI2sQjT+6D0gIJTT7DoxFgwuxiCXHBV4yO2qd4="
+        "CodeSha256": "WJkcMvtdO/qMyeXhHgJJUgbWS164TKogt9QDrRUWFac="
       }
     },
-    "DeleteCategoryLambdaVersionCY4CjBBnhYbfRIHnVfpnI24YSnrdlIiRKFmi5RPqPYs": {
+    "DeleteCategoryLambdaVersionguH7nucjAOUHaayGq2wNNKyjlcdd3CARYbLj0SR5xBQ": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "DeleteCategoryLambdaFunction"
         },
-        "CodeSha256": "sRXRcjI2sQjT+6D0gIJTT7DoxFgwuxiCXHBV4yO2qd4="
+        "CodeSha256": "WJkcMvtdO/qMyeXhHgJJUgbWS164TKogt9QDrRUWFac="
+      }
+    },
+    "GetAllEventsLambdaVersionYXxpNTKs9RLUx42Yixst3ArwkncsAFw8obYvsi3k": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetAllEventsLambdaFunction"
+        },
+        "CodeSha256": "WJkcMvtdO/qMyeXhHgJJUgbWS164TKogt9QDrRUWFac="
+      }
+    },
+    "GetEventByIdLambdaVersiondxO4Bnjkr2jj75MGFZnPYfJvs3SWcQId8JjIev9D3xE": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetEventByIdLambdaFunction"
+        },
+        "CodeSha256": "WJkcMvtdO/qMyeXhHgJJUgbWS164TKogt9QDrRUWFac="
+      }
+    },
+    "GetEventbyUserLambdaVersion0c9AVcSXUdv5fs5ajEIJ9ddfFRfedtPUP5nSsMwoRXo": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetEventbyUserLambdaFunction"
+        },
+        "CodeSha256": "WJkcMvtdO/qMyeXhHgJJUgbWS164TKogt9QDrRUWFac="
+      }
+    },
+    "GetEventsByuserCategoryLambdaVersionwHWTTLNHsRRUib2vOK1V2QZ7wXeM6qeqXu6Uv5RjBA": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetEventsByuserCategoryLambdaFunction"
+        },
+        "CodeSha256": "WJkcMvtdO/qMyeXhHgJJUgbWS164TKogt9QDrRUWFac="
+      }
+    },
+    "GetAllDepositLambdaVersioniq5H1od288PEdWSwJi9FjD7IV0O8ag2gWwlG41RM": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetAllDepositLambdaFunction"
+        },
+        "CodeSha256": "WJkcMvtdO/qMyeXhHgJJUgbWS164TKogt9QDrRUWFac="
+      }
+    },
+    "GetAllWithdrawsLambdaVersionc8yLurk15FAfOlx8K7ol1kAoskVArlzVRrS6rDZU": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetAllWithdrawsLambdaFunction"
+        },
+        "CodeSha256": "WJkcMvtdO/qMyeXhHgJJUgbWS164TKogt9QDrRUWFac="
       }
     },
     "ApiGatewayRestApi": {
@@ -643,6 +889,117 @@
       "Properties": {
         "ParentId": {
           "Ref": "ApiGatewayResourceCategoryDeletecategory"
+        },
+        "PathPart": "{id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceEvents": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "events",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceEventsIdVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceEvents"
+        },
+        "PathPart": "{id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceEventsGeteventbyuser": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceEvents"
+        },
+        "PathPart": "getEventByUser",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceEventsGeteventbyuserIdVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceEventsGeteventbyuser"
+        },
+        "PathPart": "{id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceEventsGeteventbyuserIdVarCategoryidVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceEventsGeteventbyuserIdVar"
+        },
+        "PathPart": "{categoryId}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceEventsGetdeposits": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceEvents"
+        },
+        "PathPart": "getDeposits",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceEventsGetdepositsIdVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceEventsGetdeposits"
+        },
+        "PathPart": "{id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceEventsGetallwithdraws": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceEvents"
+        },
+        "PathPart": "getAllWithdraws",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceEventsGetallwithdrawsIdVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceEventsGetallwithdraws"
         },
         "PathPart": "{id}",
         "RestApiId": {
@@ -1004,6 +1361,276 @@
         },
         "ResourceId": {
           "Ref": "ApiGatewayResourceCategoryDeletecategoryIdVar"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodEventsOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceEvents"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodEventsIdVarOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceEventsIdVar"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodEventsGeteventbyuserIdVarOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceEventsGeteventbyuserIdVar"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodEventsGeteventbyuserIdVarCategoryidVarOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceEventsGeteventbyuserIdVarCategoryidVar"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodEventsGetdepositsIdVarOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceEventsGetdepositsIdVar"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodEventsGetallwithdrawsIdVarOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceEventsGetallwithdrawsIdVar"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -1378,7 +2005,283 @@
         "DeleteCategoryLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1639135393774": {
+    "ApiGatewayMethodEventsGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceEvents"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetAllEventsLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "GetAllEventsLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayMethodEventsIdVarGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceEventsIdVar"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetEventByIdLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "GetEventByIdLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayMethodEventsGeteventbyuserIdVarGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceEventsGeteventbyuserIdVar"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetEventbyUserLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "GetEventbyUserLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayMethodEventsGeteventbyuserIdVarCategoryidVarGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceEventsGeteventbyuserIdVarCategoryidVar"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetEventsByuserCategoryLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "GetEventsByuserCategoryLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayMethodEventsGetdepositsIdVarGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceEventsGetdepositsIdVar"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetAllDepositLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "GetAllDepositLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayMethodEventsGetallwithdrawsIdVarGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceEventsGetallwithdrawsIdVar"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetAllWithdrawsLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "GetAllWithdrawsLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayDeployment1639139976430": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1395,6 +2298,12 @@
         "ApiGatewayMethodCategoryOptions",
         "ApiGatewayMethodCategoryIdVarOptions",
         "ApiGatewayMethodCategoryDeletecategoryIdVarOptions",
+        "ApiGatewayMethodEventsOptions",
+        "ApiGatewayMethodEventsIdVarOptions",
+        "ApiGatewayMethodEventsGeteventbyuserIdVarOptions",
+        "ApiGatewayMethodEventsGeteventbyuserIdVarCategoryidVarOptions",
+        "ApiGatewayMethodEventsGetdepositsIdVarOptions",
+        "ApiGatewayMethodEventsGetallwithdrawsIdVarOptions",
         "ApiGatewayMethodUsersGetallusersGet",
         "ApiGatewayMethodUsersGetuserbyidIdVarGet",
         "ApiGatewayMethodUsersAdduserPost",
@@ -1402,7 +2311,13 @@
         "ApiGatewayMethodUsersDeleteuserIdVarDelete",
         "ApiGatewayMethodCategoryGet",
         "ApiGatewayMethodCategoryIdVarGet",
-        "ApiGatewayMethodCategoryDeletecategoryIdVarDelete"
+        "ApiGatewayMethodCategoryDeletecategoryIdVarDelete",
+        "ApiGatewayMethodEventsGet",
+        "ApiGatewayMethodEventsIdVarGet",
+        "ApiGatewayMethodEventsGeteventbyuserIdVarGet",
+        "ApiGatewayMethodEventsGeteventbyuserIdVarCategoryidVarGet",
+        "ApiGatewayMethodEventsGetdepositsIdVarGet",
+        "ApiGatewayMethodEventsGetallwithdrawsIdVarGet"
       ]
     },
     "GetAllUsersLambdaPermissionApiGateway": {
@@ -1700,6 +2615,228 @@
           ]
         }
       }
+    },
+    "GetAllEventsLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetAllEventsLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "GetEventByIdLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetEventByIdLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "GetEventbyUserLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetEventbyUserLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "GetEventsByuserCategoryLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetEventsByuserCategoryLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "GetAllDepositLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetAllDepositLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "GetAllWithdrawsLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetAllWithdrawsLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
     }
   },
   "Outputs": {
@@ -1714,7 +2851,7 @@
     "GetAllUsersLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetAllUsersLambdaVersion6YyQiT8CTPmN5gHB7GKoKfKXvz9QAM45Fx4qPRYPJ5g"
+        "Ref": "GetAllUsersLambdaVersionrZ9PG6n2YcPPn3UdgaAUT4FS9rZZtT0xl1jIIm2Gcw"
       },
       "Export": {
         "Name": "sls-myWallet-dev-GetAllUsersLambdaFunctionQualifiedArn"
@@ -1723,7 +2860,7 @@
     "GetUserByIdLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetUserByIdLambdaVersionlfhomlIJWNzwaTbXGKUjYvxff7E5rdK2mBXrLsmyO0"
+        "Ref": "GetUserByIdLambdaVersionGjQ8jc91HQJTmphkfqnPPyTnHly2xVBX0DsCmKNk8tU"
       },
       "Export": {
         "Name": "sls-myWallet-dev-GetUserByIdLambdaFunctionQualifiedArn"
@@ -1732,7 +2869,7 @@
     "CreateUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CreateUserLambdaVersionaghHW3EreePomgq01m5pEg6hkWnxsuvGToYItHS7s"
+        "Ref": "CreateUserLambdaVersionnmKC5L7pHeAFQuDKQejdMlSkHo5kuvuke2jPvwOfdKU"
       },
       "Export": {
         "Name": "sls-myWallet-dev-CreateUserLambdaFunctionQualifiedArn"
@@ -1741,7 +2878,7 @@
     "UpdateUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UpdateUserLambdaVersionwO6qKDwhkdabYinN2Dg6RKeeWDwNWN7xc0qmYpDDCg"
+        "Ref": "UpdateUserLambdaVersionLoqoLnwVfkELQtdjNtjsteRS1BOjbrd6zjI7vKbrW0"
       },
       "Export": {
         "Name": "sls-myWallet-dev-UpdateUserLambdaFunctionQualifiedArn"
@@ -1750,7 +2887,7 @@
     "DeleteUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "DeleteUserLambdaVersionmuTYRZk5YkAgjlf8Qd6c1LMmmHFoRU9JjztA7XBybM"
+        "Ref": "DeleteUserLambdaVersion5txcFSYi5DnMGrVSWjBBdQK9XHxYw21udsAJVC9TIk"
       },
       "Export": {
         "Name": "sls-myWallet-dev-DeleteUserLambdaFunctionQualifiedArn"
@@ -1759,7 +2896,7 @@
     "GetAllCategoriesLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetAllCategoriesLambdaVersionGXuTIz3Tp0XY07zojOd8Pix4XMS14lujzcl6QTFzE"
+        "Ref": "GetAllCategoriesLambdaVersionwLfwv1EbKvrLY9HVjLTa9AltUEniaLkCRjCNL7jlhJ0"
       },
       "Export": {
         "Name": "sls-myWallet-dev-GetAllCategoriesLambdaFunctionQualifiedArn"
@@ -1768,7 +2905,7 @@
     "GetCategoryFromIdLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetCategoryFromIdLambdaVersionVyeEXHeEhiPbf448SR1KRhvB3XgCEkVBBvqiMmFs"
+        "Ref": "GetCategoryFromIdLambdaVersionjnmo5BfiG1VVQgW67THTw9DCKWj9MbXNBmEqlmawcI"
       },
       "Export": {
         "Name": "sls-myWallet-dev-GetCategoryFromIdLambdaFunctionQualifiedArn"
@@ -1777,10 +2914,64 @@
     "DeleteCategoryLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "DeleteCategoryLambdaVersionCY4CjBBnhYbfRIHnVfpnI24YSnrdlIiRKFmi5RPqPYs"
+        "Ref": "DeleteCategoryLambdaVersionguH7nucjAOUHaayGq2wNNKyjlcdd3CARYbLj0SR5xBQ"
       },
       "Export": {
         "Name": "sls-myWallet-dev-DeleteCategoryLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetAllEventsLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetAllEventsLambdaVersionYXxpNTKs9RLUx42Yixst3ArwkncsAFw8obYvsi3k"
+      },
+      "Export": {
+        "Name": "sls-myWallet-dev-GetAllEventsLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetEventByIdLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetEventByIdLambdaVersiondxO4Bnjkr2jj75MGFZnPYfJvs3SWcQId8JjIev9D3xE"
+      },
+      "Export": {
+        "Name": "sls-myWallet-dev-GetEventByIdLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetEventbyUserLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetEventbyUserLambdaVersion0c9AVcSXUdv5fs5ajEIJ9ddfFRfedtPUP5nSsMwoRXo"
+      },
+      "Export": {
+        "Name": "sls-myWallet-dev-GetEventbyUserLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetEventsByuserCategoryLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetEventsByuserCategoryLambdaVersionwHWTTLNHsRRUib2vOK1V2QZ7wXeM6qeqXu6Uv5RjBA"
+      },
+      "Export": {
+        "Name": "sls-myWallet-dev-GetEventsByuserCategoryLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetAllDepositLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetAllDepositLambdaVersioniq5H1od288PEdWSwJi9FjD7IV0O8ag2gWwlG41RM"
+      },
+      "Export": {
+        "Name": "sls-myWallet-dev-GetAllDepositLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetAllWithdrawsLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetAllWithdrawsLambdaVersionc8yLurk15FAfOlx8K7ol1kAoskVArlzVRrS6rDZU"
+      },
+      "Export": {
+        "Name": "sls-myWallet-dev-GetAllWithdrawsLambdaFunctionQualifiedArn"
       }
     },
     "ServiceEndpoint": {

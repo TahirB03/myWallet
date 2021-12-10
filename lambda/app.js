@@ -7,6 +7,12 @@ const validator = require("email-validator");
 const { phone } = require("phone");
 const user = require("./user");
 
+const cors = {
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+};
+
 //Get all the users (This is only for dev)
 const getAllUsers = async () => {
   try {
@@ -253,7 +259,7 @@ const updateUser = async (event) => {
     body = JSON.parse(event.body);
   }
   if (body.email !== undefined) {
-    if (!(validator.validate(body.email))) {
+    if (!validator.validate(body.email)) {
       return {
         statusCode: 400,
         headers: {
@@ -267,8 +273,8 @@ const updateUser = async (event) => {
       };
     }
   }
-  if (body.phoneNumber!==undefined) {
-    if (!(phone(body.phoneNumber).isValid)) {
+  if (body.phoneNumber !== undefined) {
+    if (!phone(body.phoneNumber).isValid) {
       return {
         statusCode: 400,
         headers: {
@@ -332,7 +338,7 @@ const updateUser = async (event) => {
   }
 };
 //Delete a user
-const deleteUser = async (event)=>{
+const deleteUser = async (event) => {
   const userId = event.pathParameters.id;
   if (!ObjectId.isValid(userId)) {
     return {
@@ -348,7 +354,7 @@ const deleteUser = async (event)=>{
     };
   }
   try {
-     await User.findByIdAndDelete(userId);
+    await User.findByIdAndDelete(userId);
     return {
       statusCode: 200,
       headers: {
@@ -374,10 +380,10 @@ const deleteUser = async (event)=>{
       }),
     };
   }
-}
+};
 ////////////////////////////////////////////////////////////////////// CATEGORY SECTION  ///////////////////////////////////////////////////
 // Get all categorie
-const getAllCategories = async ()=>{
+const getAllCategories = async () => {
   try {
     const allCategories = await Category.find();
     return {
@@ -401,13 +407,13 @@ const getAllCategories = async ()=>{
       },
       body: JSON.stringify({
         message: "Something went wrong",
-        reason: error
+        reason: error,
       }),
     };
   }
-}
+};
 //Get category from ID
-const getCategoryFromId = async event =>{
+const getCategoryFromId = async (event) => {
   const categoryId = event.pathParameters.id;
   if (!ObjectId.isValid(categoryId)) {
     return {
@@ -445,28 +451,27 @@ const getCategoryFromId = async event =>{
       },
       body: JSON.stringify({
         message: "something went wrong",
-        reason: error
+        reason: error,
       }),
     };
   }
-}
+};
 //Delete Category
-const deleteCategory = async event =>{
+const deleteCategory = async (event) => {
   const categoryId = event.pathParameters.id;
   try {
-        await Category.findByIdAndDelete(categoryId)
-        return {
-          statusCode: 200,
-          headers: {
-            "Access-Control-Allow-Headers": "Content-Type",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-          },
-          body: JSON.stringify({
-            message: "Category succesfully deleted",
-            
-          }),
-        };
+    await Category.findByIdAndDelete(categoryId);
+    return {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+      },
+      body: JSON.stringify({
+        message: "Category succesfully deleted",
+      }),
+    };
   } catch (error) {
     return {
       statusCode: 400,
@@ -481,7 +486,227 @@ const deleteCategory = async event =>{
       }),
     };
   }
-}
+};
+///////////////////////////////////////////////////////////////////// EVENT SECTION     //////////////////////////////////////
+const getAllEvents = async (even) => {
+  try {
+    const allEvents = await Event.find();
+    return {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+      },
+      body: JSON.stringify({
+        allEvents: allEvents,
+      }),
+    };
+  } catch (error) {
+    return {
+      statusCode: 400,
+      headers: {
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+      },
+      body: JSON.stringify({
+        message: "Category succesfully deleted",
+      }),
+    };
+  }
+};
+//Get event by ID
+const getEventById = async (event) => {
+  const eventId = event.pathParameters.id;
+  if (!ObjectId.isValid(eventId)) {
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Make sure the ID is correct",
+      }),
+    };
+  }
+  try {
+    const event = await Event.findById(eventId);
+    return {
+      statusCode: 200,
+      headers: cors,
+      body: JSON.stringify({
+        event: event,
+      }),
+    };
+  } catch (error) {
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Something bad happened",
+        reason: error,
+      }),
+    };
+  }
+};
+//Get event by user
+const getEventbyUser = async (event) => {
+  const userId = event.pathParameters.id;
+  if (!ObjectId.isValid(userId)) {
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Make sure the ID is correct",
+      }),
+    };
+  }
+  try {
+    const eventByUser = await Event.find({ user: userId });
+    return {
+      statusCode: 200,
+      headers: cors,
+      body: JSON.stringify({
+        events: eventByUser,
+      }),
+    };
+  } catch (error) {
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Something happened",
+        reason: error,
+      }),
+    };
+  }
+};
+const getEventsByUserCategory = async (event) => {
+  const userId = event.pathParameters.id;
+  const categoryId = event.pathParameters.categoryId;
+  if (!ObjectId.isValid(userId) || !ObjectId.isValid(categoryId)) {
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Make sure the ID is correct",
+      }),
+    };
+  }
+  try {
+    const eventsByCategory = await Event.find({
+      user: userId,
+      category: categoryId,
+    })
+      .populate("category")
+      .exec();
+    return {
+      statusCode: 200,
+      headers: cors,
+      body: JSON.stringify({
+        events: eventsByCategory,
+      }),
+    };
+  } catch (error) {
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Something happened",
+        reason: error,
+      }),
+    };
+  }
+};
+const getAllDeposit = async (event) => {
+  const userId = event.pathParameters.id;
+  if (!ObjectId.isValid(userId)) {
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Make sure the ID is correct",
+      }),
+    };
+  }
+  try {
+    let response = await Event.find({
+      user: userId,
+    })
+      .populate({
+        path: "category",
+        match: { isDeposit: true },
+        select: "categoryName",
+      })
+      .exec();
+    var i = response.length;
+    while (i--) {
+      if (response[i].category == null) {
+        response.splice(i, 1);
+      }
+    }
+    return {
+      statusCode: 200,
+      headers: cors,
+      body: JSON.stringify({
+        events: response,
+      }),
+    };
+  } catch (error) {
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Something happened",
+        reason: error,
+      }),
+    };
+  }
+};
+const getAllWithdraws = async (event) => {
+  const userId = event.pathParameters.id;
+  if (!ObjectId.isValid(userId)) {
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Make sure the ID is correct",
+      }),
+    };
+  }
+  try {
+    let response = await Event.find({
+      user: userId,
+    })
+      .populate({
+        path: "category",
+        match: { isDeposit: false },
+        select: "categoryName",
+      })
+      .exec();
+    var i = response.length;
+    while (i--) {
+      if (response[i].category == null) {
+        response.splice(i, 1);
+      }
+    }
+    return {
+      statusCode: 200,
+      headers: cors,
+      body: JSON.stringify({
+        events: response,
+      }),
+    };
+  } catch (error) {
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Something happened",
+        reason: error,
+      }),
+    };
+  }
+};
 module.exports = {
   getAllUsers,
   getUserById,
@@ -491,4 +716,10 @@ module.exports = {
   getAllCategories,
   getCategoryFromId,
   deleteCategory,
+  getAllEvents,
+  getEventById,
+  getEventbyUser,
+  getEventsByUserCategory,
+  getAllDeposit,
+  getAllWithdraws,
 };
