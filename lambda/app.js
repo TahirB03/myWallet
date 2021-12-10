@@ -6,6 +6,7 @@ const ObjectId = require("mongodb").ObjectId;
 const validator = require("email-validator");
 const { phone } = require("phone");
 const user = require("./user");
+const mongoose = require('mongoose')
 
 const cors = {
   "Access-Control-Allow-Headers": "Content-Type",
@@ -707,6 +708,128 @@ const getAllWithdraws = async (event) => {
     };
   }
 };
+const createEvent = async event=>{
+  let body ;
+  const userId = event.pathParameters.userId
+  const categoryId = event.pathParameters.categoryId
+  if (event.body !== null && event.body !== undefined) {
+    body = JSON.parse(event.body);
+  }else{
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Provide a body for the request",
+      }),
+    };
+  }
+  if (!ObjectId.isValid(userId) || !ObjectId.isValid(categoryId)){
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Make sure the ID-s are correct",
+      }),
+    };
+  }
+  if (body.amount<=0){
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Make sure amount is greater than 0",
+      }),
+    };
+  }
+  if ((await User.exists({_id : userId})) === false){
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "User doesnt exist",
+      }),
+    };
+  }
+  if ((await Category.exists({_id : categoryId})) === false){
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "User doesnt exist",
+      }),
+    };
+  }
+  const session = await mongoose.startSession();
+  const typeOfCategory = await Category.findById(categoryId)
+  const userDetails = await User.findById(userId);
+  const biggestValue = {
+    biggestDeposit: userDetails.biggestDeposit,
+    biggestWithdraw: userDetails.biggestWithdraw,
+  };
+  if (typeOfCategory.isDeposit===true){
+    biggestValue.biggestDeposit = body.amount >= biggestValue.biggestDeposit ? body.amount : biggestValue.biggestDeposit
+  }else{
+        biggestValue.biggestWithdraw = body.amount>= biggestValue.biggestWithdraw ? body.amount : biggestValue.biggestWithdraw
+  }
+  if (typeOfCategory.isDeposit === false){
+    if (body.amount>userDetails.balance){
+      return{
+        statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "You dont have that amount of money deposited.",
+      }),
+      }
+    }
+  }
+  try {
+    session.startTransaction();
+     await Event.create(
+      [
+        {
+          user: mongoose.Types.ObjectId(userId),
+          category: mongoose.Types.ObjectId(categoryId),
+          amount: body.amount,
+          description: body.description,
+        },
+      ],
+      { session: session }
+    );
+    const newUpdatedUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        $set: biggestValue,
+        $inc: {
+          "balance":
+            typeOfCategory.isDeposit === true
+              ? body.amount
+              : -1 * body.amount,
+          "nrOfDeposits": typeOfCategory.isDeposit === true ? 1 : 0,
+          "nrOfWithdraws": typeOfCategory.isDeposit === false ? 1 : 0,
+        },
+      },
+      { session: session , new: true}
+    ).exec();
+    await session.commitTransaction();
+    return{
+      statusCode: 200,
+      headers: cors,
+      body: JSON.stringify({
+        user: newUpdatedUser
+      }),
+    }
+  } catch (error) {
+    session.abortTransaction();
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Cannot proccede",
+        reason: error
+      }),
+    };
+  }
+};
 module.exports = {
   getAllUsers,
   getUserById,
@@ -722,4 +845,5 @@ module.exports = {
   getEventsByUserCategory,
   getAllDeposit,
   getAllWithdraws,
+  createEvent,
 };

@@ -104,3 +104,10 @@ functions:
           path: /events/getAllWithdraws/{id}
           method: GET
           cors: true
+  createEvent:
+    handler: app.createEvent
+    events:
+      - http:
+          path: /events/createEvent/{userId}/{categoryId}
+          method: POST
+          cors: true
