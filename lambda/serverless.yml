@@ -27,3 +27,38 @@ functions:
           path: /users/addUser
           method: POST
           cors: true
+  updateUser:
+    handler: app.updateUser
+    events:
+      - http:
+          path: /users/updateUser/{id}
+          method: PATCH
+          cors: true
+  deleteUser:
+    handler: app.deleteUser
+    events: 
+      - http:
+          path: /users/deleteUser/{id}
+          method: DELETE
+          cors: true
+  getAllCategories:
+    handler: app.getAllCategories
+    events: 
+      - http:
+          path: /category/
+          method: GET
+          cors: true
+  getCategoryFromId:
+    handler: app.getCategoryFromId
+    events:
+      - http:
+          path: /category/{id}
+          method: GET
+          cors: true
+  deleteCategory:
+    handler: app.deleteCategory
+    events:
+      - http:
+          path: /category/deleteCategory/{id}
+          method: DELETE
+          cors: true

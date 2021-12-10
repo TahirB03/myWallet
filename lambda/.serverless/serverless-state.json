@@ -102,6 +102,36 @@
               "LogGroupName": "/aws/lambda/myWallet-dev-createUser"
             }
           },
+          "UpdateUserLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/myWallet-dev-updateUser"
+            }
+          },
+          "DeleteUserLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/myWallet-dev-deleteUser"
+            }
+          },
+          "GetAllCategoriesLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/myWallet-dev-getAllCategories"
+            }
+          },
+          "GetCategoryFromIdLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/myWallet-dev-getCategoryFromId"
+            }
+          },
+          "DeleteCategoryLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/myWallet-dev-deleteCategory"
+            }
+          },
           "IamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
@@ -186,7 +216,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639091677361-2021-12-09T23:14:37.361Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1639135396891-2021-12-10T11:23:16.891Z/myWallet.zip"
               },
               "Handler": "app.getAllUsers",
               "Runtime": "nodejs12.x",
@@ -211,7 +241,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639091677361-2021-12-09T23:14:37.361Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1639135396891-2021-12-10T11:23:16.891Z/myWallet.zip"
               },
               "Handler": "app.getUserById",
               "Runtime": "nodejs12.x",
@@ -236,7 +266,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639091677361-2021-12-09T23:14:37.361Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1639135396891-2021-12-10T11:23:16.891Z/myWallet.zip"
               },
               "Handler": "app.createUser",
               "Runtime": "nodejs12.x",
@@ -254,34 +284,209 @@
               "CreateUserLogGroup"
             ]
           },
-          "GetAllUsersLambdaVersionNRYPHDQ57sYlo3xt3lMbrWaMSW0FRdi0L66jBODbREc": {
+          "UpdateUserLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/myWallet/dev/1639135396891-2021-12-10T11:23:16.891Z/myWallet.zip"
+              },
+              "Handler": "app.updateUser",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "myWallet-dev-updateUser",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "UpdateUserLogGroup"
+            ]
+          },
+          "DeleteUserLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/myWallet/dev/1639135396891-2021-12-10T11:23:16.891Z/myWallet.zip"
+              },
+              "Handler": "app.deleteUser",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "myWallet-dev-deleteUser",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "DeleteUserLogGroup"
+            ]
+          },
+          "GetAllCategoriesLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/myWallet/dev/1639135396891-2021-12-10T11:23:16.891Z/myWallet.zip"
+              },
+              "Handler": "app.getAllCategories",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "myWallet-dev-getAllCategories",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetAllCategoriesLogGroup"
+            ]
+          },
+          "GetCategoryFromIdLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/myWallet/dev/1639135396891-2021-12-10T11:23:16.891Z/myWallet.zip"
+              },
+              "Handler": "app.getCategoryFromId",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "myWallet-dev-getCategoryFromId",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetCategoryFromIdLogGroup"
+            ]
+          },
+          "DeleteCategoryLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/myWallet/dev/1639135396891-2021-12-10T11:23:16.891Z/myWallet.zip"
+              },
+              "Handler": "app.deleteCategory",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "myWallet-dev-deleteCategory",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "DeleteCategoryLogGroup"
+            ]
+          },
+          "GetAllUsersLambdaVersion6YyQiT8CTPmN5gHB7GKoKfKXvz9QAM45Fx4qPRYPJ5g": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetAllUsersLambdaFunction"
               },
-              "CodeSha256": "ZYdNp1Yi9lZaNd1epqW7YQn8Xe8Kd1h4UBbSwe05NMk="
+              "CodeSha256": "sRXRcjI2sQjT+6D0gIJTT7DoxFgwuxiCXHBV4yO2qd4="
             }
           },
-          "GetUserByIdLambdaVersionWg1m21H2OI3zlF5NashoJoSBPfJLeDSDrmajaJe58": {
+          "GetUserByIdLambdaVersionlfhomlIJWNzwaTbXGKUjYvxff7E5rdK2mBXrLsmyO0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetUserByIdLambdaFunction"
               },
-              "CodeSha256": "ZYdNp1Yi9lZaNd1epqW7YQn8Xe8Kd1h4UBbSwe05NMk="
+              "CodeSha256": "sRXRcjI2sQjT+6D0gIJTT7DoxFgwuxiCXHBV4yO2qd4="
             }
           },
-          "CreateUserLambdaVersiongphat7nAvTUxVmvqwrwbeqMmqaNA94nVzdXgBZKJY": {
+          "CreateUserLambdaVersionaghHW3EreePomgq01m5pEg6hkWnxsuvGToYItHS7s": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateUserLambdaFunction"
               },
-              "CodeSha256": "ZYdNp1Yi9lZaNd1epqW7YQn8Xe8Kd1h4UBbSwe05NMk="
+              "CodeSha256": "sRXRcjI2sQjT+6D0gIJTT7DoxFgwuxiCXHBV4yO2qd4="
+            }
+          },
+          "UpdateUserLambdaVersionwO6qKDwhkdabYinN2Dg6RKeeWDwNWN7xc0qmYpDDCg": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "UpdateUserLambdaFunction"
+              },
+              "CodeSha256": "sRXRcjI2sQjT+6D0gIJTT7DoxFgwuxiCXHBV4yO2qd4="
+            }
+          },
+          "DeleteUserLambdaVersionmuTYRZk5YkAgjlf8Qd6c1LMmmHFoRU9JjztA7XBybM": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "DeleteUserLambdaFunction"
+              },
+              "CodeSha256": "sRXRcjI2sQjT+6D0gIJTT7DoxFgwuxiCXHBV4yO2qd4="
+            }
+          },
+          "GetAllCategoriesLambdaVersionGXuTIz3Tp0XY07zojOd8Pix4XMS14lujzcl6QTFzE": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetAllCategoriesLambdaFunction"
+              },
+              "CodeSha256": "sRXRcjI2sQjT+6D0gIJTT7DoxFgwuxiCXHBV4yO2qd4="
+            }
+          },
+          "GetCategoryFromIdLambdaVersionVyeEXHeEhiPbf448SR1KRhvB3XgCEkVBBvqiMmFs": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetCategoryFromIdLambdaFunction"
+              },
+              "CodeSha256": "sRXRcjI2sQjT+6D0gIJTT7DoxFgwuxiCXHBV4yO2qd4="
+            }
+          },
+          "DeleteCategoryLambdaVersionCY4CjBBnhYbfRIHnVfpnI24YSnrdlIiRKFmi5RPqPYs": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "DeleteCategoryLambdaFunction"
+              },
+              "CodeSha256": "sRXRcjI2sQjT+6D0gIJTT7DoxFgwuxiCXHBV4yO2qd4="
             }
           },
           "ApiGatewayRestApi": {
@@ -354,6 +559,105 @@
                 "Ref": "ApiGatewayResourceUsers"
               },
               "PathPart": "addUser",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceUsersUpdateuser": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceUsers"
+              },
+              "PathPart": "updateUser",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceUsersUpdateuserIdVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceUsersUpdateuser"
+              },
+              "PathPart": "{id}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceUsersDeleteuser": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceUsers"
+              },
+              "PathPart": "deleteUser",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceUsersDeleteuserIdVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceUsersDeleteuser"
+              },
+              "PathPart": "{id}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceCategory": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "category",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceCategoryIdVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceCategory"
+              },
+              "PathPart": "{id}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceCategoryDeletecategory": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceCategory"
+              },
+              "PathPart": "deleteCategory",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceCategoryDeletecategoryIdVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceCategoryDeletecategory"
+              },
+              "PathPart": "{id}",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -488,6 +792,231 @@
               },
               "ResourceId": {
                 "Ref": "ApiGatewayResourceUsersAdduser"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodUsersUpdateuserIdVarOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,PATCH'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": ""
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceUsersUpdateuserIdVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodUsersDeleteuserIdVarOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": ""
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceUsersDeleteuserIdVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodCategoryOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": ""
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceCategory"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodCategoryIdVarOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": ""
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceCategoryIdVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodCategoryDeletecategoryIdVarOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": ""
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceCategoryDeletecategoryIdVar"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -632,7 +1161,237 @@
               "CreateUserLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1639091673818": {
+          "ApiGatewayMethodUsersUpdateuserIdVarPatch": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "PATCH",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceUsersUpdateuserIdVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "UpdateUserLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "UpdateUserLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodUsersDeleteuserIdVarDelete": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "DELETE",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceUsersDeleteuserIdVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "DeleteUserLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "DeleteUserLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodCategoryGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceCategory"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "GetAllCategoriesLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "GetAllCategoriesLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodCategoryIdVarGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceCategoryIdVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "GetCategoryFromIdLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "GetCategoryFromIdLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodCategoryDeletecategoryIdVarDelete": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "DELETE",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceCategoryDeletecategoryIdVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "DeleteCategoryLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "DeleteCategoryLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayDeployment1639135393774": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -644,9 +1403,19 @@
               "ApiGatewayMethodUsersGetallusersOptions",
               "ApiGatewayMethodUsersGetuserbyidIdVarOptions",
               "ApiGatewayMethodUsersAdduserOptions",
+              "ApiGatewayMethodUsersUpdateuserIdVarOptions",
+              "ApiGatewayMethodUsersDeleteuserIdVarOptions",
+              "ApiGatewayMethodCategoryOptions",
+              "ApiGatewayMethodCategoryIdVarOptions",
+              "ApiGatewayMethodCategoryDeletecategoryIdVarOptions",
               "ApiGatewayMethodUsersGetallusersGet",
               "ApiGatewayMethodUsersGetuserbyidIdVarGet",
-              "ApiGatewayMethodUsersAdduserPost"
+              "ApiGatewayMethodUsersAdduserPost",
+              "ApiGatewayMethodUsersUpdateuserIdVarPatch",
+              "ApiGatewayMethodUsersDeleteuserIdVarDelete",
+              "ApiGatewayMethodCategoryGet",
+              "ApiGatewayMethodCategoryIdVarGet",
+              "ApiGatewayMethodCategoryDeletecategoryIdVarDelete"
             ]
           },
           "GetAllUsersLambdaPermissionApiGateway": {
@@ -759,6 +1528,191 @@
                 ]
               }
             }
+          },
+          "UpdateUserLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "UpdateUserLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "DeleteUserLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "DeleteUserLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "GetAllCategoriesLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetAllCategoriesLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "GetCategoryFromIdLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetCategoryFromIdLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "DeleteCategoryLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "DeleteCategoryLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
           }
         },
         "Outputs": {
@@ -773,7 +1727,7 @@
           "GetAllUsersLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetAllUsersLambdaVersionNRYPHDQ57sYlo3xt3lMbrWaMSW0FRdi0L66jBODbREc"
+              "Ref": "GetAllUsersLambdaVersion6YyQiT8CTPmN5gHB7GKoKfKXvz9QAM45Fx4qPRYPJ5g"
             },
             "Export": {
               "Name": "sls-myWallet-dev-GetAllUsersLambdaFunctionQualifiedArn"
@@ -782,7 +1736,7 @@
           "GetUserByIdLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetUserByIdLambdaVersionWg1m21H2OI3zlF5NashoJoSBPfJLeDSDrmajaJe58"
+              "Ref": "GetUserByIdLambdaVersionlfhomlIJWNzwaTbXGKUjYvxff7E5rdK2mBXrLsmyO0"
             },
             "Export": {
               "Name": "sls-myWallet-dev-GetUserByIdLambdaFunctionQualifiedArn"
@@ -791,10 +1745,55 @@
           "CreateUserLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateUserLambdaVersiongphat7nAvTUxVmvqwrwbeqMmqaNA94nVzdXgBZKJY"
+              "Ref": "CreateUserLambdaVersionaghHW3EreePomgq01m5pEg6hkWnxsuvGToYItHS7s"
             },
             "Export": {
               "Name": "sls-myWallet-dev-CreateUserLambdaFunctionQualifiedArn"
+            }
+          },
+          "UpdateUserLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "UpdateUserLambdaVersionwO6qKDwhkdabYinN2Dg6RKeeWDwNWN7xc0qmYpDDCg"
+            },
+            "Export": {
+              "Name": "sls-myWallet-dev-UpdateUserLambdaFunctionQualifiedArn"
+            }
+          },
+          "DeleteUserLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "DeleteUserLambdaVersionmuTYRZk5YkAgjlf8Qd6c1LMmmHFoRU9JjztA7XBybM"
+            },
+            "Export": {
+              "Name": "sls-myWallet-dev-DeleteUserLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetAllCategoriesLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetAllCategoriesLambdaVersionGXuTIz3Tp0XY07zojOd8Pix4XMS14lujzcl6QTFzE"
+            },
+            "Export": {
+              "Name": "sls-myWallet-dev-GetAllCategoriesLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetCategoryFromIdLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetCategoryFromIdLambdaVersionVyeEXHeEhiPbf448SR1KRhvB3XgCEkVBBvqiMmFs"
+            },
+            "Export": {
+              "Name": "sls-myWallet-dev-GetCategoryFromIdLambdaFunctionQualifiedArn"
+            }
+          },
+          "DeleteCategoryLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "DeleteCategoryLambdaVersionCY4CjBBnhYbfRIHnVfpnI24YSnrdlIiRKFmi5RPqPYs"
+            },
+            "Export": {
+              "Name": "sls-myWallet-dev-DeleteCategoryLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -944,7 +1943,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GetAllUsersLambdaVersionNRYPHDQ57sYlo3xt3lMbrWaMSW0FRdi0L66jBODbREc"
+        "versionLogicalId": "GetAllUsersLambdaVersion6YyQiT8CTPmN5gHB7GKoKfKXvz9QAM45Fx4qPRYPJ5g"
       },
       "getUserById": {
         "handler": "app.getUserById",
@@ -979,7 +1978,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GetUserByIdLambdaVersionWg1m21H2OI3zlF5NashoJoSBPfJLeDSDrmajaJe58"
+        "versionLogicalId": "GetUserByIdLambdaVersionlfhomlIJWNzwaTbXGKUjYvxff7E5rdK2mBXrLsmyO0"
       },
       "createUser": {
         "handler": "app.createUser",
@@ -1014,7 +2013,182 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "CreateUserLambdaVersiongphat7nAvTUxVmvqwrwbeqMmqaNA94nVzdXgBZKJY"
+        "versionLogicalId": "CreateUserLambdaVersionaghHW3EreePomgq01m5pEg6hkWnxsuvGToYItHS7s"
+      },
+      "updateUser": {
+        "handler": "app.updateUser",
+        "events": [
+          {
+            "http": {
+              "path": "users/updateUser/{id}",
+              "method": "patch",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "PATCH"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "myWallet-dev-updateUser",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "UpdateUserLambdaVersionwO6qKDwhkdabYinN2Dg6RKeeWDwNWN7xc0qmYpDDCg"
+      },
+      "deleteUser": {
+        "handler": "app.deleteUser",
+        "events": [
+          {
+            "http": {
+              "path": "users/deleteUser/{id}",
+              "method": "delete",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "DELETE"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "myWallet-dev-deleteUser",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "DeleteUserLambdaVersionmuTYRZk5YkAgjlf8Qd6c1LMmmHFoRU9JjztA7XBybM"
+      },
+      "getAllCategories": {
+        "handler": "app.getAllCategories",
+        "events": [
+          {
+            "http": {
+              "path": "category",
+              "method": "get",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "myWallet-dev-getAllCategories",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "GetAllCategoriesLambdaVersionGXuTIz3Tp0XY07zojOd8Pix4XMS14lujzcl6QTFzE"
+      },
+      "getCategoryFromId": {
+        "handler": "app.getCategoryFromId",
+        "events": [
+          {
+            "http": {
+              "path": "category/{id}",
+              "method": "get",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "myWallet-dev-getCategoryFromId",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "GetCategoryFromIdLambdaVersionVyeEXHeEhiPbf448SR1KRhvB3XgCEkVBBvqiMmFs"
+      },
+      "deleteCategory": {
+        "handler": "app.deleteCategory",
+        "events": [
+          {
+            "http": {
+              "path": "category/deleteCategory/{id}",
+              "method": "delete",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "DELETE"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "myWallet-dev-deleteCategory",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "DeleteCategoryLambdaVersionCY4CjBBnhYbfRIHnVfpnI24YSnrdlIiRKFmi5RPqPYs"
       }
     },
     "configValidationMode": "warn",
@@ -1036,7 +2210,7 @@
     "artifact": "/home/tahir/Desktop/myWallet/myWallet/lambda/.serverless/myWallet.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/myWallet/dev/1639091677361-2021-12-09T23:14:37.361Z",
+    "artifactDirectoryName": "serverless/myWallet/dev/1639135396891-2021-12-10T11:23:16.891Z",
     "artifact": "myWallet.zip"
   }
 }
