@@ -910,6 +910,64 @@ const deleteEvent = async (event)=>{
     }
   }
 }
+const getEventByDate = async event =>{
+  const userId = event.pathParameters.id;
+  let body;
+  let startingDate ;
+  let endingDate;
+  if (event.body !== null && event.body !== undefined) {
+    body = JSON.parse(event.body);
+  }else{
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Provide a body for the request",
+      }),
+    };
+  }
+  if ('startingDate' in body){
+    startingDate = body.startingDate
+  }else{
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Please provide a starting date",
+      }),
+    }
+  }
+  if ('endingDate' in body){
+    endingDate = body.endingDate
+  }else{
+    endingDate= new Date()
+  }
+  try {
+    const filteredEvents = await Event.find({
+      user: userId,
+      createdAt: {
+        $gte: startingDate,
+        $lte: endingDate
+      }
+    })
+    return {
+      statusCode: 200,
+      headers: cors,
+      body: JSON.stringify({
+        events: filteredEvents,
+      }),
+    }
+  } catch (error) {
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Something went wrong",
+        reason: error
+      }),
+    }
+  }
+}
 module.exports = {
   getAllUsers,
   getUserById,
@@ -926,5 +984,6 @@ module.exports = {
   getAllDeposit,
   getAllWithdraws,
   createEvent,
-  deleteEvent
+  deleteEvent,
+  getEventByDate
 };

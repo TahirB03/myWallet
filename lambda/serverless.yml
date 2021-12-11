@@ -118,3 +118,10 @@ functions:
           path: /events/deleteEvent/{id}
           method: DELETE
           cors: true
+  getEventByDate:
+    handler: app.getEventByDate
+    events:
+      - http:
+          path: /events/getEventByDate/{id}
+          method: POST
+          cors: true
