@@ -17,7 +17,7 @@ function App() {
   //     console.log("Error signing out", err);
   //   }
   // };
-
+  
   return (
     <div className="App">
       <div>
@@ -36,4 +36,12 @@ function App() {
   );
 }
 
-export default withAuthenticator(App);
+
+export default withAuthenticator(App, false, [], null, null, {
+  signUpConfig: {
+    hiddenDefaults: ["phone_number"],
+    signUpFields: [
+      { label: "Name", key: "name", required: true, type: "string" },
+    ],
+  },
+});

@@ -50,19 +50,6 @@ const getAllUsers = async () => {
 //Get user by ID
 const getUserById = async (event) => {
   const userId = event.pathParameters.id;
-  if (!ObjectId.isValid(userId)) {
-    return {
-      statusCode: 400,
-      headers: {
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-      },
-      body: JSON.stringify({
-        message: "Id is invalid!",
-      }),
-    };
-  } else {
     try {
       const user = await User.findById({ _id: userId });
       if (user)
@@ -102,127 +89,12 @@ const getUserById = async (event) => {
           message: "Something went wrong",
         }),
       };
-    }
   }
 };
 //Create USER
 const createUser = async (event) => {
-  let body;
-  if (event.body !== null && event.body !== undefined) {
-    body = JSON.parse(event.body);
-  }
-  if (!/^[A-Za-z]+$/.test(body.name) || !/^[A-Za-z]+$/.test(body.surname)) {
-    return {
-      statusCode: 400,
-      headers: {
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-      },
-      body: JSON.stringify({
-        message: "Name and Surname should not contain number and symbols",
-      }),
-    };
-  }
-  if (
-    !("name" in body) &&
-    !("surname" in body) &&
-    !("age" in body) &&
-    !("email" in body) &&
-    !("phoneNumber" in body) &&
-    !("balance" in body)
-  ) {
-    return {
-      statusCode: 400,
-      headers: {
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-      },
-      body: JSON.stringify({
-        message: "Please fill the form !",
-      }),
-    };
-  }
-  if (body.name.length < 3 || body.name.length > 20) {
-    return {
-      statusCode: 400,
-      headers: {
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-      },
-      body: JSON.stringify({
-        message:
-          "Name should be longer than 3 characters and shorter than 20 characters",
-      }),
-    };
-  }
-  if (body.surname.length < 3 || body.surname.length > 20) {
-    return {
-      statusCode: 400,
-      headers: {
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-      },
-      body: JSON.stringify({
-        message:
-          "Surname should be longer than 3 characters and shorter than 20 characters",
-      }),
-    };
-  }
-  if (body.age < 16) {
-    return {
-      statusCode: 400,
-      headers: {
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-      },
-      body: JSON.stringify({
-        message: "You need to be older than 16 years old to use this app",
-      }),
-    };
-  }
-  if (!validator.validate(body.email)) {
-    return {
-      statusCode: 400,
-      headers: {
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-      },
-      body: JSON.stringify({
-        message: "Check your email!",
-      }),
-    };
-  }
-  if (!phone(body.phoneNumber).isValid) {
-    return {
-      statusCode: 400,
-      headers: {
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-      },
-      body: JSON.stringify({
-        message: "Check your phone number!",
-      }),
-    };
-  }
-  if (body.balance < 0) {
-    return {
-      statusCode: 400,
-      headers: {
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-      },
-      body: JSON.stringify({
-        message: "Balance needs to be greater than 0",
-      }),
-    };
+  const body = {
+    _id : event.pathParameters.id
   }
   try {
     const user = await User.create(body);
@@ -234,7 +106,7 @@ const createUser = async (event) => {
         "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
       },
       body: JSON.stringify({
-        user: user,
+        user: user
       }),
     };
   } catch (error) {
@@ -252,110 +124,12 @@ const createUser = async (event) => {
     };
   }
 };
-//Update a user
-const updateUser = async (event) => {
-  const userId = event.pathParameters.id;
-  let body;
-  if (event.body !== null && event.body !== undefined) {
-    body = JSON.parse(event.body);
-  }
-  if (body.email !== undefined) {
-    if (!validator.validate(body.email)) {
-      return {
-        statusCode: 400,
-        headers: {
-          "Access-Control-Allow-Headers": "Content-Type",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-        },
-        body: JSON.stringify({
-          message: "Check your email!",
-        }),
-      };
-    }
-  }
-  if (body.phoneNumber !== undefined) {
-    if (!phone(body.phoneNumber).isValid) {
-      return {
-        statusCode: 400,
-        headers: {
-          "Access-Control-Allow-Headers": "Content-Type",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-        },
-        body: JSON.stringify({
-          message: "Check your phone number!",
-        }),
-      };
-    }
-  }
-  if (!ObjectId.isValid(userId)) {
-    return {
-      statusCode: 400,
-      headers: {
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-      },
-      body: JSON.stringify({
-        message: "Make sure the ID is correct",
-      }),
-    };
-  }
-  try {
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
-      {
-        email: body.email,
-        phoneNumber: body.phoneNumber,
-      },
-      { new: true }
-    );
-    return {
-      statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-      },
-      body: JSON.stringify({
-        message: "User updated succsefully",
-        user: updatedUser,
-      }),
-    };
-  } catch (error) {
-    return {
-      statusCode: 400,
-      headers: {
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-      },
-      body: JSON.stringify({
-        message: "Something went wrong",
-        reason: error,
-      }),
-    };
-  }
-};
+
 //Delete a user
 const deleteUser = async (event) => {
   const userId = event.pathParameters.id;
-  if (!ObjectId.isValid(userId)) {
-    return {
-      statusCode: 400,
-      headers: {
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-      },
-      body: JSON.stringify({
-        message: "Make sure the ID is correct",
-      }),
-    };
-  }
   try {
-    await User.findByIdAndDelete(userId);
+    await User.deleteOne({_id:userId});
     return {
       statusCode: 200,
       headers: {
@@ -552,15 +326,6 @@ const getEventById = async (event) => {
 //Get event by user
 const getEventbyUser = async (event) => {
   const userId = event.pathParameters.id;
-  if (!ObjectId.isValid(userId)) {
-    return {
-      statusCode: 400,
-      headers: cors,
-      body: JSON.stringify({
-        message: "Make sure the ID is correct",
-      }),
-    };
-  }
   try {
     const eventByUser = await Event.find({ user: userId });
     return {
@@ -584,7 +349,7 @@ const getEventbyUser = async (event) => {
 const getEventsByUserCategory = async (event) => {
   const userId = event.pathParameters.id;
   const categoryId = event.pathParameters.categoryId;
-  if (!ObjectId.isValid(userId) || !ObjectId.isValid(categoryId)) {
+  if (!ObjectId.isValid(categoryId)) {
     return {
       statusCode: 400,
       headers: cors,
@@ -620,15 +385,6 @@ const getEventsByUserCategory = async (event) => {
 };
 const getAllDeposit = async (event) => {
   const userId = event.pathParameters.id;
-  if (!ObjectId.isValid(userId)) {
-    return {
-      statusCode: 400,
-      headers: cors,
-      body: JSON.stringify({
-        message: "Make sure the ID is correct",
-      }),
-    };
-  }
   try {
     let response = await Event.find({
       user: userId,
@@ -665,15 +421,6 @@ const getAllDeposit = async (event) => {
 };
 const getAllWithdraws = async (event) => {
   const userId = event.pathParameters.id;
-  if (!ObjectId.isValid(userId)) {
-    return {
-      statusCode: 400,
-      headers: cors,
-      body: JSON.stringify({
-        message: "Make sure the ID is correct",
-      }),
-    };
-  }
   try {
     let response = await Event.find({
       user: userId,
@@ -723,7 +470,7 @@ const createEvent = async event=>{
       }),
     };
   }
-  if (!ObjectId.isValid(userId) || !ObjectId.isValid(categoryId)){
+  if (!ObjectId.isValid(categoryId)){
     return {
       statusCode: 400,
       headers: cors,
@@ -761,7 +508,7 @@ const createEvent = async event=>{
   }
   const session = await mongoose.startSession();
   const typeOfCategory = await Category.findById(categoryId)
-  const userDetails = await User.findById(userId);
+  const userDetails = await User.findOne({_id:userId});
   const biggestValue = {
     biggestDeposit: userDetails.biggestDeposit,
     biggestWithdraw: userDetails.biggestWithdraw,
@@ -787,7 +534,7 @@ const createEvent = async event=>{
      await Event.create(
       [
         {
-          user: mongoose.Types.ObjectId(userId),
+          user: userId,
           category: mongoose.Types.ObjectId(categoryId),
           amount: body.amount,
           description: body.description,
@@ -795,8 +542,8 @@ const createEvent = async event=>{
       ],
       { session: session }
     );
-    const newUpdatedUser = await User.findByIdAndUpdate(
-      userId,
+    const newUpdatedUser = await User.findOneAndUpdate(
+      {_id:userId},
       {
         $set: biggestValue,
         $inc: {
@@ -857,8 +604,8 @@ const deleteEvent = async (event)=>{
     if (category.isDeposit===true){
       session.startTransaction();
       await Event.findByIdAndDelete(eventId, { session: session });
-      const userUpdated = await User.findByIdAndUpdate(
-        eventDb.user,
+      const userUpdated = await User.findOneAndUpdate(
+        {_id:eventDb.user},
         {
           $inc: {
             balance: -1 * eventDb.amount,
@@ -972,7 +719,6 @@ module.exports = {
   getAllUsers,
   getUserById,
   createUser,
-  updateUser,
   deleteUser,
   getAllCategories,
   getCategoryFromId,

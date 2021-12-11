@@ -24,15 +24,8 @@ functions:
     handler: app.createUser
     events:
       - http:
-          path: /users/addUser
-          method: POST
-          cors: true
-  updateUser:
-    handler: app.updateUser
-    events:
-      - http:
-          path: /users/updateUser/{id}
-          method: PATCH
+          path: /users/addUser/{id}
+          method: GET
           cors: true
   deleteUser:
     handler: app.deleteUser
