@@ -1,47 +1,48 @@
 import "./App.css";
-
+import React from "react";
 import poolData from "./poolData";
-import Amplify, { Auth } from "aws-amplify";
-import { AmplifySignOut, withAuthenticator } from "@aws-amplify/ui-react";
+import Amplify, { Auth } from 'aws-amplify';
+import { AmplifySignOut } from "@aws-amplify/ui-react";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignUp, VerifyContact, withAuthenticator } from 'aws-amplify-react';
+import SignIn from './signIn/SignIn'
+
 
 Amplify.configure(poolData);
 
+async function confirmSignUp() {
+  try {
+    await Auth.confirmSignUp('tao', 123);
+  } catch (error) {
+      console.log('error confirming sign up', error);
+  }
+}
+
 function App() {
-  // const signOut = async () => {
-  //   try {
-  //     await Auth.signOut();
-  //   } catch (err) {
-  //     console.log("Error signing out", err);
-  //   }
-  // };
-  
   return (
     <div className="App">
       <div>
-        {/* <button className="button-34" onClick={signOut}>
-          Sign out
-        </button> */}
-        <AmplifySignOut />
         <Router>
           <Routes>
-            <Route path="/home" element={<Home />}></Route>
+            <Route exact path="/" element={<Home />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
           </Routes>
         </Router>
       </div>
+      <AmplifySignOut />
     </div>
   );
 }
 
 
-export default withAuthenticator(App, false, [], null, null, {
-  signUpConfig: {
-    hiddenDefaults: ["phone_number"],
-    signUpFields: [
-      { label: "Name", key: "name", required: true, type: "string" },
-    ],
-  },
-});
+export default withAuthenticator(App,false,[
+  <SignIn/>,
+  <ConfirmSignIn/>,
+  <VerifyContact/>,
+  <SignUp/>,
+  <ConfirmSignUp/>,
+  <ForgotPassword/>,
+  <RequireNewPassword />]
+);
