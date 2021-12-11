@@ -111,3 +111,10 @@ functions:
           path: /events/createEvent/{userId}/{categoryId}
           method: POST
           cors: true
+  deleteEvent:
+    handler: app.deleteEvent
+    events:
+      - http:
+          path: /events/deleteEvent/{id}
+          method: DELETE
+          cors: true

@@ -830,6 +830,86 @@ const createEvent = async event=>{
     };
   }
 };
+const deleteEvent = async (event)=>{
+  const eventId = event.pathParameters.id;
+  if (!ObjectId.isValid(eventId)){
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Make sure the ID is correct",
+      }),
+    };
+  }
+  const eventDb = await Event.findById(eventId)
+  const category = await Category.findById(eventDb.category)
+  if (eventDb.event===null){
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: eventDb
+      }),
+    }
+  }
+  const session = await mongoose.startSession()
+  try {
+    if (category.isDeposit===true){
+      session.startTransaction();
+      await Event.findByIdAndDelete(eventId, { session: session });
+      const userUpdated = await User.findByIdAndUpdate(
+        eventDb.user,
+        {
+          $inc: {
+            balance: -1 * eventDb.amount,
+            nrOfDeposits:  -1
+          },
+          $set: {biggestDeposit: 0},
+        },
+        { session: session, new: true }
+      ).exec();
+      await session.commitTransaction();
+      return{
+        statusCode: 200,
+        headers: cors,
+        body: JSON.stringify({
+          userUpdated: userUpdated,
+      }),
+      }
+    } else{
+      session.startTransaction();
+      await Event.findByIdAndDelete(eventId, { session: session });
+      const userUpdated = await User.findByIdAndUpdate(
+        eventDb.user,
+        {
+          $inc: {
+            balance: eventDb.amount,
+            nrOfWithdraws:  -1
+          },
+          $set: {biggestWithdraw: 0},
+        },
+        { session: session,new: true }
+      ).exec();
+      await session.commitTransaction();
+      return{
+        statusCode: 200,
+        headers: cors,
+        body: JSON.stringify({
+          userUpdated: userUpdated,
+      }),
+      }
+    }
+  } catch (error) {
+    session.abortTransaction();
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "No event was found",
+      }),
+    }
+  }
+}
 module.exports = {
   getAllUsers,
   getUserById,
@@ -846,4 +926,5 @@ module.exports = {
   getAllDeposit,
   getAllWithdraws,
   createEvent,
+  deleteEvent
 };
