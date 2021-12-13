@@ -11,18 +11,20 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 // import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignUp, VerifyContact, withAuthenticator , } from 'aws-amplify-react';
 // import CostumFlow from './signIn/CostumFlow'
 import { Transactions } from "./pages/Transactions";
+import ChangePassword from './pages/ChangePassword';
 
 Amplify.configure(poolData);
 
 function App() {
   return (
-    <div className="App">
+    <div className='App'>
       <div>
         <Router>
           <Routes>
-            <Route exact path="/" element={<Dashboard />}></Route>
-            <Route path="/profile" element={<Profile />}></Route>
-            <Route path="/transactions" element={<Transactions />}></Route>
+            <Route exact path='/' element={<Dashboard />}></Route>
+            <Route path='/profile' element={<Profile />}></Route>
+            <Route path='/transactions' element={<Transactions />}></Route>
+            <Route path='/changePassword' element={<ChangePassword />}></Route>
           </Routes>
         </Router>
       </div>
