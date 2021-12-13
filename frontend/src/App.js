@@ -7,9 +7,10 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Dashboard from './pages/Dashboard/Dashboard'
 
-// import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignUp, VerifyContact, withAuthenticator , } from 'aws-amplify-react';
-// import CostumFlow from './signIn/CostumFlow'
+import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignUp, VerifyContact, withAuthenticator , } from 'aws-amplify-react';
+import CostumFlow from './signIn/CostumFlow'
 Amplify.configure(poolData);
 
 function App() {
@@ -19,19 +20,18 @@ function App() {
         <Navbar />
         <Router>
           <Routes>
-            <Route exact path="/" element={<Home />}></Route>
+            <Route exact path="/" element={<Dashboard />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
           </Routes>
         </Router>
       </div>
-      <AmplifySignOut />
     </div>
   );
 }
 
-export default App;
+// export default App;
 
-// export default withAuthenticator(App,false,[
-//   <CostumFlow />,
-//   ]
-// );
+export default withAuthenticator(App,false,[
+  <CostumFlow />,
+  ]
+);

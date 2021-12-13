@@ -1,0 +1,20 @@
+.dashboard{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 100vw;
+}
+.events_byMonth{
+    display: flex;
+    justify-content: space-between;
+}
+.boxContainer{
+    display: flex;
+    flex-direction: row;
+}
+.boxContainer_text{
+    margin: 15px 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
