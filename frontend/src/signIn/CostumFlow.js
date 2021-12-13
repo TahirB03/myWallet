@@ -15,7 +15,7 @@ const CostumFlow = () => {
   const [flowStep, setFlowStep] = useState("signIn");
   const [code, setCode] = useState("");
   const [codeError, setCodeError] = useState(false);
-
+  const [logInError,setLogInError]=useState(false)
   const [credentials, setCredential] = useState(initialCredentials);
   const [forgotPasswordCredentials, setForgotPasswordCredentials] = useState({
     username: "",
@@ -30,6 +30,7 @@ const CostumFlow = () => {
 
   const handleChange = (e) => {
     setCredential({ ...credentials, [e.target.name]: e.target.value });
+    setLogInError(false)
   };
   const handleChangepassword = (e) => {
     setForgotPasswordCredentials({
@@ -84,7 +85,9 @@ const CostumFlow = () => {
       );
       console.log(user);
     } catch (error) {
-      console.log(error);
+      if (error.message === "Incorrect username or password."){
+        setLogInError(true)
+      }
     }
   };
 
@@ -381,10 +384,12 @@ const CostumFlow = () => {
         </div>
         <div className="form">
           <TextField
-            id="outlined-required"
+            id="outlined"
             className="inputRounded"
+            error={logInError}
             label="Username"
             value={credentials.username}
+            autoFocus={true}
             name="username"
             fullWidth={true}
             onChange={handleChange}
@@ -395,11 +400,13 @@ const CostumFlow = () => {
             label="Password"
             name="password"
             value={credentials.password}
+            error={logInError}
             type="password"
             fullWidth={true}
             onChange={handleChange}
             sx={{ marginTop: "15px" }}
           />
+          {logInError && <p style={{color:'red',marginTop:"5px",fontSize:"12px"}}>Password wasn't correct.Please check you username and password!</p>}
         </div>
         <div className="forgotPassword">
           <p

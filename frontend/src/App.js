@@ -6,8 +6,8 @@ import { AmplifySignOut } from "@aws-amplify/ui-react";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
-import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignUp, VerifyContact, withAuthenticator , } from 'aws-amplify-react';
-import CostumFlow from './signIn/CostumFlow'
+// import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignUp, VerifyContact, withAuthenticator , } from 'aws-amplify-react';
+// import CostumFlow from './signIn/CostumFlow'
 Amplify.configure(poolData);
 
 function App() {
@@ -26,8 +26,9 @@ function App() {
   );
 }
 
+export default App;
 
-export default withAuthenticator(App,false,[
-  <CostumFlow />,
-  ]
-);
+// export default withAuthenticator(App,false,[
+//   <CostumFlow />,
+//   ]
+// );

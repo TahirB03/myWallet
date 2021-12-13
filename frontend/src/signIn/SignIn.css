@@ -8,10 +8,10 @@
     padding: 40px 20px;
 }
 .imageLogo{
-    flex: 0 0 50%;
+    flex: 0 0 40%;
 }
 .signInForm{
-    flex: 0 0 50%;
+    flex: 0 0 60%;
     display: flex;
     flex-direction: column;
 }
@@ -23,6 +23,7 @@
 .inputRounded .MuiOutlinedInput-root {
     border-radius: 60px;
     height: 55px;
+    padding-left: 15px;
 }
 .forgotPassword{
     margin: 20px 0;
@@ -43,4 +44,7 @@
 }
 .registerNow_span{
     color: blue;
+}
+label{
+    margin-left: 15px;
 }
