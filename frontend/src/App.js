@@ -17,11 +17,12 @@ function App() {
   return (
     <div className="App">
       <div>
-        <Navbar />
         <Router>
+          <Navbar />
           <Routes>
             <Route exact path="/" element={<Dashboard />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
+            <Route path="/transactions" element={<Transactions />}></Route>
           </Routes>
         </Router>
       </div>
@@ -29,9 +30,9 @@ function App() {
   );
 }
 
-// export default App;
+export default App;
 
-export default withAuthenticator(App,false,[
-  <CostumFlow />,
-  ]
-);
+// export default withAuthenticator(App,false,[
+//   <CostumFlow />,
+//   ]
+// );

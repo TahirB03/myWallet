@@ -1,22 +1,62 @@
 .container {
+  display: flex;
   height: 200px;
   width: 100%;
   max-width: 600px;
   background-color: rgb(57, 57, 199);
   border-radius: 0 0 20px 20px;
-
   top: -20px;
   color: white;
 }
 
 .username {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 20px;
+  right: 55px;
 }
 
 .imgIcon {
   position: absolute;
-  top: 5px;
+  top: 15px;
   right: 5px;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.backArrow {
+  position: absolute;
+  top: 20px;
+  left: 5px;
+}
+
+.tra {
+  position: absolute;
+  top: 20px;
+  left: 25px;
+  text-decoration: underline;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  cursor: pointer;
+  color: white;
+}
+
+.logo {
+  height: 40px;
+  width: 40px;
+  border-radius: 20%;
+  background-color: rgb(202, 45, 45);
+  position: absolute;
+  top: 10%;
+  right: 45%;
+}
+.totalBalanceNumber {
+  position: absolute;
+  margin-top: 130px;
+  margin-left: 200px;
+}
+.totalBalanceText {
+  position: absolute;
+  margin-top: 150px;
+  margin-left: 150px;
 }

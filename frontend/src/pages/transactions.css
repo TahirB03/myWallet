@@ -1,0 +1,23 @@
+.months {
+  height: 30px;
+  width: 70px;
+  cursor: pointer;
+  background-color: white;
+  border-style: ridge;
+  border-radius: 5px;
+  border: 1px solid gold;
+  margin: 5px;
+}
+.stats {
+  margin-top: 10px;
+  display: flex;
+
+  justify-content: space-around;
+}
+.typo {
+  background-color: rgb(205, 255, 205);
+
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid gold;
+}
