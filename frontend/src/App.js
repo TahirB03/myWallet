@@ -8,8 +8,8 @@ import Profile from "./pages/Profile";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Dashboard from './pages/Dashboard/Dashboard'
-import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignUp, VerifyContact, withAuthenticator , } from 'aws-amplify-react';
-import CostumFlow from './signIn/CostumFlow'
+// import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignUp, VerifyContact, withAuthenticator , } from 'aws-amplify-react';
+// import CostumFlow from './signIn/CostumFlow'
 import {Transactions} from './pages/Transactions'
 
 Amplify.configure(poolData);
