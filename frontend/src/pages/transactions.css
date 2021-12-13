@@ -1,12 +1,12 @@
 .months {
-  height: 30px;
-  width: 70px;
+  padding: 20px;
   cursor: pointer;
-  background-color: white;
+  background-color: rgb(170, 172, 253);
   border-style: ridge;
   border-radius: 5px;
   border: 1px solid gold;
-  margin: 5px;
+  margin: 15px;
+  text-align: center;
 }
 .stats {
   margin-top: 10px;

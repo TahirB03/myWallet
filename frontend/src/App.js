@@ -6,11 +6,11 @@ import { AmplifySignOut } from "@aws-amplify/ui-react";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Dashboard from './pages/Dashboard/Dashboard'
+
+import Dashboard from "./pages/Dashboard/Dashboard";
 // import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignUp, VerifyContact, withAuthenticator , } from 'aws-amplify-react';
 // import CostumFlow from './signIn/CostumFlow'
-import {Transactions} from './pages/Transactions'
+import { Transactions } from "./pages/Transactions";
 
 Amplify.configure(poolData);
 
@@ -19,7 +19,6 @@ function App() {
     <div className="App">
       <div>
         <Router>
-          <Navbar />
           <Routes>
             <Route exact path="/" element={<Dashboard />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
