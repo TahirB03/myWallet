@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import { Transactions } from "./pages/Transactions";
 
 // import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignUp, VerifyContact, withAuthenticator , } from 'aws-amplify-react';
 // import CostumFlow from './signIn/CostumFlow'
@@ -16,15 +17,15 @@ function App() {
   return (
     <div className="App">
       <div>
-        <Navbar />
         <Router>
+          <Navbar />
           <Routes>
             <Route exact path="/" element={<Home />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
+            <Route path="/transactions" element={<Transactions />}></Route>
           </Routes>
         </Router>
       </div>
-      <AmplifySignOut />
     </div>
   );
 }
