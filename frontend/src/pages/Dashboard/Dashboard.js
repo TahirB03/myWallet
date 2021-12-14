@@ -9,8 +9,9 @@ import {UserContext} from '../../../src/context/UserContext'
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 import moment from 'moment'
 
+import DashboardNavbar from "./DashboardNavbar";
 
-const Dashboard =  () => {
+const Dashboard = () => {
   const navigate = useNavigate();
   const userId = useContext(UserContext)
   const [user,setUser]=useState(null)
@@ -88,40 +89,52 @@ const Dashboard =  () => {
 
   return (
     <div className="dashboard">
+      <DashboardNavbar />
       <div className="dashboardMonth">
         <h3>{new Date().toLocaleString("default", { month: "long" })}</h3>
       </div>
       <div className="events_byMonth">
         <Box
-            onClick={()=> navigate("/s")}
-            className='boxContainer'
-            sx={{
-            marginTop:"30px",
+          onClick={() => navigate("/s")}
+          className="boxContainer"
+          sx={{
+            marginTop: "30px",
             width: 160,
             height: 80,
-            border:"1px solid gray",
-            borderRadius:"25px",
-            padding:"5px 10px"
+            border: "1px solid gray",
+            borderRadius: "25px",
+            padding: "5px 10px",
           }}
         >
-          <img src={deposit} style={{marginTop:"10px"}} width={50} height={50} ></img>
+          <img
+            src={deposit}
+            style={{ marginTop: "10px" }}
+            width={50}
+            height={50}
+          ></img>
           <div className="boxContainer_text">
               <p style={{display:"block", color:"green"}}>Income</p>
               <p>$ {monthIncome}</p>
           </div>
         </Box>
         <Box
-          onClick={()=> navigate("/sa")}
-          className='boxContainer'
+          onClick={() => navigate("/sa")}
+          className="boxContainer"
           sx={{
-            marginTop:"30px",
+            marginTop: "30px",
             width: 160,
             height: 80,
-            border:"1px solid gray",
-            borderRadius:"25px",
-            padding:"5px 10px"
-          }}>
-          <img src={withdraw} style={{marginTop:"10px"}} width={50} height={50} ></img>
+            border: "1px solid gray",
+            borderRadius: "25px",
+            padding: "5px 10px",
+          }}
+        >
+          <img
+            src={withdraw}
+            style={{ marginTop: "10px" }}
+            width={50}
+            height={50}
+          ></img>
           <div className="boxContainer_text">
               <p style={{display:"block", color:"red"}}>Outcome</p>
               <p>$ {monthExpenses}</p>

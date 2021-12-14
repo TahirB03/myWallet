@@ -8,11 +8,14 @@ import Profile from "./pages/Profile";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Dashboard from './pages/Dashboard/Dashboard'
-import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignUp, VerifyContact, withAuthenticator , } from 'aws-amplify-react';
 import CostumFlow from './signIn/CostumFlow'
 import {Transactions} from './pages/Transactions'
 import {UserContext} from '../src/context/UserContext'
 import axios from "axios";
+// import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignUp, VerifyContact, withAuthenticator , } from 'aws-amplify-react';
+// import CostumFlow from './signIn/CostumFlow'
+import ChangePassword from './pages/ChangePassword';
+
 Amplify.configure(poolData);
 const App=  ()=> {
   const [user,setUser]=useState()
@@ -29,11 +32,11 @@ const App=  ()=> {
     <div className="App">
       <div>
         <Router>
-          <Navbar />
           <Routes>
-            <Route exact path="/" element={<Dashboard />}></Route>
-            <Route path="/profile" element={<Profile />}></Route>
-            <Route path="/transactions" element={<Transactions />}></Route>
+            <Route exact path='/' element={<Dashboard />}></Route>
+            <Route path='/profile' element={<Profile />}></Route>
+            <Route path='/transactions' element={<Transactions />}></Route>
+            <Route path='/changePassword' element={<ChangePassword />}></Route>
           </Routes>
         </Router>
       </div>
@@ -42,9 +45,9 @@ const App=  ()=> {
   );
 }
 
-// export default App;
+export default App;
 
-export default withAuthenticator(App,false,[
-  <CostumFlow />,
-  ]
-);
+// export default withAuthenticator(App,false,[
+//   <CostumFlow />,
+//   ]
+// );

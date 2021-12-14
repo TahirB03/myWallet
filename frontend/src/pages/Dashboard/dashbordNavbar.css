@@ -1,11 +1,11 @@
 .container {
   display: flex;
-  height: 150px;
+  height: 300px;
   width: 100%;
   max-width: 600px;
   background-color: rgb(57, 57, 199);
   border-radius: 0 0 20px 20px;
-  top: -20px;
+
   color: white;
 }
 
@@ -19,7 +19,8 @@
   position: absolute;
   top: 15px;
   right: 5px;
-
+  height: 35px;
+  width: 35px;
   border-radius: 50%;
   background-color: black;
 }
@@ -30,23 +31,22 @@
   left: 5px;
 }
 
-.tra {
+.logo {
+  height: 40px;
+  width: 40px;
+  border-radius: 20%;
+  background-color: rgb(202, 45, 45);
   position: absolute;
-  top: 20px;
-  left: 25px;
-  text-decoration: underline;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  cursor: pointer;
-  color: white;
+  top: 10%;
+  right: 45%;
 }
-
 .totalBalanceNumber {
   position: absolute;
-  margin-top: 120px;
+  margin-top: 130px;
   margin-left: 200px;
 }
 .totalBalanceText {
   position: absolute;
-  margin-top: 90px;
-  margin-left: 155px;
+  margin-top: 150px;
+  margin-left: 150px;
 }

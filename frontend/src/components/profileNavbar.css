@@ -19,7 +19,8 @@
   position: absolute;
   top: 15px;
   right: 5px;
-
+  height: 35px;
+  width: 35px;
   border-radius: 50%;
   background-color: black;
 }
