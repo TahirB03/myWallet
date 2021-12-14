@@ -1,12 +1,13 @@
 .container {
   display: flex;
-  height: 150px;
+  height: 100px;
   width: 100%;
   max-width: 600px;
   background-color: rgb(57, 57, 199);
   border-radius: 0 0 20px 20px;
   top: -20px;
   color: white;
+  position: relative;
 }
 
 .username {
