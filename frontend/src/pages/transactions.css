@@ -1,7 +1,7 @@
 .months {
   padding: 20px;
   cursor: pointer;
-  background-color: rgb(170, 172, 253);
+  background-color: rgb(255, 255, 255);
   border-style: ridge;
   border-radius: 5px;
   border: 1px solid gold;
@@ -20,4 +20,26 @@
   padding: 20px;
   border-radius: 15px;
   border: 1px solid gold;
+}
+
+.amountChild {
+  border-bottom: 1px solid gold;
+  align-items: center;
+  justify-content: center;
+  height: 8vh;
+  font-weight: 600;
+  font-size: 25px;
+}
+
+.amount {
+  margin-top: 5%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 5%;
+}
+
+.arrows {
+  padding: 20px;
+  display: flex;
 }
