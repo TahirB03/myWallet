@@ -1,12 +1,19 @@
 .dashboard {
+  max-width: 600px;
   display: flex;
   flex-direction: column;
-
   width: 100vw;
+  padding: 33px 20px;
 }
 .events_byMonth {
   display: flex;
   justify-content: space-between;
+}
+.dashboardMonth{
+  margin-left: 30%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .boxContainer {
   display: flex;

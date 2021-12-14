@@ -149,6 +149,7 @@ const CostumFlow = () => {
               autoFocus={true}
               fullWidth={true}
               value={credentials.username}
+              key='Username'
               InputProps={{
                 readOnly: true,
               }}

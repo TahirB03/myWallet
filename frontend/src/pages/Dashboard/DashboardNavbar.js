@@ -1,31 +1,51 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import "./dashbordNavbar.css";
 import axios from "axios";
-import { Navigate, useNavigate, Link } from "react-router-dom";
+import {  useNavigate, Link  } from "react-router-dom";
+import {UserContext} from '../../context/UserContext'
+import './dashboardNavbar.css'
+import Avatar from '../../images/Avatar.png'
+import Logo from '../../images/Image.png'
 
 const DashboardNavbar = () => {
-  const url =
-    "https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/652c5c67-c09f-43ae-834a-a5ceae383535";
-  const [balance, setBalance] = useState(100);
+  const navigate = useNavigate();
+  const user = useContext(UserContext);
+  console.log(user);
+  const [userDetails,setUserDetails]=useState('')
 
+  const fetchUserDetails = async ()=>{
+      try {
+        const {data} = await axios.get(`https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${user}`)
+        setUserDetails(...userDetails,data.user)
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+  }
   useEffect(() => {
-    axios.get(url).then((response) => {
-      console.log(response);
-      setBalance(response.data.user.balance);
-    });
-  }, [url]);
+    fetchUserDetails()
+  }, []);
 
   return (
-    <div className="container">
-      <h3 className="username">Emri</h3>
-      <div className="imgIcon">
-        <Link to="/profile">
-          <AccountCircleIcon />
-        </Link>
+    <div className="dashboardNavbar">
+      <div className="dashboardNavbar_header">
+        <Link to="/"><p style={{fontSize:"18px",color:"white",textDecoration:"underline"}}>My wallet</p></Link>
+        <div className="dashboardNavbar_user" onClick={()=> navigate('/profile')} >
+        <div style={{marginRight:"10px",fontWeight:"400",textAlign:"end"}}>
+            <div className="dashboardNavbar_user_greetin">Hello</div>
+            <div className="dashboardNavbar_user_greetin">{localStorage.getItem("CognitoIdentityServiceProvider.3ae3cn84i7v4j30cg0v9o8bp50.LastAuthUser")}</div>
+        </div>
+        <img src={Avatar} width="35"></img>
+        </div>
       </div>
-      <div className="totalBalanceNumber">{balance}$</div>
-      <h3 className="totalBalanceText">Total Balance</h3>
+      <div className="dashboardNavbar_body">
+          <img src={Logo} alt="" width="70" style={{borderBottom:"solid 1px white"}} />
+          <div style={{marginTop:"5px"}} className="dashboardNavbar_balance">
+            <span style={{position:"absolute",fontWeight:"300",left:"-20px",width:"10px",height:"36px",fontSize:"25px",}}>$</span>
+            {userDetails.balance>0 && <h1 style={{fontSize:"32px",display:"inline-block"}}>{(userDetails.balance.toFixed(2))}</h1>}
+          </div>
+          <h1 style={{fontWeight:"200",fontSize:"16px",marginBottom:"20px"}}>Total Balance</h1>
+      </div>
     </div>
   );
 };

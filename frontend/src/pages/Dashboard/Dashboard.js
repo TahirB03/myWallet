@@ -8,12 +8,34 @@ import withdraw from './withdraw.png'
 import {UserContext} from '../../../src/context/UserContext'
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 import moment from 'moment'
-
+import Filter from '../../images/Filter.png'
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
 import DashboardNavbar from "./DashboardNavbar";
+import Settings from '../../images/Settings.png'
+
+const floatingByttonStyles = {
+  margin: 0,
+  top: 'auto',
+  right: 20,
+  bottom: 100,
+  left: 'auto',
+  position: 'fixed',
+};
+const floatingByttonStyles1 = {
+  margin: 0,
+  top: 'auto',
+  right: 25,
+  bottom: 40,
+  left: 'auto',
+  position: 'fixed',
+};
+
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const userId = useContext(UserContext)
+  console.log(userId);
   const [user,setUser]=useState(null)
   const [monthIncome,setMonthIncome]=useState(null)
   const [monthExpenses,setMonthExpenses]=useState(null)
@@ -37,7 +59,7 @@ const Dashboard = () => {
   
     return (
       <text x={x} y={y} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-        {`${(percent * 100).toFixed(0)}%`}
+        {`${userExpensesData[index].name}${(percent * 100).toFixed(0)}%`}
       </text>
     );
   };
@@ -88,10 +110,12 @@ const Dashboard = () => {
   },[userId])
 
   return (
-    <div className="dashboard">
+    <div className="dashboardWrapper">
       <DashboardNavbar />
+      <div className="dashboard">
       <div className="dashboardMonth">
-        <h3>{new Date().toLocaleString("default", { month: "long" })}</h3>
+        <h3 style={{textAlign:"center",color:"#3F3D56", fontSize:"16px",display:"inline-block"}}>{moment().format(' ddd, MMMM Do ')}</h3>
+        <img src={Filter} alt="" width="25" />
       </div>
       <div className="events_byMonth">
         <Box
@@ -142,11 +166,13 @@ const Dashboard = () => {
         </Box>
       </div>
       <Link to="/abs" style={{marginTop:"20px",textAlign:"center"}}>Show Details</Link>
-      <PieChart width={400} height={400}>
+      <h3 style={{marginTop:"20px",fontSize:"20px",color:"#3F3D56"}}>Categories</h3>
+      <PieChart width={400} height={300}>
       <Pie
+          style={{margin: "0 auto"}}
           data={userExpensesData}
-          cx={200}
-          cy={200}
+          cx={180}
+          cy={150}
           innerRadius={65}
           outerRadius={90}
           fill="#8884d8"
@@ -159,6 +185,13 @@ const Dashboard = () => {
           ))}
         </Pie>
     </PieChart>
+      <Fab size="small" color="primary" aria-label="add" style={floatingByttonStyles}>
+        <AddIcon />
+      </Fab>
+      <Fab size="medium"  aria-label="add" style={floatingByttonStyles1} onClick={()=> navigate('/profile')}>
+          <img src={Settings} style={{width:"80%"}} />
+      </Fab>
+    </div>
     </div>
   );
 };

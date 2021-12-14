@@ -12,13 +12,12 @@ import CostumFlow from './signIn/CostumFlow'
 import {Transactions} from './pages/Transactions'
 import {UserContext} from '../src/context/UserContext'
 import axios from "axios";
-// import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignUp, VerifyContact, withAuthenticator , } from 'aws-amplify-react';
-// import CostumFlow from './signIn/CostumFlow'
+import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignUp, VerifyContact, withAuthenticator , } from 'aws-amplify-react';
 import ChangePassword from './pages/ChangePassword';
 
 Amplify.configure(poolData);
 const App=  ()=> {
-  const [user,setUser]=useState()
+  const [user,setUser]=useState(null)
   
   const  setUserSub = async ()=>{
     const {attributes} = await Auth.currentAuthenticatedUser()
@@ -27,6 +26,7 @@ const App=  ()=> {
   useEffect(()=>{
     setUserSub();
   },[])
+  if (user !== null ){
   return (
     <UserContext.Provider value={user}>
     <div className="App">
@@ -44,10 +44,14 @@ const App=  ()=> {
     </UserContext.Provider>
   );
 }
+return (
+  <h1>Hello</h1>
+)
+}
 
-export default App;
+// export default App;
 
-// export default withAuthenticator(App,false,[
-//   <CostumFlow />,
-//   ]
-// );
+export default withAuthenticator(App,false,[
+  <CostumFlow />,
+  ]
+);
