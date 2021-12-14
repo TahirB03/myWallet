@@ -118,3 +118,10 @@ functions:
           path: /events/getEventByDate/{id}
           method: POST
           cors: true
+  getExpensesByUserMonth:
+    handler: app.getExpensesByUserMonth
+    events:
+      - http:
+          path: /events/getExpensesByUserMonth/{id}
+          method: POST
+          cors: true

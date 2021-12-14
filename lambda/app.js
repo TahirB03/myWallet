@@ -715,6 +715,118 @@ const getEventByDate = async event =>{
     }
   }
 }
+
+const getExpensesByUserMonth = async (event)=>{
+  const userId = event.pathParameters.id;
+  let body;
+  let startingDate ;
+  let endingDate;
+  let filteredCategories=[
+    {
+      name:"Gift",
+      amount:0
+    },
+    {
+      name:"Healthcare",
+      amount:0
+    },
+    {
+      name:"Fun",
+      amount:0
+    }
+    ,{
+      name:"Transportation",
+      amount:0
+    },
+    {
+      name:"Other",
+      amount:0
+    },
+    {
+      name:"Apparel",
+      amount:0
+    },{
+      name:"Maintenance",
+      amount:0
+    }
+  ]
+  if (event.body !== null && event.body !== undefined) {
+    body = JSON.parse(event.body);
+  }else{
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Provide a body for the request",
+      }),
+    };
+  }
+  if ('startingDate' in body){
+    startingDate = body.startingDate
+  }else{
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Please provide a starting date",
+      }),
+    }
+  }
+  if ('endingDate' in body){
+    endingDate = body.endingDate
+  }else{
+    endingDate= new Date()
+  }
+  try {
+    const filteredEvents = await Event.find({
+      user: userId,
+      createdAt: {
+        $gte: startingDate,
+        $lte: endingDate
+      }
+    }) .populate({
+      path: "category",
+      match: { isDeposit: false },
+      select: "categoryName",
+    }).exec()
+    var i = filteredEvents.length;
+    while (i--) {
+      if (filteredEvents[i].category === null) {
+        filteredEvents.splice(i, 1);
+      }
+    }
+    filteredEvents.map(x=>{
+      for(let i=0;i<filteredCategories.length;i++){
+        if(x.category.categoryName === filteredCategories[i].name){
+          filteredCategories[i].amount = filteredCategories[i].amount+ x.amount; 
+        }
+      }
+    })
+    var i = filteredCategories.length;
+    while (i--) {
+      if (filteredCategories[i].amount === 0) {
+        filteredCategories.splice(i, 1);
+      }
+    }
+    return {
+      statusCode: 200,
+      headers: cors,
+      body: JSON.stringify({
+        events: filteredCategories
+      }),
+    }
+  } catch (error) {
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Something went wrong",
+        reason: error
+      }),
+    }
+  }
+}
+
 module.exports = {
   getAllUsers,
   getUserById,
@@ -731,5 +843,6 @@ module.exports = {
   getAllWithdraws,
   createEvent,
   deleteEvent,
-  getEventByDate
+  getEventByDate,
+  getExpensesByUserMonth
 };

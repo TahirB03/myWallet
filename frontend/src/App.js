@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState,useEffect, createContext } from "react";
 import poolData from "./poolData";
 import Amplify, { Auth } from "aws-amplify";
 import { AmplifySignOut } from "@aws-amplify/ui-react";
@@ -8,14 +8,24 @@ import Profile from "./pages/Profile";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Dashboard from './pages/Dashboard/Dashboard'
-// import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignUp, VerifyContact, withAuthenticator , } from 'aws-amplify-react';
-// import CostumFlow from './signIn/CostumFlow'
+import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignUp, VerifyContact, withAuthenticator , } from 'aws-amplify-react';
+import CostumFlow from './signIn/CostumFlow'
 import {Transactions} from './pages/Transactions'
-
+import {UserContext} from '../src/context/UserContext'
+import axios from "axios";
 Amplify.configure(poolData);
-
-function App() {
+const App=  ()=> {
+  const [user,setUser]=useState()
+  
+  const  setUserSub = async ()=>{
+    const {attributes} = await Auth.currentAuthenticatedUser()
+    setUser(attributes.sub)
+  }
+  useEffect(()=>{
+    setUserSub();
+  },[])
   return (
+    <UserContext.Provider value={user}>
     <div className="App">
       <div>
         <Router>
@@ -28,12 +38,13 @@ function App() {
         </Router>
       </div>
     </div>
+    </UserContext.Provider>
   );
 }
 
-export default App;
+// export default App;
 
-// export default withAuthenticator(App,false,[
-//   <CostumFlow />,
-//   ]
-// );
+export default withAuthenticator(App,false,[
+  <CostumFlow />,
+  ]
+);

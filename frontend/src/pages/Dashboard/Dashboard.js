@@ -1,14 +1,91 @@
-import React from "react";
+import React,{useContext,useEffect,useState} from "react";
 import "./Dashboard.css";
 import Box from "@mui/material/Box";
 import {Link,useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import deposit from './deposit.png'
 import withdraw from './withdraw.png'
+import {UserContext} from '../../../src/context/UserContext'
+import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import moment from 'moment'
 
 
 const Dashboard =  () => {
   const navigate = useNavigate();
+  const userId = useContext(UserContext)
+  const [user,setUser]=useState(null)
+  const [monthIncome,setMonthIncome]=useState(null)
+  const [monthExpenses,setMonthExpenses]=useState(null)
+  const [expenses,setExpenses]=useState(null)
+  const [userExpensesData,setUserExpensesData]=useState([])
+  const data02 = [
+    { name: "A1", value: 100 },
+    { name: "A2", value: 300 },
+    { name: "B1", value: 100 },
+    { name: "B2", value: 80 }
+  ];
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+  const RADIAN = Math.PI / 180;
+  // First day of the month to make the api calls 
+  const fd = moment().startOf('month').format('YYYY-MM-DD')
+
+  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+    const radius = outerRadius*1.3 ;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  
+    return (
+      <text x={x} y={y} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
+
+  const getUser = async ()=>{
+    try {
+      const {data} = await axios.get(`https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${userId}`)
+      setUser(data.user)
+      console.log(data.user);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  const getUserIncome = async ()=>{
+    try {
+      const {data}= await axios.get(`https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getDeposits/${userId}`)
+      let sum = 0;
+      data.events.map(x=> sum=sum+x.amount)
+      setMonthIncome(sum)
+    } catch (error) {
+      getUserIncome()
+    }
+  }
+  const getUserExpenses = async ()=>{
+    try {
+      const {data}= await axios.get(`https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getAllWithdraws/${userId}`)
+      setExpenses(data)
+      let sum = 0;
+      data.events.map(x=> sum=sum+x.amount)
+      setMonthExpenses(sum)
+    } catch (error) {
+      getUserExpenses()
+    }
+  }
+  const getUserExpensesData = async ()=>{
+      try {
+        const {data} = await axios.post(`https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getExpensesByUserMonth/${userId}`,{"startingDate":fd})
+        setUserExpensesData(data.events)
+      } catch (error) {
+        console.log(error);
+      }
+  }
+  useEffect(()=>{
+    getUser();
+    getUserIncome();
+    getUserExpenses();
+    getUserExpensesData();
+  },[userId])
+
   return (
     <div className="dashboard">
       <div className="dashboardMonth">
@@ -30,7 +107,7 @@ const Dashboard =  () => {
           <img src={deposit} style={{marginTop:"10px"}} width={50} height={50} ></img>
           <div className="boxContainer_text">
               <p style={{display:"block", color:"green"}}>Income</p>
-              <p>$ 600</p>
+              <p>$ {monthIncome}</p>
           </div>
         </Box>
         <Box
@@ -47,11 +124,28 @@ const Dashboard =  () => {
           <img src={withdraw} style={{marginTop:"10px"}} width={50} height={50} ></img>
           <div className="boxContainer_text">
               <p style={{display:"block", color:"red"}}>Outcome</p>
-              <p>$ 600</p>
+              <p>$ {monthExpenses}</p>
           </div>
         </Box>
       </div>
       <Link to="/abs" style={{marginTop:"20px",textAlign:"center"}}>Show Details</Link>
+      <PieChart width={400} height={400}>
+      <Pie
+          data={userExpensesData}
+          cx={200}
+          cy={200}
+          innerRadius={65}
+          outerRadius={90}
+          fill="#8884d8"
+          dataKey="amount"
+          isAnimationActive={false}
+          label={renderCustomizedLabel}
+        >
+          {data02.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
+    </PieChart>
     </div>
   );
 };
