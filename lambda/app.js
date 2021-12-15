@@ -327,7 +327,7 @@ const getEventById = async (event) => {
 const getEventbyUser = async (event) => {
   const userId = event.pathParameters.id;
   try {
-    const eventByUser = await Event.find({ user: userId });
+    const eventByUser = await Event.find({ user: userId }).populate("category").exec();
     return {
       statusCode: 200,
       headers: cors,

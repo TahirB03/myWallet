@@ -1,53 +1,77 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Dashboard.css";
 import Box from "@mui/material/Box";
-import {Link,useNavigate} from 'react-router-dom'
-import axios from 'axios'
-import deposit from './deposit.png'
-import withdraw from './withdraw.png'
-import {UserContext} from '../../../src/context/UserContext'
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
-import moment from 'moment'
-import Filter from '../../images/Filter.png'
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { UserContext } from "../../../src/context/UserContext";
+import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
+import moment from "moment";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
+import Drawer from '@mui/material/Drawer';
 import DashboardNavbar from "./DashboardNavbar";
-import Settings from '../../images/Settings.png'
+import Modal from "react-modal";
+import Sidebar from '../../components/Sidebar.js/Sidebar'
 
 const floatingByttonStyles = {
   margin: 0,
-  top: 'auto',
+  top: "auto",
   right: 20,
   bottom: 100,
-  left: 'auto',
-  position: 'fixed',
+  left: "auto",
+  position: "fixed",
+  zIndex: "10",
 };
 const floatingByttonStyles1 = {
   margin: 0,
-  top: 'auto',
+  top: "auto",
   right: 25,
   bottom: 40,
-  left: 'auto',
-  position: 'fixed',
+  left: "auto",
+  position: "fixed",
+  zIndex: "10",
 };
-
+const floatingByttonStyles2 = {
+  margin: 0,
+  top: "auto",
+  right: 25,
+  bottom: 180,
+  left: "auto",
+  position: "fixed",
+  zIndex: "10",
+};
+const customStyles = {
+  content: {
+    width: "20px",
+    height: "20px",
+    border: "transparent",
+    backgroundColor: "transparent",
+  },
+};
+const COLORS = [
+  "#69D6C5",
+  "#7C6FF1",
+  "#F18F35",
+  "#D44E9A",
+  "#FDB797",
+  "#32AE1B",
+  "#2B32BD",
+];
+Modal.setAppElement("#root");
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const userId = useContext(UserContext)
+  const userId = useContext(UserContext);
   console.log(userId);
-  const [user,setUser]=useState(null)
-  const [monthIncome,setMonthIncome]=useState(null)
-  const [monthExpenses,setMonthExpenses]=useState(null)
-  const [expenses,setExpenses]=useState(null)
-  const [userExpensesData,setUserExpensesData]=useState([])
-  const data02 = [
-    { name: "A1", value: 100 },
-    { name: "A2", value: 300 },
-    { name: "B1", value: 100 },
-    { name: "B2", value: 80 },
-  ];
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+  const [user, setUser] = useState(null);
+  const [monthIncome, setMonthIncome] = useState(null);
+  const [monthExpenses, setMonthExpenses] = useState(null);
+  const [expenses, setExpenses] = useState(null);
+  const [userExpensesData, setUserExpensesData] = useState([]);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [sideBar,setSideBar]=useState(false)
+
+  
   const RADIAN = Math.PI / 180;
   // First day of the month to make the api calls
   const fd = moment().startOf("month").format("YYYY-MM-DD");
@@ -66,8 +90,14 @@ const Dashboard = () => {
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
     return (
-      <text x={x} y={y} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-        {`${userExpensesData[index].name}${(percent * 100).toFixed(0)}%`}
+      <text
+        x={x}
+        y={y}
+        fill="black"
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+      >
+        {`${(percent * 100).toFixed(0)}%`}
       </text>
     );
   };
@@ -126,89 +156,183 @@ const Dashboard = () => {
     getUserExpensesData();
   }, [userId]);
 
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   return (
     <div className="dashboardWrapper">
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={()=> setIsOpen(false)}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <div className="floatedButtons" style={floatingByttonStyles2}>
+          <div className="createDeposit" style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+            <p style={{display:"inline-block",color:"white",marginRight:"10px"}}>Add income</p>
+            <Fab
+              size="medium"
+              aria-label="add"
+              onClick={() => navigate(`/addIncome/${userId}`)}
+            >
+              <img
+                src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Up.png"
+                style={{ width: "60%" }}
+              />
+            </Fab>
+          </div>
+          <div className="createWithdraw" style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+          <p style={{display:"inline-block",color:"white",marginRight:"10px"}}>Add expense</p>
+            <Fab
+              size="medium"
+              aria-label="add"
+              onClick={() => navigate(`/addExpense/${userId}`)}
+            >
+              <img
+                src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Down.png"
+                style={{ width: "60%" }}
+              />
+            </Fab>
+          </div>
+        </div>
+      </Modal>
       <DashboardNavbar />
       <div className="dashboard">
-      <div className="dashboardMonth">
-        <h3 style={{textAlign:"center",color:"#3F3D56", fontSize:"16px",display:"inline-block"}}>{moment().format(' ddd, MMMM Do ')}</h3>
-        <img src={Filter} alt="" width="25" />
-      </div>
-      <div className="events_byMonth">
-        <Box
-          onClick={() => navigate("/s")}
-          className="boxContainer"
-          sx={{
-            marginTop: "30px",
-            width: 160,
-            height: 80,
-            border: "1px solid gray",
-            borderRadius: "25px",
-            padding: "5px 10px",
-          }}
+        <div className="dashboardMonth">
+          <h3
+            style={{
+              textAlign: "center",
+              color: "#3F3D56",
+              fontSize: "16px",
+              display: "inline-block",
+            }}
+          >
+            {moment().format(" ddd, MMMM Do ")}
+          </h3>
+          <img
+            onClick={()=> setSideBar(true)}
+            src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Filter.png"
+            alt=""
+            width="25"
+          />
+          <Drawer
+            anchor="right"
+            open={sideBar}
+            onClose={()=> setSideBar(false)}
+          >
+            <Sidebar setSideBar={setSideBar} />
+          </Drawer>
+        </div>
+        <div className="events_byMonth">
+          <Box
+            onClick={() => navigate("/s")}
+            className="boxContainer"
+            sx={{
+              marginTop: "30px",
+              width: 160,
+              height: 80,
+              border: "1px solid gray",
+              borderRadius: "25px",
+              padding: "5px 10px",
+            }}
+          >
+            <img
+              src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/income.png"
+              style={{ marginTop: "10px" }}
+              width={50}
+              height={50}
+            ></img>
+            <div className="boxContainer_text">
+              <p style={{ display: "block", color: "green" }}>Income</p>
+              <p>$ {monthIncome}</p>
+            </div>
+          </Box>
+          <Box
+            onClick={() => navigate("/sa")}
+            className="boxContainer"
+            sx={{
+              marginTop: "30px",
+              width: 160,
+              height: 80,
+              border: "1px solid gray",
+              borderRadius: "25px",
+              padding: "5px 10px",
+            }}
+          >
+            <img
+              src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/outcome.png"
+              style={{ marginTop: "10px" }}
+              width={50}
+              height={50}
+            ></img>
+            <div className="boxContainer_text">
+              <p style={{ display: "block", color: "red" }}>Outcome</p>
+              <p>$ {monthExpenses}</p>
+            </div>
+          </Box>
+        </div>
+        <Link
+          to="/transactions"
+          style={{ marginTop: "20px", textAlign: "center" }}
+        >
+          Show Details
+        </Link>
+        <h3 style={{ marginTop: "20px", fontSize: "20px", color: "#3F3D56" }}>
+          Categories
+        </h3>
+        <PieChart width={400} height={300}>
+          <Pie
+            style={{ margin: "0 auto" }}
+            data={userExpensesData}
+            cx={180}
+            cy={150}
+            innerRadius={65}
+            outerRadius={90}
+            fill="#8884d8"
+            dataKey="amount"
+            isAnimationActive={false}
+            label={renderCustomizedLabel}
+          >
+            {userExpensesData.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
+          </Pie>
+        </PieChart>
+        <Fab
+          size="small"
+          color="primary"
+          aria-label="add"
+          style={floatingByttonStyles}
+        >
+          {modalIsOpen && 
+            <img 
+            src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Close.png" 
+            width="20"
+            onClick={()=> setIsOpen(false)}
+            />
+            }
+          {modalIsOpen===false && <AddIcon onClick={()=> setIsOpen(true)} />}
+        </Fab>
+        <Fab
+          size="medium"
+          aria-label="add"
+          style={floatingByttonStyles1}
+          onClick={() => navigate("/profile")}
         >
           <img
-            src={deposit}
-            style={{ marginTop: "10px" }}
-            width={50}
-            height={50}
-          ></img>
-          <div className="boxContainer_text">
-            <p style={{ display: "block", color: "green" }}>Income</p>
-            <p>$ {monthIncome}</p>
-          </div>
-        </Box>
-        <Box
-          onClick={() => navigate("/sa")}
-          className="boxContainer"
-          sx={{
-            marginTop: "30px",
-            width: 160,
-            height: 80,
-            border: "1px solid gray",
-            borderRadius: "25px",
-            padding: "5px 10px",
-          }}
-        >
-          <img
-            src={withdraw}
-            style={{ marginTop: "10px" }}
-            width={50}
-            height={50}
-          ></img>
-          <div className="boxContainer_text">
-            <p style={{ display: "block", color: "red" }}>Outcome</p>
-            <p>$ {monthExpenses}</p>
-          </div>
-        </Box>
+            src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Settings.png"
+            style={{ width: "80%" }}
+          />
+        </Fab>
       </div>
-      <Link to="/abs" style={{marginTop:"20px",textAlign:"center"}}>Show Details</Link>
-      <h3 style={{marginTop:"20px",fontSize:"20px",color:"#3F3D56"}}>Categories</h3>
-      <PieChart width={400} height={300}>
-      <Pie
-          style={{margin: "0 auto"}}
-          data={userExpensesData}
-          cx={180}
-          cy={150}
-          innerRadius={65}
-          outerRadius={90}
-          fill="#8884d8"
-          dataKey="amount"
-          isAnimationActive={false}
-          label={renderCustomizedLabel}
-        >
-          {data02.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-    </PieChart>
-      <Fab size="small" color="primary" aria-label="add" style={floatingByttonStyles}>
-        <AddIcon />
-      </Fab>
-      <Fab size="medium"  aria-label="add" style={floatingByttonStyles1} onClick={()=> navigate('/profile')}>
-          <img src={Settings} style={{width:"80%"}} />
-      </Fab>
-    </div>
     </div>
   );
 };

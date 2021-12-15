@@ -25,3 +25,13 @@
   justify-content: space-between;
   flex-direction: column;
 }
+.floatedButtons{
+  display: flex;
+  flex-direction: column;
+  height: 120px;
+  justify-content: space-between;
+}
+.ReactModal__Overlay--after-open{
+  background-color: #3F3D56 !important;
+  opacity: 0.75 !important;
+}
