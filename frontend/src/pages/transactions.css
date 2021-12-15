@@ -1,12 +1,20 @@
+.monthContainer {
+  height: 100%;
+}
+
 .months {
   padding: 20px;
   cursor: pointer;
   background-color: rgb(255, 255, 255);
   border-style: ridge;
-  border-radius: 5px;
-  border: 1px solid gold;
-  margin: 15px;
+  border-radius: 40%;
+  border: 1px solid rgb(216, 216, 216);
+  margin: 5px;
   text-align: center;
+}
+.months:hover {
+  background-color: rgb(255, 0, 43);
+  border: none;
 }
 .stats {
   margin-top: 10px;
@@ -42,4 +50,8 @@
 .arrows {
   padding: 20px;
   display: flex;
+}
+.events_byMonth {
+  display: flex;
+  justify-content: space-between;
 }
