@@ -1,20 +1,18 @@
-.monthContainer {
-  height: 100%;
-}
-
 .months {
-  padding: 20px;
+  padding: 15px;
   cursor: pointer;
   background-color: rgb(255, 255, 255);
   border-style: ridge;
-  border-radius: 40%;
+  border-radius: 50px;
   border: 1px solid rgb(216, 216, 216);
   margin: 5px;
   text-align: center;
+  margin: 0px 5px;
 }
 .months:hover {
-  background-color: rgb(255, 0, 43);
+  background-color: rgb(32, 13, 16);
   border: none;
+  color: aliceblue;
 }
 .stats {
   margin-top: 10px;
@@ -30,26 +28,67 @@
   border: 1px solid gold;
 }
 
-.amountChild {
-  border-bottom: 1px solid gold;
-  align-items: center;
-  justify-content: center;
+.amountChildIncome {
+  border-bottom: dotted rgb(212, 212, 212);
+  border-width: 0.01mm;
+  padding-top: 3%;
   height: 8vh;
   font-weight: 600;
-  font-size: 25px;
+  font-size: 15px;
+  align-items: center;
+  justify-content: center;
+}
+.amountChildExpense {
+  border-bottom: dotted rgb(212, 212, 212);
+  border-width: 0.1mm;
+  padding-top: 3%;
+  height: 8vh;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.amountChildIncome h3 {
+  margin-left: 20%;
+  font-size: 15px;
+  padding: 0;
+  font-weight: 400;
+  color: rgb(156, 156, 156);
+}
+.amountChildIncome h4 {
+  margin-left: 20%;
+  color: rgb(92, 153, 0);
+  font-size: 17px;
+}
+
+.amountChildExpense h3 {
+  margin-left: 20%;
+  font-size: 15px;
+  padding: 0;
+  font-weight: 400;
+  color: rgb(156, 156, 156);
+}
+.amountChildExpense h4 {
+  margin-left: 20%;
+  color: rgb(255, 17, 0);
+  font-size: 17px;
 }
 
 .amount {
   margin-top: 5%;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  height: 5%;
+  margin-left: 7%;
+  margin-right: 7%;
+  height: 15%;
 }
 
 .arrows {
   padding: 20px;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: underline;
+  display: flex;
+  flex-direction: column;
 }
 .events_byMonth {
   display: flex;

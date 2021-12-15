@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect } from "react";
 import poolData from "./poolData";
 import Amplify, { Auth } from "aws-amplify";
 import Profile from "./pages/Profile";
@@ -11,7 +11,10 @@ import { UserContext } from "../src/context/UserContext";
 import { withAuthenticator  } from 'aws-amplify-react';
 import ChangePassword from './pages/ChangePassword';
 
+
 Amplify.configure(poolData);
+Auth.configure(poolData)
+
 
 const App =  ()=> {
   const [user,setUser]=useState(null)
@@ -41,7 +44,6 @@ const App =  ()=> {
           </Router>
         </div>
       </div>
-      {/* <AmplifySignOut /> */}
     </UserContext.Provider>
   );
 }
