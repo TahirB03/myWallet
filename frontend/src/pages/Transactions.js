@@ -10,12 +10,12 @@ import axios from "axios";
 
 export const Transactions = () => {
   const url =
-    "https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getEventByDate/fc099009-220e-44eb-9900-ead7e2e0613b";
+    "https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getEventByUser/fc099009-220e-44eb-9900-ead7e2e0613b";
   const [eventValues, setEventValues] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    axios.post(url, { startingDate: 2020 - 12 - 10 }).then((response) => {
+    axios.get(url).then((response) => {
       console.log(response);
       console.log(response.data.events);
       setEventValues(response.data.events);
@@ -26,13 +26,13 @@ export const Transactions = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToShow: 5,
+    slidesToScroll: 2,
   };
   return (
     <div className="monthContainer">
       <Navbar />
-      <Slider {...settings}>
+      <Slider className="slider" {...settings}>
         <button className="months">Jan</button>
         <button className="months">Fec</button>
         <button className="months">Mar</button>
@@ -57,11 +57,57 @@ export const Transactions = () => {
       </div>
       <div className="amount">
         {loading &&
-          eventValues.map((value) => (
-            <div className="amountChild" key={value._id}>
-              {value.amount}$
-            </div>
-          ))}
+          eventValues.map((value) => {
+            if (value.category.categoryName === "Gift") {
+              return (
+                <div className="amountChild" key={value._id}>
+                  {value.amount}$ {value.category.categoryName}
+                </div>
+              );
+            } else if (value.category.categoryName === "Salary") {
+              return (
+                <div className="amountChild" key={value._id}>
+                  {value.amount}${value.category.categoryName}
+                </div>
+              );
+            } else if (value.category.categoryName === "Tips/Lottery") {
+              return (
+                <div className="amountChild" key={value._id}>
+                  {value.amount}${value.category.categoryName}
+                </div>
+              );
+            } else if (value.category.categoryName === "Healthcare") {
+              return (
+                <div className="amountChild" key={value._id}>
+                  {value.amount}${value.category.categoryName}
+                </div>
+              );
+            } else if (value.category.categoryName === "Entertainment") {
+              return (
+                <div className="amountChild" key={value._id}>
+                  {value.amount}${value.category.categoryName}
+                </div>
+              );
+            } else if (value.category.categoryName === "Transportation") {
+              return (
+                <div className="amountChild" key={value._id}>
+                  {value.amount}${value.category.categoryName}
+                </div>
+              );
+            } else if (value.category.categoryName === "Other") {
+              return (
+                <div className="amountChild" key={value._id}>
+                  {value.amount}${value.category.categoryName}
+                </div>
+              );
+            } else if (value.category.categoryName === "Maintenance") {
+              return (
+                <div className="amountChild" key={value._id}>
+                  {value.amount}${value.category.categoryName}
+                </div>
+              );
+            }
+          })}
       </div>
     </div>
   );
