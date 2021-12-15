@@ -6,9 +6,7 @@ import { Auth } from "aws-amplify";
 import "./profile.css";
 
 const signOut = async (e) => {
-  e.preventDefault();
   await Auth.signOut();
-  window.location.reload();
 };
 
 const Profile = () => {

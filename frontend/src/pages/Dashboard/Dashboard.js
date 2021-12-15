@@ -64,12 +64,14 @@ const Dashboard = () => {
   const userId = useContext(UserContext);
   console.log(userId);
   const [user, setUser] = useState(null);
-  const [monthIncome, setMonthIncome] = useState(null);
-  const [monthExpenses, setMonthExpenses] = useState(null);
+  const [userIncome, setUserIncome] = useState(0);
+  const [userExpenses, setUserExpenses] = useState(0);
   const [expenses, setExpenses] = useState(null);
   const [userExpensesData, setUserExpensesData] = useState([]);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [sideBar,setSideBar]=useState(false)
+  const [filteredTime,setFilteredTime]=useState('Day')
+  const [dateFormat,setTimeFormat]=useState(moment().startOf("month").format('YYYY-MM-DD'))
 
   
   const RADIAN = Math.PI / 180;
@@ -113,31 +115,20 @@ const Dashboard = () => {
       console.log(error);
     }
   };
-  const getUserIncome = async () => {
-    try {
-      const { data } = await axios.get(
-        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getDeposits/${userId}`
-      );
-      let sum = 0;
-      data.events.map((x) => (sum = sum + x.amount));
-      setMonthIncome(sum);
-    } catch (error) {
-      getUserIncome();
-    }
-  };
-  const getUserExpenses = async () => {
-    try {
-      const { data } = await axios.get(
-        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getAllWithdraws/${userId}`
-      );
-      setExpenses(data);
-      let sum = 0;
-      data.events.map((x) => (sum = sum + x.amount));
-      setMonthExpenses(sum);
-    } catch (error) {
-      getUserExpenses();
-    }
-  };
+  const getUserFiltered = async ()=>{
+      try {
+        const {data} = await axios.post(`https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getEventByDate/${userId}`,{startingDate: dateFormat})
+        data.events.map(x=>{
+          if (x.category.isDeposit === true){
+            setUserIncome(prevState => prevState+x.amount)
+          }else{
+            setUserExpenses(prevState => prevState+x.amount)
+          }
+        })
+      } catch (error) {
+        console.log(error);
+      }
+  }
   const getUserExpensesData = async () => {
     try {
       const { data } = await axios.post(
@@ -151,10 +142,9 @@ const Dashboard = () => {
   };
   useEffect(() => {
     getUser();
-    getUserIncome();
-    getUserExpenses();
+    getUserFiltered();
     getUserExpensesData();
-  }, [userId]);
+  }, [dateFormat]);
 
   function openModal() {
     setIsOpen(true);
@@ -225,7 +215,7 @@ const Dashboard = () => {
             open={sideBar}
             onClose={()=> setSideBar(false)}
           >
-            <Sidebar setSideBar={setSideBar} />
+            <Sidebar filteredTime={filteredTime} setFilteredTime={setFilteredTime} setSideBar={setSideBar} />
           </Drawer>
         </div>
         <div className="events_byMonth">
@@ -249,7 +239,7 @@ const Dashboard = () => {
             ></img>
             <div className="boxContainer_text">
               <p style={{ display: "block", color: "green" }}>Income</p>
-              <p>$ {monthIncome}</p>
+              <p>$ {userIncome}</p>
             </div>
           </Box>
           <Box
@@ -272,7 +262,7 @@ const Dashboard = () => {
             ></img>
             <div className="boxContainer_text">
               <p style={{ display: "block", color: "red" }}>Outcome</p>
-              <p>$ {monthExpenses}</p>
+              <p>$ {userExpenses}</p>
             </div>
           </Box>
         </div>

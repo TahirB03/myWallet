@@ -2,12 +2,14 @@
     width: 190px;
     display: flex;
     padding: 20px 10px;
-    color: #3F3D56; 
+    color: #3F3D56;
+    flex-direction: column;
 }
-.label{
+.sidebar_label{
     width:100%;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 25px;
 }
 
 .roundedClose{

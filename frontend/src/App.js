@@ -2,22 +2,19 @@ import "./App.css";
 import React, { useState, useEffect, createContext } from "react";
 import poolData from "./poolData";
 import Amplify, { Auth } from "aws-amplify";
-import { AmplifySignOut } from "@aws-amplify/ui-react";
 import Profile from "./pages/Profile";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
-import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import CostumFlow from "./signIn/CostumFlow";
 import { Transactions } from "./pages/Transactions";
 import { UserContext } from "../src/context/UserContext";
-import axios from "axios";
-// import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignUp, VerifyContact, withAuthenticator , } from 'aws-amplify-react';
+import { withAuthenticator  } from 'aws-amplify-react';
 import ChangePassword from './pages/ChangePassword';
 
 Amplify.configure(poolData);
-const App=  ()=> {
+
+const App =  ()=> {
   const [user,setUser]=useState(null)
-  
   const  setUserSub = async ()=>{
     const {attributes} = await Auth.currentAuthenticatedUser()
     setUser(attributes.sub)
@@ -25,6 +22,7 @@ const App=  ()=> {
   useEffect(()=>{
     setUserSub();
   },[])
+
   if (user !== null ){
   return (
     <UserContext.Provider value={user}>
@@ -43,6 +41,7 @@ const App=  ()=> {
           </Router>
         </div>
       </div>
+      {/* <AmplifySignOut /> */}
     </UserContext.Provider>
   );
 }
@@ -51,9 +50,9 @@ return (
 )
 }
 
-export default App;
+// export default App;
 
-// export default withAuthenticator(App,false,[
-//   <CostumFlow />,
-//   ]
-// );
+export default withAuthenticator(App,false,[
+  <CostumFlow />,
+  ]
+);

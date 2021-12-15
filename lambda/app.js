@@ -696,7 +696,7 @@ const getEventByDate = async event =>{
         $gte: startingDate,
         $lte: endingDate
       }
-    })
+    }).populate('category').exec()
     return {
       statusCode: 200,
       headers: cors,
