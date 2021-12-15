@@ -1,6 +1,7 @@
 import React from 'react';
 import { Auth } from 'aws-amplify';
 import TextField from '@material-ui/core/TextField';
+import ProfileNav from '../components/ProfileNavbar';
 import { Link } from 'react-router-dom';
 
 import './profile.css';
@@ -17,6 +18,7 @@ function changePass() {
 const ChangePassword = () => {
   return (
     <div>
+      <ProfileNav />
       Change Password
       <div className='text'>
         <div className='text-field'>

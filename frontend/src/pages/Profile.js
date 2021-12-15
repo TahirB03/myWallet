@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import userLogo from "./user.png";
 import ProfileNav from "../components/ProfileNavbar";
 import { Auth } from "aws-amplify";
 
@@ -16,14 +15,18 @@ const Profile = () => {
   return (
     <div>
       <ProfileNav />
-      <div className="userLogo">
-        <img src={userLogo} width="120px" alt="userLogo" />
-      </div>
+      <p className='settings'>Settings</p>
       <div>
-        <Link to="/changePassword">
-          <button className="password">🔒 Change Password</button>
+        <Link to='/changePassword'>
+          <button className='password'>🔒 Change Password</button>
         </Link>
-        <button className="logOut" onClick={signOut}>
+        <Link to='/about'>
+          <button className='about-us'>ℹ️ About Us</button>
+        </Link>
+        <Link to='/policy'>
+          <button className='policy'>📄 Privacy & Policy</button>
+        </Link>
+        <button className='logOut' onClick={signOut}>
           Log Out
         </button>
       </div>
