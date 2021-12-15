@@ -1,4 +1,3 @@
-import { TextField, Typography } from "@mui/material";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
@@ -7,6 +6,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
+import Income from "../components/Income";
+import Outcome from "../components/Outcome";
+import deposit from "./Dashboard/deposit.png";
+import withdraw from "./Dashboard/withdraw.png";
 
 export const Transactions = () => {
   const url =
@@ -48,65 +51,183 @@ export const Transactions = () => {
       </Slider>
 
       <div className="stats">
-        <Typography className="typo">Income</Typography>
-        <Typography className="typo">Outcome</Typography>
+        <Income />
+        <Outcome />
       </div>
       <div className="arrows">
-        <CompareArrowsIcon />
         Transactions
+        <CompareArrowsIcon />
       </div>
       <div className="amount">
         {loading &&
           eventValues.map((value) => {
-            if (value.category.categoryName === "Gift") {
+            if (
+              value.category.categoryName === "Gift" &&
+              value.category.isDeposit === true
+            ) {
               return (
-                <div className="amountChild" key={value._id}>
-                  {value.amount}$ {value.category.categoryName}
+                <div className="amountChildIncome" key={value._id}>
+                  <img src={deposit} />
+                  <h3 className="categoryName">
+                    {value.category.categoryName}
+                  </h3>
+                  <h4 className="valueAmount">+{value.amount}$</h4>
                 </div>
               );
-            } else if (value.category.categoryName === "Salary") {
+            } else if (
+              value.category.categoryName === "Gift" &&
+              value.category.isDeposit !== true
+            ) {
               return (
-                <div className="amountChild" key={value._id}>
-                  {value.amount}${value.category.categoryName}
+                <div className="amountChildExpense" key={value._id}>
+                  <h3>{value.category.categoryName}</h3>
+                  <h4>-{value.amount}$</h4>
                 </div>
               );
-            } else if (value.category.categoryName === "Tips/Lottery") {
+            } else if (
+              value.category.categoryName === "Salary" &&
+              value.category.isDeposit === true
+            ) {
               return (
-                <div className="amountChild" key={value._id}>
-                  {value.amount}${value.category.categoryName}
+                <div className="amountChildIncome" key={value._id}>
+                  <h3 className="categoryName">
+                    {value.category.categoryName}
+                  </h3>
+                  <h4 className="valueAmount">+{value.amount}$</h4>
                 </div>
               );
-            } else if (value.category.categoryName === "Healthcare") {
+            } else if (
+              value.category.categoryName === "Salary" &&
+              value.category.isDeposit !== true
+            ) {
               return (
-                <div className="amountChild" key={value._id}>
-                  {value.amount}${value.category.categoryName}
+                <div className="amountChildExpense" key={value._id}>
+                  <h3>{value.category.categoryName}</h3>
+                  <h4>-{value.amount}$</h4>
                 </div>
               );
-            } else if (value.category.categoryName === "Entertainment") {
+            } else if (
+              value.category.categoryName === "Tips/Lottery" &&
+              value.category.isDeposit === true
+            ) {
               return (
-                <div className="amountChild" key={value._id}>
-                  {value.amount}${value.category.categoryName}
+                <div className="amountChildIncome" key={value._id}>
+                  <h3>{value.category.categoryName}</h3>
+                  <h4>+{value.amount}$</h4>
                 </div>
               );
-            } else if (value.category.categoryName === "Transportation") {
+            } else if (
+              value.category.categoryName === "Tips/Lottery" &&
+              value.category.isDeposit !== true
+            ) {
               return (
-                <div className="amountChild" key={value._id}>
-                  {value.amount}${value.category.categoryName}
+                <div className="amountChildExpense" key={value._id}>
+                  <h3>{value.category.categoryName}</h3>
+                  <h4>-{value.amount}$</h4>
                 </div>
               );
-            } else if (value.category.categoryName === "Other") {
+            } else if (
+              value.category.categoryName === "Healthcare" &&
+              value.category.isDeposit === true
+            ) {
               return (
-                <div className="amountChild" key={value._id}>
-                  {value.amount}${value.category.categoryName}
+                <div className="amountChildIncome" key={value._id}>
+                  <h3>{value.category.categoryName}</h3>
+                  <h4>+{value.amount}$</h4>
                 </div>
               );
-            } else if (value.category.categoryName === "Maintenance") {
+            } else if (
+              value.category.categoryName === "Healthcare" &&
+              value.category.isDeposit !== true
+            ) {
               return (
-                <div className="amountChild" key={value._id}>
-                  {value.amount}${value.category.categoryName}
+                <div className="amountChildExpense" key={value._id}>
+                  <h3>{value.category.categoryName}</h3>
+                  <h4>-{value.amount}$</h4>
+                </div>
+              );
+            } else if (
+              value.category.categoryName === "Entertainment" &&
+              value.category.isDeposit === true
+            ) {
+              return (
+                <div className="amountChildIncome" key={value._id}>
+                  <h3>{value.category.categoryName}</h3>
+                  <h4>+{value.amount}$</h4>
+                </div>
+              );
+            } else if (
+              value.category.categoryName === "Entertainment" &&
+              value.category.isDeposit !== true
+            ) {
+              return (
+                <div className="amountChildExpense" key={value._id}>
+                  <h3>{value.category.categoryName}</h3>
+                  <h4>-{value.amount}$</h4>
+                </div>
+              );
+            } else if (
+              value.category.categoryName === "Transportation" &&
+              value.category.isDeposit === true
+            ) {
+              return (
+                <div className="amountChildIncome" key={value._id}>
+                  <h3>{value.category.categoryName}</h3>
+                  <h4>+{value.amount}$</h4>
+                </div>
+              );
+            } else if (
+              value.category.categoryName === "Transportation" &&
+              value.category.isDeposit !== true
+            ) {
+              return (
+                <div className="amountChildExpense" key={value._id}>
+                  <h3>{value.category.categoryName}</h3>
+                  <h4>-{value.amount}$</h4>
+                </div>
+              );
+            } else if (
+              value.category.categoryName === "Other" &&
+              value.category.isDeposit === true
+            ) {
+              return (
+                <div className="amountChildIncome" key={value._id}>
+                  <h3>{value.category.categoryName}</h3>
+                  <h4>+{value.amount}$</h4>
+                </div>
+              );
+            } else if (
+              value.category.categoryName === "Other" &&
+              value.category.isDeposit !== true
+            ) {
+              return (
+                <div className="amountChildExpense" key={value._id}>
+                  <h3>{value.category.categoryName}</h3>
+                  <h4>-{value.amount}$</h4>
+                </div>
+              );
+            } else if (
+              value.category.categoryName === "Maintenance" &&
+              value.category.isDeposit === true
+            ) {
+              return (
+                <div className="amountChildIncome" key={value._id}>
+                  <h3>{value.category.categoryName}</h3>
+                  <h4>+{value.amount}$</h4>
+                </div>
+              );
+            } else if (
+              value.category.categoryName === "Maintenance" &&
+              value.category.isDeposit !== true
+            ) {
+              return (
+                <div className="amountChildExpense" key={value._id}>
+                  <h3>{value.category.categoryName}</h3>
+                  <h4>-{value.amount}$</h4>
                 </div>
               );
             }
+            return <h1>Something went wrong</h1>;
           })}
       </div>
     </div>

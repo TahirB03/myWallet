@@ -5,6 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import "./navbar.css";
 import Avatar from "../images/Avatar.png";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -36,9 +37,11 @@ const Navbar = () => {
               fontSize: "18px",
               color: "white",
               textDecoration: "underline",
+              display: "flex",
             }}
           >
-            Transacions
+            <ArrowBackIosIcon />
+            Transactions
           </p>
         </Link>
         <div
