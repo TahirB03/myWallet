@@ -1,6 +1,13 @@
+.settings {
+   margin-left: 40px;
+   margin-top: 40px;
+   font-family: Baskerville, "Baskerville Old Face", "Goudy Old Style", Garamond, "Times New Roman", serif;
+   font-size: 25px;
+}
+
 .password {
  margin-left: 30px;
- margin-top: 170px;
+ margin-top: 50px;
  background-color: white; 
  border: solid 1px gray;
  padding: 10px 32px;
@@ -13,13 +20,29 @@
  border-radius: 40px;
 }
 
-.password:hover {
+.password:hover, .about-us:hover, .policy:hover {
   background-color: rgb(29, 27, 27);
   color: white; 
 }
 
+.about-us, .policy {
+ margin-left: 30px;
+ margin-top: 10px;
+ background-color: white; 
+ border: solid 1px gray;
+ padding: 10px 32px;
+ text-align: left;
+ text-decoration: none;
+ font-size: 18px;
+ transition-duration: 0.4s;
+ width: 80%;
+ border-width: 2px 4px;
+ border-radius: 40px;
+}
+
+
 .logOut {
- margin-top: 230px;
+ margin-top: 100px;
  margin-left: 30px;
  background-color: #EC6800; 
  color: white;
@@ -42,7 +65,7 @@
 
 
 .text {
- margin-top: 100px;
+ margin-top: 30px;
  border-width: 2px 4px;
  border-radius: 40px;
 }
@@ -101,10 +124,4 @@
 .back-button:hover {
   background-color: #022ebd; 
   color: white;
-}
-
-.userLogo {
- margin-top: 80px;
- margin-left: 120px;
- height: 1px;
 }

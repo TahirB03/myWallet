@@ -1,0 +1,18 @@
+.sidebar{
+    width: 190px;
+    display: flex;
+    padding: 20px 10px;
+    color: #3F3D56; 
+}
+.label{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.roundedClose{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #E6E6E6;
+}
