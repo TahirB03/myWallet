@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
-import withdraw from "../pages/Dashboard/withdraw.png";
 
 const Outcome = () => {
   const [outcome, setOutcome] = useState(0);
@@ -40,7 +39,7 @@ const Outcome = () => {
         }}
       >
         <img
-          src={withdraw}
+          src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/outcome.png"
           style={{ marginTop: "10px" }}
           width={50}
           height={50}

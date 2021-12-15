@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
-import deposit from "../pages/Dashboard/deposit.png";
 
 const Income = () => {
   const [income, setIncome] = useState(0);
@@ -40,7 +39,7 @@ const Income = () => {
         }}
       >
         <img
-          src={deposit}
+          src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/income.png"
           style={{ marginTop: "10px" }}
           width={44}
           height={50}

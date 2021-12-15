@@ -8,8 +8,6 @@ import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
 import Income from "../components/Income";
 import Outcome from "../components/Outcome";
-import deposit from "./Dashboard/deposit.png";
-import withdraw from "./Dashboard/withdraw.png";
 
 export const Transactions = () => {
   const url =
@@ -67,7 +65,6 @@ export const Transactions = () => {
             ) {
               return (
                 <div className="amountChildIncome" key={value._id}>
-                  <img src={deposit} />
                   <h3 className="categoryName">
                     {value.category.categoryName}
                   </h3>
