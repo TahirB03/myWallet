@@ -94,11 +94,12 @@ const Dashboard = () => {
       <text
         x={x}
         y={y}
-        fill="black"
+        fill={userExpensesData[index].color}
         textAnchor={x > cx ? "start" : "end"}
         dominantBaseline="central"
+        fontSize={"13px"}
       >
-        {`${(percent * 100).toFixed(0)}%`}
+        {`${userExpensesData[index].name} `}
       </text>
     );
   };
@@ -218,7 +219,7 @@ const Dashboard = () => {
             className="boxContainer"
             sx={{
               marginTop: "30px",
-              width: 160,
+              width: 170,
               height: 80,
               border: "1px solid gray",
               borderRadius: "25px",
@@ -233,7 +234,7 @@ const Dashboard = () => {
             ></img>
             <div className="boxContainer_text">
               <p style={{ display: "block", color: "green" }}>Income</p>
-              <p>$ {userIncome.toFixed(2)}</p>
+              <p>$ {userIncome.toFixed(1)}</p>
             </div>
           </Box>
           <Box
@@ -241,7 +242,7 @@ const Dashboard = () => {
             className="boxContainer"
             sx={{
               marginTop: "30px",
-              width: 160,
+              width: 170,
               height: 80,
               border: "1px solid gray",
               borderRadius: "25px",
@@ -256,7 +257,7 @@ const Dashboard = () => {
             ></img>
             <div className="boxContainer_text">
               <p style={{ display: "block", color: "red" }}>Outcome</p>
-              <p>$ {userExpenses.toFixed(2)}</p>
+              <p>$ {userExpenses.toFixed(1)}</p>
             </div>
           </Box>
         </div>
@@ -269,7 +270,7 @@ const Dashboard = () => {
         <h3 style={{ marginTop: "20px", fontSize: "20px", color: "#3F3D56" }}>
           Categories
         </h3>
-        <PieChart width={400} height={300}>
+        <PieChart width={500} height={300}>
           <Pie
             style={{ margin: "0 auto" }}
             data={userExpensesData}
@@ -281,11 +282,12 @@ const Dashboard = () => {
             dataKey="amount"
             isAnimationActive={false}
             label={renderCustomizedLabel}
+            style={{overflow:"visible"}}
           >
-            {userExpensesData.map((entry, index) => (
+            {userExpensesData.map((index) => (
               <Cell
                 key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
+                fill={index.color}
               />
             ))}
           </Pie>

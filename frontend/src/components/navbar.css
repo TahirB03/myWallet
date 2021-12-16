@@ -1,7 +1,6 @@
 .dashboardNavbar {
   width: 100vw;
   max-width: 600px;
-  height: 20vh;
   background-color: #2b32bd;
   border-radius: 0 0 40px 40px;
   display: flex;

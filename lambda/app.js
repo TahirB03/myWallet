@@ -724,30 +724,56 @@ const getExpensesByUserMonth = async (event)=>{
   let filteredCategories=[
     {
       name:"Gift",
-      amount:0
+      amount:0,
+      color: "#A569BD",
+      image: "https://mywalletimages.s3.eu-central-1.amazonaws.com/images/gift.png"
     },
     {
       name:"Healthcare",
-      amount:0
+      amount:0,
+      color: "#EC7063",
+      image: "https://mywalletimages.s3.eu-central-1.amazonaws.com/images/health.png"
     },
     {
-      name:"Fun",
-      amount:0
+      name:"Entertainment",
+      amount:0,
+      color: "#EB984E",
+      image: "https://mywalletimages.s3.eu-central-1.amazonaws.com/images/entertainment.png"
     }
     ,{
       name:"Transportation",
-      amount:0
+      amount:0,
+      color: "#16A085",
+      image: "https://mywalletimages.s3.eu-central-1.amazonaws.com/images/transport.png"
     },
     {
       name:"Other",
-      amount:0
+      amount:0,
+      color: "#5D6D7E",
+      image: "https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Other+Deposits.png"
     },
     {
-      name:"Apparel",
-      amount:0
+      name:"Clothing",
+      amount:0,
+      color: "#D35400",
+      image: "https://mywalletimages.s3.eu-central-1.amazonaws.com/images/clothes.png"
     },{
-      name:"Maintenance",
-      amount:0
+      name:"Communication",
+      amount:0,
+      color: "#5499C7",
+      image: "https://mywalletimages.s3.eu-central-1.amazonaws.com/images/communication.png"
+    },
+    {
+      name:"Food",
+      amount:0,
+      color: "#F4D03F",
+      image: "https://mywalletimages.s3.eu-central-1.amazonaws.com/images/food.png"
+    },
+    {
+      name:"Sport",
+      amount:0,
+      color: "#5DADE2",
+      image: "https://mywalletimages.s3.eu-central-1.amazonaws.com/images/sport.png"
     }
   ]
   if (event.body !== null && event.body !== undefined) {
@@ -798,7 +824,7 @@ const getExpensesByUserMonth = async (event)=>{
     filteredEvents.map(x=>{
       for(let i=0;i<filteredCategories.length;i++){
         if(x.category.categoryName === filteredCategories[i].name){
-          filteredCategories[i].amount = filteredCategories[i].amount+ x.amount; 
+          filteredCategories[i].amount = filteredCategories[i].amount+ x.amount;
         }
       }
     })
