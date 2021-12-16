@@ -19,9 +19,15 @@ const NewExpense = () => {
   const [categoryId, setcategoryId] = useState(null);
   const [amount, setAmount] = useState(null);
   const [description, setDescription] = useState(null);
-  const [amountError,setAmountError]=useState({
-    state:false,
-    message:"Amount should be a number"
+  const [errors,setErrors]=useState({
+    amount:{
+      state:false,
+      message:"Amount should be greater tha 0"
+    },
+    category:{
+      state:false,
+      message: "Select a category"
+    }
   })
 
   let categoryLabelStyles = {width:categoryId===null ? "140px" : "84px"}
@@ -46,6 +52,7 @@ const NewExpense = () => {
 
   const handleCategory = (e) => {
     setcategoryId(e.target.value);
+    setErrors(prevState => ({...errors,amount:prevState.amount,category:{state:false,message:prevState.category.message}}))
   };
   const handleAmount = (e) => {
     if (e.target.value===''){
@@ -53,10 +60,10 @@ const NewExpense = () => {
       return;
     }
     if (!/^[1-90.]+$/.test(e.target.value)){
-      setAmountError({...amountError,state:true})
+      setErrors(prevState => ({...errors,amount:{state:true,message:prevState.amount.message},category:prevState.category}))
       return;
     }
-    setAmountError({...amountError,state:false})
+    setErrors(prevState => ({...errors,amount:{state:false,message:prevState.amount.message},category:prevState.category}))
     setAmount(Number(e.target.value));
   };
   const handleDescription = e=>{
@@ -64,6 +71,12 @@ const NewExpense = () => {
   }
 
   const handleEvent = async () => {
+    if(amount===0 || amount===null){
+      setErrors(prevState => ({...errors,
+        amount:{state:true,message:"Please provide amount for the event"},
+        category:prevState.category
+      }))
+    }
     try {
       const { data } = await axios.post(
         `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/createEvent/${id}/${categoryId}`,
@@ -76,8 +89,22 @@ const NewExpense = () => {
         navigate('/')
       }
     } catch (error) {
-      console.log(error);
-      // USERI NUK KA FONDE
+      if(error.response.data.message==="Make sure the ID-s are correct"){
+        setErrors(prevState=> ({
+          ...errors,amount:prevState.amount,category:{
+            state:true,
+            message:"Please choose a category"
+          }
+        }))
+      }
+      if(error.response.data.message==="You dont have that amount of money deposited."){
+        setErrors(prevState=> ({
+          ...errors,amount:{
+            state:true,
+            message: error.response.data.message
+          },category:prevState.category
+        }))
+      }
     }
   };
 
@@ -124,6 +151,7 @@ const NewExpense = () => {
             className="inputRounded"
             sx={{borderRadius:"40px",paddingLeft:"20px"}}
             notched={false}
+            error={errors.category.state}
           >
             {categories.map((category) => {
               return (
@@ -133,6 +161,7 @@ const NewExpense = () => {
               );
             })}
           </Select>
+          {errors.category.state && <p style={{color:"red",fontSize:"16px",marginLeft:"20px"}}>{errors.category.message}</p>}
         </FormControl>
         <FormControl className="inputRounded" fullWidth sx={{ mt:2,mb: 2 }}>
           <InputLabel className="labelInput labelInputAmount" htmlFor="outlined-adornment-amount">Amount</InputLabel>
@@ -144,27 +173,29 @@ const NewExpense = () => {
             onChange={handleAmount}
             startAdornment={<InputAdornment position="start" sx={{ml:2}}>$</InputAdornment>}
             label="Amount"
-            error={amountError.state}
+            error={errors.amount.state}
             inputProps={{
               step:0.01,
               max: 10000000,
               min: 0
             }}
           />
-          {amountError.state && <p style={{color:"red",fontSize:"16px",marginLeft:"20px"}}>{amountError.message}</p>}
+          {errors.amount.state && <p style={{color:"red",fontSize:"16px",marginLeft:"20px"}}>{errors.amount.message}</p>}
         </FormControl>
-        <TextField
-          className="inputRounded"
-          id="outlined"
-          label="Note"
-          variant="outlined"
-          value={description}
-          fullWidth
-          onChange={handleDescription}
-          sx={{height:"80px !important"}}
-        />
+        <FormControl className="inputRounded inputNotesRounded" fullWidth sx={{ mt:2,mb: 2 }}>
+          <InputLabel className="labelInput labelInputAmount" htmlFor="outlined-adornment-amount" sx={{ml: 0}}>Note</InputLabel>
+          <OutlinedInput
+            type="text"
+            notched={false}
+            id="outlined-adornment-amount"
+            value={description}
+            onChange={handleDescription}
+            label="Amount"
+            sx={{height:"80px !important"}}
+          />
+        </FormControl>
+      <button className="addExspenseButton" onClick={handleEvent}>Add</button>
       </div>
-      <button onClick={handleEvent}>S</button>
     </div>
   );
 };
