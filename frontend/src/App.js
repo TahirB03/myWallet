@@ -10,6 +10,7 @@ import { Transactions } from "./pages/Transactions";
 import { UserContext } from "../src/context/UserContext";
 import { withAuthenticator  } from 'aws-amplify-react';
 import ChangePassword from './pages/ChangePassword';
+import NewExpense from './pages/NewExpense/NewExpense'
 
 
 Amplify.configure(poolData);
@@ -35,6 +36,7 @@ const App =  ()=> {
             <Routes>
               <Route exact path="/" element={<Dashboard />}></Route>
               <Route path="/profile" element={<Profile />}></Route>
+              <Route path="/addExspense/:id" element={<NewExpense />} />
               <Route path="/transactions" element={<Transactions />}></Route>
               <Route
                 path="/changePassword"

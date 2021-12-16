@@ -1,0 +1,29 @@
+.addExpense_wrapper{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    color:#3F3D56;
+}
+.addExpense_header{
+    width: 100%;
+    height: 65px;
+    background-color: #2B32BD;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+.addExpense_wrapper_back{
+    margin-top: 3px;
+    margin-right: 10px;
+    width: 25px;
+    height: 25px;
+}
+.calendarExpense{
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.inputs{
+    padding: 20px;
+}

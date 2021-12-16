@@ -10,7 +10,6 @@ import Logo from '../../images/Image.png'
 const DashboardNavbar = () => {
   const navigate = useNavigate();
   const user = useContext(UserContext);
-  console.log(user);
   const [userDetails,setUserDetails]=useState('')
 
   const fetchUserDetails = async ()=>{

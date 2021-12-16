@@ -1,17 +1,20 @@
 import React from "react";
 import Button from "@mui/material/Button";
 
-const RoundedButtons = ({  name , setTime, time, setSideBar}) => {
+const RoundedButtons = ({  name , setTime, time, setSideBar, value,setTimeFormat, disabled}) => {
     const backgroundColor = name===time ? "#FD7941" : "transparent"
+    console.log(value);
     const color = name===time ? "white" : "black"
     const handleClick = (e)=>{
-        setTime(e.target.name)
+      setTimeFormat(value)
+        setTime(name)
         setSideBar(false)
     }
   return (
     <Button
       variant="contained"
       color={name === time ? "warning" : "inherit"}
+      disabled={disabled}
     //   value={value}
       onClick={handleClick}
       sx={{

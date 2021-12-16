@@ -62,7 +62,6 @@ Modal.setAppElement("#root");
 const Dashboard = () => {
   const navigate = useNavigate();
   const userId = useContext(UserContext);
-  console.log(userId);
   const [user, setUser] = useState(null);
   const [userIncome, setUserIncome] = useState(0);
   const [userExpenses, setUserExpenses] = useState(0);
@@ -110,7 +109,6 @@ const Dashboard = () => {
         `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${userId}`
       );
       setUser(data.user);
-      console.log(data.user);
     } catch (error) {
       console.log(error);
     }
@@ -118,6 +116,8 @@ const Dashboard = () => {
   const getUserFiltered = async ()=>{
       try {
         const {data} = await axios.post(`https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getEventByDate/${userId}`,{startingDate: dateFormat})
+        setUserExpenses(0);
+        setUserIncome(0);
         data.events.map(x=>{
           if (x.category.isDeposit === true){
             setUserIncome(prevState => prevState+x.amount)
@@ -133,7 +133,7 @@ const Dashboard = () => {
     try {
       const { data } = await axios.post(
         `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getExpensesByUserMonth/${userId}`,
-        { startingDate: fd }
+        { startingDate: dateFormat }
       );
       setUserExpensesData(data.events);
     } catch (error) {
@@ -146,13 +146,7 @@ const Dashboard = () => {
     getUserExpensesData();
   }, [dateFormat]);
 
-  function openModal() {
-    setIsOpen(true);
-  }
 
-  function closeModal() {
-    setIsOpen(false);
-  }
 
   return (
     <div className="dashboardWrapper">
@@ -181,7 +175,7 @@ const Dashboard = () => {
             <Fab
               size="medium"
               aria-label="add"
-              onClick={() => navigate(`/addExpense/${userId}`)}
+              onClick={() => navigate(`/addExspense/${userId}`)}
             >
               <img
                 src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Down.png"
@@ -215,7 +209,7 @@ const Dashboard = () => {
             open={sideBar}
             onClose={()=> setSideBar(false)}
           >
-            <Sidebar filteredTime={filteredTime} setFilteredTime={setFilteredTime} setSideBar={setSideBar} />
+            <Sidebar setTimeFormat={setTimeFormat} filteredTime={filteredTime} setFilteredTime={setFilteredTime} setSideBar={setSideBar} />
           </Drawer>
         </div>
         <div className="events_byMonth">
