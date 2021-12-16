@@ -53,8 +53,11 @@ export const Transactions = () => {
         <Outcome />
       </div>
       <div className="arrows">
+        <img
+          src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Transactions.png"
+          className="transactionsArrows"
+        />
         Transactions
-        <CompareArrowsIcon />
       </div>
       <div className="amount">
         {loading &&

@@ -5,12 +5,16 @@
   border-style: ridge;
   border-radius: 50px;
   border: 1px solid rgb(216, 216, 216);
-  margin: 5px;
+
   text-align: center;
   margin: 0px 5px;
 }
+
+.slider {
+  margin-top: 20px;
+}
 .months:hover {
-  background-color: rgb(32, 13, 16);
+  background-color: rgb(49, 25, 29);
   border: none;
   color: aliceblue;
 }
@@ -56,7 +60,7 @@
 }
 .amountChildIncome h4 {
   margin-left: 20%;
-  color: rgb(92, 153, 0);
+  color: rgb(88, 211, 88);
   font-size: 17px;
 }
 
@@ -69,12 +73,11 @@
 }
 .amountChildExpense h4 {
   margin-left: 20%;
-  color: rgb(255, 17, 0);
+  color: rgb(0, 0, 0);
   font-size: 17px;
 }
 
 .amount {
-  margin-top: 5%;
   align-items: center;
   margin-left: 7%;
   margin-right: 7%;
@@ -85,12 +88,16 @@
   padding: 20px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-decoration: underline;
+
+  margin-top: 10px;
   display: flex;
-  flex-direction: column;
 }
 .events_byMonth {
   display: flex;
   justify-content: space-between;
+}
+
+.transactionsArrows {
+  height: 25px;
+  width: 25px;
 }

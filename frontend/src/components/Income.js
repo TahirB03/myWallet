@@ -32,17 +32,17 @@ const Income = () => {
         sx={{
           marginTop: "15px",
           width: 160,
-          height: 80,
-          border: "1px solid green",
+          height: 70,
+          border: "1px solid lightgray",
           borderRadius: "25px",
-          padding: "5px 10px",
+          padding: "0 0 0 5px",
         }}
       >
         <img
           src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/income.png"
           style={{ marginTop: "10px" }}
-          width={44}
-          height={50}
+          width={45}
+          height={45}
         ></img>
         <div className="boxContainer_text">
           <p style={{ display: "block", color: "green" }}>Income</p>
