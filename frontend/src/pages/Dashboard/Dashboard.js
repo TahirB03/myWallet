@@ -69,7 +69,7 @@ const Dashboard = () => {
   const [userExpensesData, setUserExpensesData] = useState([]);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [sideBar,setSideBar]=useState(false)
-  const [filteredTime,setFilteredTime]=useState('Day')
+  const [filteredTime,setFilteredTime]=useState('Month')
   const [dateFormat,setTimeFormat]=useState(moment().startOf("month").format('YYYY-MM-DD'))
 
   
@@ -233,7 +233,7 @@ const Dashboard = () => {
             ></img>
             <div className="boxContainer_text">
               <p style={{ display: "block", color: "green" }}>Income</p>
-              <p>$ {userIncome}</p>
+              <p>$ {userIncome.toFixed(2)}</p>
             </div>
           </Box>
           <Box
@@ -256,7 +256,7 @@ const Dashboard = () => {
             ></img>
             <div className="boxContainer_text">
               <p style={{ display: "block", color: "red" }}>Outcome</p>
-              <p>$ {userExpenses}</p>
+              <p>$ {userExpenses.toFixed(2)}</p>
             </div>
           </Box>
         </div>

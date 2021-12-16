@@ -9,15 +9,23 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import RoundedButtons from "../../components/RoundedButtons";
-
+import InputAdornment from '@mui/material/InputAdornment';
+import OutlinedInput from '@mui/material/OutlinedInput';
 
 const NewExpense = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
-  const [categoryId, setcategoryId] = useState('Choose category');
+  const [categoryId, setcategoryId] = useState(null);
   const [amount, setAmount] = useState(null);
   const [description, setDescription] = useState(null);
+  const [amountError,setAmountError]=useState({
+    state:false,
+    message:"Amount should be a number"
+  })
+
+  let categoryLabelStyles = {width:categoryId===null ? "140px" : "84px"}
+
 
   const date = moment().format("dddd D MMMM");
 
@@ -28,7 +36,6 @@ const NewExpense = () => {
       );
       data.allCategories.map((x) => {
         if (x.isDeposit === false) {
-          console.log(x);
           setCategories((prevState) => [...prevState, x]);
         }
       });
@@ -41,7 +48,16 @@ const NewExpense = () => {
     setcategoryId(e.target.value);
   };
   const handleAmount = (e) => {
-    setAmount(parseInt(e.target.value));
+    if (e.target.value===''){
+      setAmount('')
+      return;
+    }
+    if (!/^[1-90.]+$/.test(e.target.value)){
+      setAmountError({...amountError,state:true})
+      return;
+    }
+    setAmountError({...amountError,state:false})
+    setAmount(Number(e.target.value));
   };
   const handleDescription = e=>{
     setDescription(e.target.value)
@@ -97,7 +113,7 @@ const NewExpense = () => {
       </div>
       <div className="inputs">
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label" >Category</InputLabel>
+          <InputLabel className="labelInput" id="demo-simple-select-label" sx={categoryLabelStyles}>{categoryId===null? "Choose Category" : "Category"}</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
@@ -106,7 +122,8 @@ const NewExpense = () => {
             onChange={handleCategory}
             defaultValue="Choose Category"
             className="inputRounded"
-            sx={{borderRadius:"40px"}}
+            sx={{borderRadius:"40px",paddingLeft:"20px"}}
+            notched={false}
           >
             {categories.map((category) => {
               return (
@@ -117,19 +134,27 @@ const NewExpense = () => {
             })}
           </Select>
         </FormControl>
+        <FormControl className="inputRounded" fullWidth sx={{ mt:2,mb: 2 }}>
+          <InputLabel className="labelInput labelInputAmount" htmlFor="outlined-adornment-amount">Amount</InputLabel>
+          <OutlinedInput
+            type="number"
+            notched={false}
+            id="outlined-adornment-amount"
+            value={amount}
+            onChange={handleAmount}
+            startAdornment={<InputAdornment position="start" sx={{ml:2}}>$</InputAdornment>}
+            label="Amount"
+            error={amountError.state}
+            inputProps={{
+              step:0.01,
+              max: 10000000,
+              min: 0
+            }}
+          />
+          {amountError.state && <p style={{color:"red",fontSize:"16px",marginLeft:"20px"}}>{amountError.message}</p>}
+        </FormControl>
         <TextField
-        className="inputRounded"
-          id="outlined"
-          type="number"
-          label="Amount"
-          variant="outlined"
-          value={amount}
-          fullWidth
-          onChange={handleAmount}
-          sx={{margin:"20px 0"}}
-        />
-        <TextField
-        className="inputRounded"
+          className="inputRounded"
           id="outlined"
           label="Note"
           variant="outlined"

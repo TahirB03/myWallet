@@ -3,7 +3,6 @@ import Button from "@mui/material/Button";
 
 const RoundedButtons = ({  name , setTime, time, setSideBar, value,setTimeFormat, disabled}) => {
     const backgroundColor = name===time ? "#FD7941" : "transparent"
-    console.log(value);
     const color = name===time ? "white" : "black"
     const handleClick = (e)=>{
       setTimeFormat(value)

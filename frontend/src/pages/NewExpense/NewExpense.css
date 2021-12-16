@@ -27,3 +27,11 @@
 .inputs{
     padding: 20px;
 }
+.labelInput{
+    background-color: white !important;
+    padding-left: 10px;
+    text-align: center;
+}
+.labelInputAmount{
+    width: 80px ;
+}

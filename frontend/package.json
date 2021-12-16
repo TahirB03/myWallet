@@ -2,6 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@aws-amplify/auth": "^4.3.18",
     "@aws-amplify/ui": "^2.0.5",
