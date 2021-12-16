@@ -32,8 +32,8 @@ const Outcome = () => {
         sx={{
           marginTop: "15px",
           width: 160,
-          height: 80,
-          border: "1px solid red",
+          height: 70,
+          border: "1px solid lightgray",
           borderRadius: "25px",
           padding: "5px 10px",
         }}
@@ -41,8 +41,8 @@ const Outcome = () => {
         <img
           src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/outcome.png"
           style={{ marginTop: "10px" }}
-          width={50}
-          height={50}
+          width={45}
+          height={45}
         ></img>
         <div className="boxContainer_text">
           <p style={{ display: "block", color: "red" }}>Outcome</p>
