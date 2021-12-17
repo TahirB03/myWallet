@@ -1,12 +1,14 @@
 .button {
- margin-top: 200px;
- display: inline-block;
+ margin-top: 40px;
+ display: inline;
  text-align: center;
 }
 
 
-.back-button {
- margin-left: 60px;
+.back-buttonPolicy {
+ margin-top: 40px;
+ margin-left: 20px;
+ margin-bottom: 50px;
  background-color: #0082ec; 
  color: white;
  border: none;

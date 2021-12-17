@@ -8,7 +8,7 @@ const About = () => {
   return (
     <div>
       <AboutNavbar />
-      <p className='settings'>About us</p>
+      <p className='settingsAbout'>About us</p>
       <div>
         <p className='text'>
           We are three talented students that like new challenges. We have
@@ -18,7 +18,7 @@ const About = () => {
         </p>
         <div className='button'>
           <Link to='/profile'>
-            <button className='back-button '>Back</button>
+            <button className='back-buttonAbout'>Back</button>
           </Link>
         </div>
       </div>

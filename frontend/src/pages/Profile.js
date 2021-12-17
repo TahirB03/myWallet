@@ -5,6 +5,7 @@ import { Auth } from "aws-amplify";
 import Password from '../images/Password.png';
 import Info from '../images/Info.png';
 import Privacy from '../images/Privacy policy.png';
+import Currency from '../images/Currency.png';
 
 
 import "./profile.css";
@@ -20,6 +21,16 @@ const Profile = () => {
       <ProfileNavbar />
       <p className='settings'>Settings</p>
       <div>
+        <button className='currency'>
+          <img
+            className='currency-logo'
+            width={30}
+            height={30}
+            src={Currency}
+            alt='Currency'
+          />
+          Change currency
+        </button>
         <Link style={{ textDecoration: 'none' }} to='/changePassword'>
           <button className='password'>
             <img

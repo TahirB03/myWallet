@@ -1,15 +1,13 @@
-.settings {
+.settingsAbout {
    margin-left: 20px;
    margin-top: 50px;
    font-size: 22px;
    text-decoration: none!important;
 }
 
-.button {
- margin-top: 200px;
-}
 
-.back-button {
+.back-buttonAbout {
+margin-top: 180px;
  margin-left: 20px;
  background-color: #0082ec; 
  color: white;
