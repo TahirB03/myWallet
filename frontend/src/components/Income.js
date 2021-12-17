@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
+import { UserContext } from "../context/UserContext";
 
 const Income = () => {
+  const userId = useContext(UserContext);
   const [income, setIncome] = useState(0);
-  const navigate = useNavigate();
 
   const getUserIncome = async () => {
     try {
       const { data } = await axios.get(
-        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getDeposits/fc099009-220e-44eb-9900-ead7e2e0613b`
+        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getDeposits/${userId}`
       );
       let sum = 0;
       data.events.map((x) => (sum = sum + x.amount));
@@ -27,7 +28,6 @@ const Income = () => {
     <div>
       {" "}
       <Box
-        onClick={() => navigate("/s")}
         className="boxContainer"
         sx={{
           marginTop: "15px",

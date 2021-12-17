@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
+import moment from "moment";
+import { UserContext } from "../context/UserContext";
 
 const Outcome = () => {
+  const userId = useContext(UserContext);
+
   const [outcome, setOutcome] = useState(0);
-  const navigate = useNavigate();
 
   const getUseOutcome = async () => {
     try {
       const { data } = await axios.get(
-        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getAllWithdraws/fc099009-220e-44eb-9900-ead7e2e0613b`
+        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getAllWithdraws/${userId}`
       );
       let sum = 0;
       data.events.map((x) => (sum = sum + x.amount));
@@ -27,7 +30,6 @@ const Outcome = () => {
     <div>
       {" "}
       <Box
-        onClick={() => navigate("/sa")}
         className="boxContainer"
         sx={{
           marginTop: "15px",
@@ -46,7 +48,7 @@ const Outcome = () => {
         ></img>
         <div className="boxContainer_text">
           <p style={{ display: "block", color: "red" }}>Outcome</p>
-          <p>$ {outcome}</p>
+          <p>$ {outcome.toFixed(1)}</p>
         </div>
       </Box>
     </div>

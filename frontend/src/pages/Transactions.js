@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useNavigate, useContext } from "react";
 import Navbar from "../components/Navbar";
 import "./transactions.css";
 import Slider from "react-slick";
@@ -8,10 +8,12 @@ import axios from "axios";
 import Income from "../components/Income";
 import Outcome from "../components/Outcome";
 import moment from "moment";
+import Box from "@mui/material/Box";
+import { UserContext } from "../context/UserContext";
 
 export const Transactions = () => {
-  const url =
-    "https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getEventByUser/fc099009-220e-44eb-9900-ead7e2e0613b";
+  const userId = useContext(UserContext);
+  const url = `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getEventByUser/${userId}`;
   const [eventValues, setEventValues] = useState(null);
   const [loading, setLoading] = useState(false);
   const [month, setMonth] = useState("January");
@@ -22,13 +24,16 @@ export const Transactions = () => {
         const res = await axios.get(url);
         setEventValues(res.data.events);
         setLoading(true);
-        console.log(eventValues);
       } catch (err) {
         console.log(err);
       }
     };
     fetchEvents();
   }, []);
+
+  const [incomeList, setIncomeList] = useState(0);
+
+  const [outcome, setOutcome] = useState(0);
 
   const settings = {
     dots: false,
@@ -37,6 +42,7 @@ export const Transactions = () => {
     slidesToShow: 5,
     slidesToScroll: 2,
   };
+  let outcomeSum = 0;
   return (
     <div className="monthContainer">
       <Navbar />
@@ -83,6 +89,7 @@ export const Transactions = () => {
         <Income />
         <Outcome />
       </div>
+
       <div className="arrows">
         <img
           src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Transactions.png"
