@@ -475,6 +475,27 @@ export const Transactions = () => {
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
               );
+            } else if (
+              value.category.categoryName === "Savings" &&
+              value.category.isDeposit === true &&
+              moment(value.createdAt).format("MMMM") === month
+            ) {
+              return (
+                <div className="transactionsContainer">
+                  <img
+                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Savings.png"
+                    className="categoryLogo"
+                    alt="transaction icon"
+                  />
+                  <div className="amountChildIncome" key={value._id}>
+                    <h3 className="categoryName">
+                      {value.category.categoryName}
+                    </h3>
+                    <h4 className="valueAmount">+{value.amount}$</h4>
+                  </div>
+                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
+                </div>
+              );
             }
           })}
       </div>

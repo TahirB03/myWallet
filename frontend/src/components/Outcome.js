@@ -35,7 +35,7 @@ const Outcome = () => {
           height: 70,
           border: "1px solid lightgray",
           borderRadius: "25px",
-          padding: "5px 10px",
+          padding: "0 0 0 5px",
         }}
       >
         <img
