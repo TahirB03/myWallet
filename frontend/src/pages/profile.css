@@ -1,23 +1,24 @@
 .settings {
-   margin-left: 40px;
-   margin-top: 40px;
-   font-family: Baskerville, "Baskerville Old Face", "Goudy Old Style", Garamond, "Times New Roman", serif;
-   font-size: 25px;
+   margin-left: 20px;
+   margin-top: 50px;
+   font-size: 22px;
+   text-decoration: none!important;
 }
 
 .password {
- margin-left: 30px;
+ font-size: 16pt;
+ margin-left: 20px;
  margin-top: 50px;
  background-color: white; 
- border: solid 1px gray;
- padding: 10px 32px;
- text-align: left;
- text-decoration: none;
+ border: solid 1px #CCCCCC;
+ padding: 10px 15px;
  font-size: 18px;
  transition-duration: 0.4s;
- width: 80%;
- border-width: 2px 4px;
+ width: 90%;
+ border-width: 1px 1px;
  border-radius: 40px;
+ display: flex;
+ align-items: center;
 }
 
 .password:hover, .about-us:hover, .policy:hover {
@@ -25,26 +26,31 @@
   color: white; 
 }
 
+.password-logo {
+  margin-left: 0px;
+}
+
 .about-us, .policy {
- margin-left: 30px;
+ margin-left: 20px;
  margin-top: 10px;
  background-color: white; 
- border: solid 1px gray;
- padding: 10px 32px;
- text-align: left;
+ border: solid 1px #CCCCCC;
+ padding: 10px 15px;
  text-decoration: none;
  font-size: 18px;
  transition-duration: 0.4s;
- width: 80%;
- border-width: 2px 4px;
+ width: 90%;
+ border-width: 1px 1px;
  border-radius: 40px;
+ display: flex;
+ align-items: center;
 }
 
 
 .logOut {
- margin-top: 100px;
- margin-left: 30px;
- background-color: #EC6800; 
+ margin-top: 250px;
+ margin-left: 20px;
+ background-color: #FD7941; 
  color: white;
  border: none;
  padding: 10px 32px;
@@ -53,75 +59,12 @@
  display: inline-block;
  font-size: 16px;
  transition-duration: 0.4s;
- width: 80%;
+ width: 90%;
  border-width: 2px 4px;
  border-radius: 40px;
 }
 
 .logOut:hover {
   background-color: #aa300f; 
-  color: white;
-}
-
-
-.text {
- margin-top: 30px;
- border-width: 2px 4px;
- border-radius: 40px;
-}
-
-.text-field .MuiOutlinedInput-root{
- margin-top: 50px;
- margin-left: 70px;
- border-radius: 20px;
-}
-
-.button {
- margin-top: 200px;
- display: inline-block;
- text-align: center;
-}
-
-.confirm-button {
- margin-left: 50px;
- float: right;
- background-color: #EC6800; 
- color: white;
- border: none;
- padding: 10px 32px;
- text-align: center;
- text-decoration: none;
- font-size: 16px;
- border-radius: 25%;
- transition-duration: 0.4s;
- width: 30%;
- border-width: 2px 4px;
- border-radius: 40px;
-}
-
-.confirm-button:hover {
-  background-color: #aa300f; 
-  color: white;
-}
-
-.back-button {
- margin-left: 60px;
- float: left;
- background-color: #0082ec; 
- color: white;
- border: none;
- padding: 10px 32px;
- text-align: center;
- text-decoration: none;
- font-size: 16px;
- border-radius: 25%;
- transition-duration: 0.4s;
- width: 30%;
- border-width: 2px 4px;
- border-radius: 40px;
-}
-
-.back-button:hover {
-  background-color: #022ebd; 
   color: white;
 }

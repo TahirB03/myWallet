@@ -1,54 +1,36 @@
-.container {
-  display: flex;
-  height: 100px;
-  width: 100%;
+.dashboardNavbar {
+  width: 100vw;
   max-width: 600px;
-  background-color: rgb(57, 57, 199);
-  border-radius: 0 0 20px 20px;
-  top: -20px;
+  height: 200px;
+  background-color: #2b32bd;
+  border-radius: 0 0 40px 40px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 27px;
   color: white;
+}
+.dashboardNavbar_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dashboardNavbar_user {
+  display: flex;
+  align-items: center;
+}
+.dashboardNavbar_body {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dashboardNavbar_balance {
   position: relative;
 }
-
-.username {
-  position: absolute;
-  top: 20px;
-  right: 55px;
+.MuiFab-primary {
+  background-color: #faab1a !important;
 }
-
-.imgIcon {
-  position: absolute;
-  top: 15px;
-  right: 5px;
-  height: 35px;
-  width: 35px;
-  border-radius: 50%;
-  background-color: black;
-}
-
-.backArrow {
-  position: absolute;
-  top: 20px;
-  left: 5px;
-}
-
-.tra {
-  position: absolute;
-  top: 20px;
-  left: 25px;
-  text-decoration: underline;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  cursor: pointer;
-  color: white;
-}
-
-.totalBalanceNumber {
-  position: absolute;
-  margin-top: 120px;
-  margin-left: 200px;
-}
-.totalBalanceText {
-  position: absolute;
-  margin-top: 90px;
-  margin-left: 155px;
+.MuiFab-sizeSmall {
+  width: 60px !important;
+  height: 60px !important;
 }

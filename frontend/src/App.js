@@ -12,7 +12,8 @@ import { withAuthenticator  } from 'aws-amplify-react';
 import ChangePassword from './pages/ChangePassword';
 import NewExpense from './pages/NewExpense/NewExpense'
 import NewIncome from './pages/NewIncome/NewIcome'
-
+import About from './pages/about';
+import Policy from './pages/policy';
 
 Amplify.configure(poolData);
 Auth.configure(poolData)
@@ -31,17 +32,19 @@ const App =  ()=> {
   if (user !== null ){
   return (
     <UserContext.Provider value={user}>
-      <div className="App">
+      <div className='App'>
         <div>
           <Router>
             <Routes>
-              <Route exact path="/" element={<Dashboard />}></Route>
-              <Route path="/profile" element={<Profile />}></Route>
-              <Route path="/addExspense/:id" element={<NewExpense />} />
-              <Route path="/addIncome/:id" element={<NewIncome />} />
-              <Route path="/transactions" element={<Transactions />}></Route>
+              <Route exact path='/' element={<Dashboard />}></Route>
+              <Route path='/profile' element={<Profile />}></Route>
+              <Route path='/addExspense/:id' element={<NewExpense />} />
+              <Route path='/addIncome/:id' element={<NewIncome />} />
+              <Route path='/transactions' element={<Transactions />}></Route>
+              <Route path='/about' element={<About />}></Route>
+              <Route path='/policy' element={<Policy />}></Route>
               <Route
-                path="/changePassword"
+                path='/changePassword'
                 element={<ChangePassword />}
               ></Route>
             </Routes>

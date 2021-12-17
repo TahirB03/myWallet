@@ -1,21 +1,33 @@
+.settings {
+   margin-left: 20px;
+   margin-top: 50px;
+   font-size: 22px;
+   text-decoration: none!important;
+}
+
 .button {
  margin-top: 200px;
- display: inline-block;
- text-align: center;
 }
 
 .back-button {
- margin-left: 60px;
+ margin-left: 20px;
  background-color: #0082ec; 
  color: white;
  border: none;
- padding: 10px 32px;
- text-align: center;
- text-decoration: none;
+ padding: 10px 30px;
  font-size: 16px;
  border-radius: 25%;
  transition-duration: 0.4s;
  width: 30%;
  border-width: 2px 4px;
  border-radius: 40px;
+}
+
+
+.text {
+ margin: 20px 15px;
+ font-family: 'Times New Roman', Times, serif;
+ font-size: 22px;
+ text-align: left;
+ height: auto;
 }

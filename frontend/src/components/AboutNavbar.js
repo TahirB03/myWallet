@@ -7,7 +7,7 @@ import './navbar.css';
 import Avatar from '../images/Avatar.png';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
-const ProfileNavbar = () => {
+const AboutNavbar = () => {
   const navigate = useNavigate();
   const user = useContext(UserContext);
   console.log(user);
@@ -31,7 +31,7 @@ const ProfileNavbar = () => {
   return (
     <div className='dashboardNavbar'>
       <div className='dashboardNavbar_header'>
-        <Link to='/'>
+        <Link to='/profile'>
           <p
             style={{
               fontSize: '18px',
@@ -41,7 +41,7 @@ const ProfileNavbar = () => {
             }}
           >
             <ArrowBackIosIcon />
-            Settings
+            About us
           </p>
         </Link>
         <div
@@ -90,4 +90,4 @@ const ProfileNavbar = () => {
     </div>
   );
 };
-export default ProfileNavbar;
+export default AboutNavbar;
