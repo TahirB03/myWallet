@@ -1,4 +1,3 @@
-import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import "./transactions.css";
@@ -8,21 +7,29 @@ import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
 import Income from "../components/Income";
 import Outcome from "../components/Outcome";
+import moment from "moment";
 
 export const Transactions = () => {
   const url =
     "https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getEventByUser/fc099009-220e-44eb-9900-ead7e2e0613b";
   const [eventValues, setEventValues] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [month, setMonth] = useState("January");
 
   useEffect(() => {
-    axios.get(url).then((response) => {
-      console.log(response);
-      console.log(response.data.events);
-      setEventValues(response.data.events);
-      setLoading(true);
-    });
-  }, [url]);
+    const fetchEvents = async () => {
+      try {
+        const res = await axios.get(url);
+        setEventValues(res.data.events);
+        setLoading(true);
+        console.log(eventValues);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchEvents();
+  }, []);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -34,18 +41,42 @@ export const Transactions = () => {
     <div className="monthContainer">
       <Navbar />
       <Slider className="slider" {...settings}>
-        <button className="months">Jan</button>
-        <button className="months">Fec</button>
-        <button className="months">Mar</button>
-        <button className="months">Apr</button>
-        <button className="months">May</button>
-        <button className="months">June</button>
-        <button className="months">July</button>
-        <button className="months">Aug</button>
-        <button className="months">Sep</button>
-        <button className="months">Oct</button>
-        <button className="months">Nov</button>
-        <button className="months">Dec</button>
+        <button className="months" onClick={() => setMonth("Januray")}>
+          Jan
+        </button>
+        <button className="months" onClick={() => setMonth("February ")}>
+          Fec
+        </button>
+        <button className="months" onClick={() => setMonth("March ")}>
+          Mar
+        </button>
+        <button className="months" onClick={() => setMonth("April")}>
+          Apr
+        </button>
+        <button className="months" onClick={() => setMonth("Januray")}>
+          May
+        </button>
+        <button className="months" onClick={() => setMonth("June")}>
+          June
+        </button>
+        <button className="months" onClick={() => setMonth("July")}>
+          July
+        </button>
+        <button className="months" onClick={() => setMonth("August")}>
+          Aug
+        </button>
+        <button className="months" onClick={() => setMonth("September")}>
+          Sep
+        </button>
+        <button className="months" onClick={() => setMonth("October ")}>
+          Oct
+        </button>
+        <button className="months" onClick={() => setMonth("November ")}>
+          Nov
+        </button>
+        <button className="months" onClick={() => setMonth("December")}>
+          Dec
+        </button>
       </Slider>
 
       <div className="stats">
@@ -55,6 +86,7 @@ export const Transactions = () => {
       <div className="arrows">
         <img
           src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Transactions.png"
+          alt="transaction icon"
           className="transactionsArrows"
         />
         Transactions
@@ -64,170 +96,386 @@ export const Transactions = () => {
           eventValues.map((value) => {
             if (
               value.category.categoryName === "Gift" &&
-              value.category.isDeposit === true
+              value.category.isDeposit === true &&
+              moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="amountChildIncome" key={value._id}>
-                  <h3 className="categoryName">
-                    {value.category.categoryName}
-                  </h3>
-                  <h4 className="valueAmount">+{value.amount}$</h4>
+                <div className="transactionsContainer">
+                  <img
+                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/gift.png"
+                    className="categoryLogo"
+                    alt="transaction icon"
+                  />
+                  <div className="amountChildIncome" key={value._id}>
+                    <h3 className="categoryName">
+                      {value.category.categoryName}
+                    </h3>
+                    <h4 className="valueAmount">+{value.amount}$</h4>
+                  </div>
+                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
               );
             } else if (
               value.category.categoryName === "Gift" &&
-              value.category.isDeposit !== true
+              value.category.isDeposit !== true &&
+              moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="amountChildExpense" key={value._id}>
-                  <h3>{value.category.categoryName}</h3>
-                  <h4>-{value.amount}$</h4>
+                <div className="transactionsContainer">
+                  <img
+                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/gift.png"
+                    className="categoryLogo"
+                    alt="transaction icon"
+                  />
+                  <div className="amountChildExpense" key={value._id}>
+                    <h3>{value.category.categoryName}</h3>
+                    <h4>-{value.amount}$</h4>
+                  </div>
+                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
               );
             } else if (
-              value.category.categoryName === "Salary" &&
-              value.category.isDeposit === true
+              value.category.categoryName === "Clothing" &&
+              value.category.isDeposit === true &&
+              moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="amountChildIncome" key={value._id}>
-                  <h3 className="categoryName">
-                    {value.category.categoryName}
-                  </h3>
-                  <h4 className="valueAmount">+{value.amount}$</h4>
+                <div className="transactionsContainer">
+                  <img
+                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/clothes.png"
+                    className="categoryLogo"
+                    alt="transaction icon"
+                  />
+                  <div className="amountChildIncome" key={value._id}>
+                    <h3 className="categoryName">
+                      {value.category.categoryName}
+                    </h3>
+                    <h4 className="valueAmount">+{value.amount}$</h4>
+                  </div>
+                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
               );
             } else if (
-              value.category.categoryName === "Salary" &&
-              value.category.isDeposit !== true
+              value.category.categoryName === "Clothing" &&
+              value.category.isDeposit !== true &&
+              moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="amountChildExpense" key={value._id}>
-                  <h3>{value.category.categoryName}</h3>
-                  <h4>-{value.amount}$</h4>
+                <div className="transactionsContainer">
+                  <img
+                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/clothes.png"
+                    className="categoryLogo"
+                    alt="transaction icon"
+                  />
+                  <div className="amountChildExpense" key={value._id}>
+                    <h3>{value.category.categoryName}</h3>
+                    <h4>-{value.amount}$</h4>
+                  </div>
+                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
               );
             } else if (
-              value.category.categoryName === "Tips/Lottery" &&
-              value.category.isDeposit === true
+              value.category.categoryName === "Communcation" &&
+              value.category.isDeposit === true &&
+              moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="amountChildIncome" key={value._id}>
-                  <h3>{value.category.categoryName}</h3>
-                  <h4>+{value.amount}$</h4>
+                <div className="transactionsContainer">
+                  <img
+                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/communication.png"
+                    className="categoryLogo"
+                    alt="transaction icon"
+                  />
+                  <div className="amountChildIncome" key={value._id}>
+                    <h3 className="categoryName">
+                      {value.category.categoryName}
+                    </h3>
+                    <h4 className="valueAmount">+{value.amount}$</h4>
+                  </div>
+                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
               );
             } else if (
-              value.category.categoryName === "Tips/Lottery" &&
-              value.category.isDeposit !== true
+              value.category.categoryName === "Communcation" &&
+              value.category.isDeposit !== true &&
+              moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="amountChildExpense" key={value._id}>
-                  <h3>{value.category.categoryName}</h3>
-                  <h4>-{value.amount}$</h4>
+                <div className="transactionsContainer">
+                  <img
+                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/communication.png"
+                    className="categoryLogo"
+                    alt="transaction icon"
+                  />
+                  <div className="amountChildExpense" key={value._id}>
+                    <h3>{value.category.categoryName}</h3>
+                    <h4>-{value.amount}$</h4>
+                  </div>
+                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
               );
             } else if (
               value.category.categoryName === "Healthcare" &&
-              value.category.isDeposit === true
+              value.category.isDeposit === true &&
+              moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="amountChildIncome" key={value._id}>
-                  <h3>{value.category.categoryName}</h3>
-                  <h4>+{value.amount}$</h4>
+                <div className="transactionsContainer">
+                  <img
+                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/health.png"
+                    className="categoryLogo"
+                    alt="transaction icon"
+                  />
+                  <div className="amountChildIncome" key={value._id}>
+                    <h3 className="categoryName">
+                      {value.category.categoryName}
+                    </h3>
+                    <h4 className="valueAmount">+{value.amount}$</h4>
+                  </div>
+                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
               );
             } else if (
               value.category.categoryName === "Healthcare" &&
-              value.category.isDeposit !== true
+              value.category.isDeposit !== true &&
+              moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="amountChildExpense" key={value._id}>
-                  <h3>{value.category.categoryName}</h3>
-                  <h4>-{value.amount}$</h4>
+                <div className="transactionsContainer">
+                  <img
+                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/health.png"
+                    className="categoryLogo"
+                    alt="transaction icon"
+                  />
+                  <div className="amountChildExpense" key={value._id}>
+                    <h3>{value.category.categoryName}</h3>
+                    <h4>-{value.amount}$</h4>
+                  </div>
+                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
               );
             } else if (
               value.category.categoryName === "Entertainment" &&
-              value.category.isDeposit === true
+              value.category.isDeposit === true &&
+              moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="amountChildIncome" key={value._id}>
-                  <h3>{value.category.categoryName}</h3>
-                  <h4>+{value.amount}$</h4>
+                <div className="transactionsContainer">
+                  <img
+                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/entertainment.png"
+                    className="categoryLogo"
+                    alt="transaction icon"
+                  />
+                  <div className="amountChildIncome" key={value._id}>
+                    <h3 className="categoryName">
+                      {value.category.categoryName}
+                    </h3>
+                    <h4 className="valueAmount">+{value.amount}$</h4>
+                  </div>
+                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
               );
             } else if (
               value.category.categoryName === "Entertainment" &&
-              value.category.isDeposit !== true
+              value.category.isDeposit !== true &&
+              moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="amountChildExpense" key={value._id}>
-                  <h3>{value.category.categoryName}</h3>
-                  <h4>-{value.amount}$</h4>
+                <div className="transactionsContainer">
+                  <img
+                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/entertainment.png"
+                    className="categoryLogo"
+                    alt="transaction icon"
+                  />
+                  <div className="amountChildExpense" key={value._id}>
+                    <h3>{value.category.categoryName}</h3>
+                    <h4>-{value.amount}$</h4>
+                  </div>
+                  <h5> {moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
               );
             } else if (
               value.category.categoryName === "Transportation" &&
-              value.category.isDeposit === true
+              value.category.isDeposit === true &&
+              moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="amountChildIncome" key={value._id}>
-                  <h3>{value.category.categoryName}</h3>
-                  <h4>+{value.amount}$</h4>
+                <div className="transactionsContainer">
+                  <img
+                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/transport.png"
+                    className="categoryLogo"
+                    alt="transaction icon"
+                  />
+                  <div className="amountChildIncome" key={value._id}>
+                    <h3 className="categoryName">
+                      {value.category.categoryName}
+                    </h3>
+                    <h4 className="valueAmount">+{value.amount}$</h4>
+                  </div>
+                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
               );
             } else if (
               value.category.categoryName === "Transportation" &&
-              value.category.isDeposit !== true
+              value.category.isDeposit !== true &&
+              moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="amountChildExpense" key={value._id}>
-                  <h3>{value.category.categoryName}</h3>
-                  <h4>-{value.amount}$</h4>
+                <div className="transactionsContainer">
+                  <img
+                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/transport.png"
+                    className="categoryLogo"
+                    alt="transaction icon"
+                  />
+                  <div className="amountChildExpense" key={value._id}>
+                    <h3>{value.category.categoryName}</h3>
+                    <h4>-{value.amount}$</h4>
+                  </div>
+                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
               );
             } else if (
               value.category.categoryName === "Other" &&
-              value.category.isDeposit === true
+              value.category.isDeposit === true &&
+              moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="amountChildIncome" key={value._id}>
-                  <h3>{value.category.categoryName}</h3>
-                  <h4>+{value.amount}$</h4>
+                <div className="transactionsContainer">
+                  <img
+                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Other Deposits.png"
+                    className="categoryLogo"
+                    alt="transaction icon"
+                  />
+                  <div className="amountChildIncome" key={value._id}>
+                    <h3 className="categoryName">
+                      {value.category.categoryName}
+                    </h3>
+                    <h4 className="valueAmount">+{value.amount}$</h4>
+                  </div>
+                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
               );
             } else if (
               value.category.categoryName === "Other" &&
-              value.category.isDeposit !== true
+              value.category.isDeposit !== true &&
+              moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="amountChildExpense" key={value._id}>
-                  <h3>{value.category.categoryName}</h3>
-                  <h4>-{value.amount}$</h4>
+                <div className="transactionsContainer">
+                  <img
+                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Other Deposits.png"
+                    className="categoryLogo"
+                    alt="transaction icon"
+                  />
+                  <div className="amountChildExpense" key={value._id}>
+                    <h3>{value.category.categoryName}</h3>
+                    <h4>-{value.amount}$</h4>
+                  </div>
+                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
               );
             } else if (
-              value.category.categoryName === "Maintenance" &&
-              value.category.isDeposit === true
+              value.category.categoryName === "Food" &&
+              value.category.isDeposit === true &&
+              moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="amountChildIncome" key={value._id}>
-                  <h3>{value.category.categoryName}</h3>
-                  <h4>+{value.amount}$</h4>
+                <div className="transactionsContainer">
+                  <img
+                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/food.png"
+                    className="categoryLogo"
+                    alt="transaction icon"
+                  />
+                  <div className="amountChildIncome" key={value._id}>
+                    <h3 className="categoryName">
+                      {value.category.categoryName}
+                    </h3>
+                    <h4 className="valueAmount">+{value.amount}$</h4>
+                  </div>
+                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
               );
             } else if (
-              value.category.categoryName === "Maintenance" &&
-              value.category.isDeposit !== true
+              value.category.categoryName === "Food" &&
+              value.category.isDeposit !== true &&
+              moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="amountChildExpense" key={value._id}>
-                  <h3>{value.category.categoryName}</h3>
-                  <h4>-{value.amount}$</h4>
+                <div className="transactionsContainer">
+                  <img
+                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/food.png"
+                    className="categoryLogo"
+                    alt="transaction icon"
+                  />
+                  <div className="amountChildExpense" key={value._id}>
+                    <h3>{value.category.categoryName}</h3>
+                    <h4>-{value.amount}$</h4>
+                  </div>
+                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
+                </div>
+              );
+            } else if (
+              value.category.categoryName === "Sport" &&
+              value.category.isDeposit === true &&
+              moment(value.createdAt).format("MMMM") === month
+            ) {
+              return (
+                <div className="transactionsContainer">
+                  <img
+                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/sport.png"
+                    className="categoryLogo"
+                    alt="transaction icon"
+                  />
+                  <div className="amountChildIncome" key={value._id}>
+                    <h3 className="categoryName">
+                      {value.category.categoryName}
+                    </h3>
+                    <h4 className="valueAmount">+{value.amount}$</h4>
+                  </div>
+                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
+                </div>
+              );
+            } else if (
+              value.category.categoryName === "Sport" &&
+              value.category.isDeposit !== true &&
+              moment(value.createdAt).format("MMMM") === month
+            ) {
+              return (
+                <div className="transactionsContainer">
+                  <img
+                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/sport.png"
+                    className="categoryLogo"
+                    alt="transaction icon"
+                  />
+                  <div className="amountChildExpense" key={value._id}>
+                    <h3>{value.category.categoryName}</h3>
+                    <h4>-{value.amount}$</h4>
+                  </div>
+                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
+                </div>
+              );
+            } else if (
+              value.category.categoryName === "Salary" &&
+              value.category.isDeposit === true &&
+              moment(value.createdAt).format("MMMM") === month
+            ) {
+              return (
+                <div className="transactionsContainer">
+                  <img
+                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Salary.png"
+                    className="categoryLogo"
+                    alt="transaction icon"
+                  />
+                  <div className="amountChildIncome" key={value._id}>
+                    <h3 className="categoryName">
+                      {value.category.categoryName}
+                    </h3>
+                    <h4 className="valueAmount">+{value.amount}$</h4>
+                  </div>
+                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
               );
             }
-            return <h1>Something went wrong</h1>;
           })}
       </div>
     </div>

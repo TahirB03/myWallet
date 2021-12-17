@@ -36,7 +36,7 @@ const Navbar = () => {
             style={{
               fontSize: "18px",
               color: "white",
-              textDecoration: "underline",
+
               display: "flex",
             }}
           >
