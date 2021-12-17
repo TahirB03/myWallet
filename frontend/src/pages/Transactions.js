@@ -16,7 +16,7 @@ export const Transactions = () => {
   const url = `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getEventByUser/${userId}`;
   const [eventValues, setEventValues] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [month, setMonth] = useState("January");
+  const [month, setMonth] = useState("December");
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -115,6 +115,7 @@ export const Transactions = () => {
                   />
                   <div className="amountChildIncome" key={value._id}>
                     <h3 className="categoryName">
+                      {" "}
                       {value.category.categoryName}
                     </h3>
                     <h4 className="valueAmount">+{value.amount}$</h4>
@@ -135,7 +136,10 @@ export const Transactions = () => {
                     alt="transaction icon"
                   />
                   <div className="amountChildExpense" key={value._id}>
-                    <h3>{value.category.categoryName}</h3>
+                    <h3 className="categoryName">
+                      {" "}
+                      {value.category.categoryName}
+                    </h3>
                     <h4>-{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
@@ -155,6 +159,7 @@ export const Transactions = () => {
                   />
                   <div className="amountChildIncome" key={value._id}>
                     <h3 className="categoryName">
+                      {" "}
                       {value.category.categoryName}
                     </h3>
                     <h4 className="valueAmount">+{value.amount}$</h4>
@@ -175,7 +180,10 @@ export const Transactions = () => {
                     alt="transaction icon"
                   />
                   <div className="amountChildExpense" key={value._id}>
-                    <h3>{value.category.categoryName}</h3>
+                    <h3 className="categoryName">
+                      {" "}
+                      {value.category.categoryName}
+                    </h3>
                     <h4>-{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
@@ -195,6 +203,7 @@ export const Transactions = () => {
                   />
                   <div className="amountChildIncome" key={value._id}>
                     <h3 className="categoryName">
+                      {" "}
                       {value.category.categoryName}
                     </h3>
                     <h4 className="valueAmount">+{value.amount}$</h4>
@@ -215,7 +224,10 @@ export const Transactions = () => {
                     alt="transaction icon"
                   />
                   <div className="amountChildExpense" key={value._id}>
-                    <h3>{value.category.categoryName}</h3>
+                    <h3 className="categoryName">
+                      {" "}
+                      {value.category.categoryName}
+                    </h3>
                     <h4>-{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
@@ -235,6 +247,7 @@ export const Transactions = () => {
                   />
                   <div className="amountChildIncome" key={value._id}>
                     <h3 className="categoryName">
+                      {" "}
                       {value.category.categoryName}
                     </h3>
                     <h4 className="valueAmount">+{value.amount}$</h4>
@@ -255,7 +268,10 @@ export const Transactions = () => {
                     alt="transaction icon"
                   />
                   <div className="amountChildExpense" key={value._id}>
-                    <h3>{value.category.categoryName}</h3>
+                    <h3 className="categoryName">
+                      {" "}
+                      {value.category.categoryName}
+                    </h3>
                     <h4>-{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
@@ -275,6 +291,7 @@ export const Transactions = () => {
                   />
                   <div className="amountChildIncome" key={value._id}>
                     <h3 className="categoryName">
+                      {" "}
                       {value.category.categoryName}
                     </h3>
                     <h4 className="valueAmount">+{value.amount}$</h4>
@@ -295,7 +312,10 @@ export const Transactions = () => {
                     alt="transaction icon"
                   />
                   <div className="amountChildExpense" key={value._id}>
-                    <h3>{value.category.categoryName}</h3>
+                    <h3 className="categoryName">
+                      {" "}
+                      {value.category.categoryName}
+                    </h3>
                     <h4>-{value.amount}$</h4>
                   </div>
                   <h5> {moment(value.createdAt).format(" DD MMM")}</h5>
@@ -315,6 +335,7 @@ export const Transactions = () => {
                   />
                   <div className="amountChildIncome" key={value._id}>
                     <h3 className="categoryName">
+                      {" "}
                       {value.category.categoryName}
                     </h3>
                     <h4 className="valueAmount">+{value.amount}$</h4>
@@ -335,7 +356,7 @@ export const Transactions = () => {
                     alt="transaction icon"
                   />
                   <div className="amountChildExpense" key={value._id}>
-                    <h3>{value.category.categoryName}</h3>
+                    <h3> {value.category.categoryName}</h3>
                     <h4>-{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
@@ -355,6 +376,7 @@ export const Transactions = () => {
                   />
                   <div className="amountChildIncome" key={value._id}>
                     <h3 className="categoryName">
+                      {" "}
                       {value.category.categoryName}
                     </h3>
                     <h4 className="valueAmount">+{value.amount}$</h4>
@@ -375,7 +397,7 @@ export const Transactions = () => {
                     alt="transaction icon"
                   />
                   <div className="amountChildExpense" key={value._id}>
-                    <h3>{value.category.categoryName}</h3>
+                    <h3> {value.category.categoryName}</h3>
                     <h4>-{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
@@ -395,6 +417,7 @@ export const Transactions = () => {
                   />
                   <div className="amountChildIncome" key={value._id}>
                     <h3 className="categoryName">
+                      {" "}
                       {value.category.categoryName}
                     </h3>
                     <h4 className="valueAmount">+{value.amount}$</h4>
@@ -415,7 +438,7 @@ export const Transactions = () => {
                     alt="transaction icon"
                   />
                   <div className="amountChildExpense" key={value._id}>
-                    <h3>{value.category.categoryName}</h3>
+                    <h3> {value.category.categoryName}</h3>
                     <h4>-{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
@@ -435,6 +458,7 @@ export const Transactions = () => {
                   />
                   <div className="amountChildIncome" key={value._id}>
                     <h3 className="categoryName">
+                      {" "}
                       {value.category.categoryName}
                     </h3>
                     <h4 className="valueAmount">+{value.amount}$</h4>
@@ -455,7 +479,7 @@ export const Transactions = () => {
                     alt="transaction icon"
                   />
                   <div className="amountChildExpense" key={value._id}>
-                    <h3>{value.category.categoryName}</h3>
+                    <h3> {value.category.categoryName}</h3>
                     <h4>-{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
@@ -475,6 +499,7 @@ export const Transactions = () => {
                   />
                   <div className="amountChildIncome" key={value._id}>
                     <h3 className="categoryName">
+                      {" "}
                       {value.category.categoryName}
                     </h3>
                     <h4 className="valueAmount">+{value.amount}$</h4>
@@ -496,6 +521,7 @@ export const Transactions = () => {
                   />
                   <div className="amountChildIncome" key={value._id}>
                     <h3 className="categoryName">
+                      {" "}
                       {value.category.categoryName}
                     </h3>
                     <h4 className="valueAmount">+{value.amount}$</h4>
