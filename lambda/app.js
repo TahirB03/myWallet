@@ -518,17 +518,6 @@ const createEvent = async event=>{
   }else{
         biggestValue.biggestWithdraw = body.amount>= biggestValue.biggestWithdraw ? body.amount : biggestValue.biggestWithdraw
   }
-  if (typeOfCategory.isDeposit === false){
-    if (body.amount>userDetails.balance){
-      return{
-        statusCode: 400,
-      headers: cors,
-      body: JSON.stringify({
-        message: "You dont have that amount of money deposited.",
-      }),
-      }
-    }
-  }
   try {
     session.startTransaction();
      await Event.create(

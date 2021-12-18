@@ -6,7 +6,6 @@ const userSchema = mongoose.Schema(
     image: { type: String , default: ''},
     balance: {
       type: Number,
-      min: [0, "You need to have more money than 0"],
       default: 0
     },
     nrOfDeposits: { type: Number, min: 0, default: 0 },
