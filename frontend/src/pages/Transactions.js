@@ -61,8 +61,6 @@ export const Transactions = () => {
     fetchOutcomes();
   }, [userId]);
 
-  console.log(incomeList);
-
   let incomeSum = 0;
   let outcomeSum = 0;
 

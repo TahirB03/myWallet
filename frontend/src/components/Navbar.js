@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
@@ -10,7 +10,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 const Navbar = () => {
   const navigate = useNavigate();
   const user = useContext(UserContext);
-  console.log(user);
+
   const [userDetails, setUserDetails] = useState("");
 
   const fetchUserDetails = async () => {
@@ -19,7 +19,6 @@ const Navbar = () => {
         `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${user}`
       );
       setUserDetails(...userDetails, data.user);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
