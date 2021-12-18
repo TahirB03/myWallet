@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useNavigate, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Navbar from "../components/Navbar";
 import "./transactions.css";
 import Slider from "react-slick";
@@ -11,61 +11,65 @@ import { UserContext } from "../context/UserContext";
 
 export const Transactions = () => {
   const userId = useContext(UserContext);
-  const url = `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getEventByUser/${userId}`;
   const [eventValues, setEventValues] = useState(null);
   const [loading, setLoading] = useState(false);
   const [month, setMonth] = useState("December");
   const [incomeList, setIncomeList] = useState([]);
   const [outcomeList, setOutcomeList] = useState([]);
 
-  const fetchEvents = async () => {
-    try {
-      const res = await axios.get(url);
-      setEventValues(res.data.events);
-      setLoading(true);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const fetchIncomes = async () => {
-    try {
-      const res = await axios.get(
-        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getDeposits/${userId}`
-      );
-      setIncomeList(res.data.events);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const fetchOutcomes = async () => {
-    try {
-      const res = await axios.get(
-        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getAllWithdraws/${userId}`
-      );
-      setOutcomeList(res.data.events);
-    } catch (err) {
-      console.log(err);
-    }
-  };
   useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const res = await axios.get(
+          `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getEventByUser/${userId}`
+        );
+        setEventValues(res.data.events);
+        setLoading(true);
+      } catch (err) {
+        console.log(err);
+      }
+    };
     fetchEvents();
-    fetchIncomes();
-    fetchOutcomes();
-  }, []);
+  }, [userId]);
 
-  console.log(incomeList);
+  useEffect(() => {
+    const fetchIncomes = async () => {
+      try {
+        const res = await axios.get(
+          `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getDeposits/${userId}`
+        );
+        setIncomeList(res.data.events);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchIncomes();
+  }, [userId]);
+
+  useEffect(() => {
+    const fetchOutcomes = async () => {
+      try {
+        const res = await axios.get(
+          `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getAllWithdraws/${userId}`
+        );
+
+        setOutcomeList(res.data.events);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchOutcomes();
+  }, [userId]);
 
   let incomeSum = 0;
   let outcomeSum = 0;
 
-  
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 5,
-    slidesToScroll: 2,
+    slidesToScroll: 3,
   };
 
   return (
@@ -126,17 +130,19 @@ export const Transactions = () => {
             if (moment(incomee.createdAt).format("MMMM") === month) {
               incomeSum = incomeSum + incomee.amount;
             }
+            return null;
           })}
           <img
             src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/income.png"
             style={{ marginTop: "10px" }}
             width={45}
             height={45}
+            alt="income"
           ></img>
 
           <div className="boxContainer_text">
             <p style={{ display: "block", color: "green" }}>Income</p>
-            <p>$ {incomeSum.toFixed(1)}</p>
+            <p key={incomeList._id}>$ {incomeSum.toFixed(1)}</p>
           </div>
         </Box>
         <Box
@@ -157,17 +163,19 @@ export const Transactions = () => {
             ) {
               outcomeSum = outcomeSum + outcomee.amount;
             }
+            return null;
           })}
           <img
             src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/outcome.png"
             style={{ marginTop: "10px" }}
             width={45}
             height={45}
+            alt="outcome"
           ></img>
 
           <div className="boxContainer_text">
             <p style={{ display: "block", color: "red" }}>Outcome</p>
-            <p>$ {outcomeSum.toFixed(1)}</p>
+            <p key={outcomeList._id}>$ {outcomeSum.toFixed(1)}</p>
           </div>
         </Box>
       </div>
@@ -189,18 +197,18 @@ export const Transactions = () => {
               moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="transactionsContainer">
+                <div className="transactionsContainer" key={value._id}>
                   <img
                     src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/gift.png"
                     className="categoryLogo"
                     alt="transaction icon"
                   />
-                  <div className="amountChildExpense" key={value._id}>
+                  <div className="amountChildExpense">
                     <h3 className="categoryName">
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount.toFixed(1)}$</h4>
+                    <h4>-{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -211,18 +219,18 @@ export const Transactions = () => {
               moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="transactionsContainer">
+                <div className="transactionsContainer" key={value._id}>
                   <img
                     src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/clothes.png"
                     className="categoryLogo"
                     alt="transaction icon"
                   />
-                  <div className="amountChildExpense" key={value._id}>
+                  <div className="amountChildExpense">
                     <h3 className="categoryName">
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount.toFixed(1)}$</h4>
+                    <h4>-{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -233,18 +241,18 @@ export const Transactions = () => {
               moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="transactionsContainer">
+                <div className="transactionsContainer" key={value._id}>
                   <img
                     src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/communication.png"
                     className="categoryLogo"
                     alt="transaction icon"
                   />
-                  <div className="amountChildExpense" key={value._id}>
+                  <div className="amountChildExpense">
                     <h3 className="categoryName">
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount.toFixed(1)}$</h4>
+                    <h4>-{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -255,18 +263,18 @@ export const Transactions = () => {
               moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="transactionsContainer">
+                <div className="transactionsContainer" key={value._id}>
                   <img
                     src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/health.png"
                     className="categoryLogo"
                     alt="transaction icon"
                   />
-                  <div className="amountChildExpense" key={value._id}>
+                  <div className="amountChildExpense">
                     <h3 className="categoryName">
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount.toFixed(1)}$</h4>
+                    <h4>-{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -277,18 +285,18 @@ export const Transactions = () => {
               moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="transactionsContainer">
+                <div className="transactionsContainer" key={value._id}>
                   <img
                     src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/entertainment.png"
                     className="categoryLogo"
                     alt="transaction icon"
                   />
-                  <div className="amountChildExpense" key={value._id}>
+                  <div className="amountChildExpense">
                     <h3 className="categoryName">
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount.toFixed(1)}$</h4>
+                    <h4>-{value.amount}$</h4>
                   </div>
                   <h5> {moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -299,18 +307,18 @@ export const Transactions = () => {
               moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="transactionsContainer">
+                <div className="transactionsContainer" key={value._id}>
                   <img
                     src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/transport.png"
                     className="categoryLogo"
                     alt="transaction icon"
                   />
-                  <div className="amountChildExpense" key={value._id}>
+                  <div className="amountChildExpense">
                     <h3 className="categoryName">
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount.toFixed(1)}$</h4>
+                    <h4>-{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -321,18 +329,18 @@ export const Transactions = () => {
               moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="transactionsContainer">
+                <div className="transactionsContainer" key={value._id}>
                   <img
                     src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Other Deposits.png"
                     className="categoryLogo"
                     alt="transaction icon"
                   />
-                  <div className="amountChildExpense" key={value._id}>
+                  <div className="amountChildExpense">
                     <h3 className="categoryName">
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount.toFixed(1)}$</h4>
+                    <h4>-{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -343,18 +351,18 @@ export const Transactions = () => {
               moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="transactionsContainer">
+                <div className="transactionsContainer" key={value._id}>
                   <img
                     src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/food.png"
                     className="categoryLogo"
                     alt="transaction icon"
                   />
-                  <div className="amountChildExpense" key={value._id}>
+                  <div className="amountChildExpense">
                     <h3 className="categoryName">
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount.toFixed(1)}$</h4>
+                    <h4>-{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -365,13 +373,13 @@ export const Transactions = () => {
               moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="transactionsContainer">
+                <div className="transactionsContainer" key={value._id}>
                   <img
                     src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/sport.png"
                     className="categoryLogo"
                     alt="transaction icon"
                   />
-                  <div className="amountChildExpense" key={value._id}>
+                  <div className="amountChildExpense">
                     <h3 className="categoryName">
                       {" "}
                       {value.category.categoryName}
@@ -387,18 +395,18 @@ export const Transactions = () => {
               moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="transactionsContainer">
+                <div className="transactionsContainer" key={value._id}>
                   <img
                     src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Salary.png"
                     className="categoryLogo"
                     alt="transaction icon"
                   />
-                  <div className="amountChildIncome" key={value._id}>
+                  <div className="amountChildIncome">
                     <h3 className="categoryName">
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4 className="valueAmount">+{value.amount.toFixed(1)}$</h4>
+                    <h4 className="valueAmount">+{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -409,13 +417,13 @@ export const Transactions = () => {
               moment(value.createdAt).format("MMMM") === month
             ) {
               return (
-                <div className="transactionsContainer">
+                <div className="transactionsContainer" key={value._id}>
                   <img
                     src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Savings.png"
                     className="categoryLogo"
                     alt="transaction icon"
                   />
-                  <div className="amountChildIncome" key={value._id}>
+                  <div className="amountChildIncome">
                     <h3 className="categoryName">
                       {" "}
                       {value.category.categoryName}
@@ -426,6 +434,7 @@ export const Transactions = () => {
                 </div>
               );
             }
+            return null;
           })}
       </div>
     </div>
