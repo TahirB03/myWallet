@@ -7,6 +7,7 @@
   flex-direction: column;
   padding: 20px 27px;
   color: white;
+  font-weight: medium;
 }
 .dashboardNavbar_header {
   display: flex;
@@ -25,6 +26,7 @@
 }
 .dashboardNavbar_balance {
   position: relative;
+  font-size: 32px;
 }
 .MuiFab-primary {
   background-color: #faab1a !important;

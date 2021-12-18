@@ -5,8 +5,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
-import Income from "../components/Income";
-import Outcome from "../components/Outcome";
 import moment from "moment";
 import Box from "@mui/material/Box";
 import { UserContext } from "../context/UserContext";
@@ -169,7 +167,7 @@ export const Transactions = () => {
           ></img>
 
           <div className="boxContainer_text">
-            <p style={{ display: "block", color: "green" }}>Outcome</p>
+            <p style={{ display: "block", color: "red" }}>Outcome</p>
             <p>$ {outcomeSum}</p>
           </div>
         </Box>
