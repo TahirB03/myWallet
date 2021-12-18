@@ -307,7 +307,10 @@ export const Transactions = () => {
                     alt="transaction icon"
                   />
                   <div className="amountChildExpense" key={value._id}>
-                    <h3> {value.category.categoryName}</h3>
+                    <h3 className="categoryName">
+                      {" "}
+                      {value.category.categoryName}
+                    </h3>
                     <h4>-{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
@@ -326,7 +329,10 @@ export const Transactions = () => {
                     alt="transaction icon"
                   />
                   <div className="amountChildExpense" key={value._id}>
-                    <h3> {value.category.categoryName}</h3>
+                    <h3 className="categoryName">
+                      {" "}
+                      {value.category.categoryName}
+                    </h3>
                     <h4>-{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
@@ -345,7 +351,10 @@ export const Transactions = () => {
                     alt="transaction icon"
                   />
                   <div className="amountChildExpense" key={value._id}>
-                    <h3> {value.category.categoryName}</h3>
+                    <h3 className="categoryName">
+                      {" "}
+                      {value.category.categoryName}
+                    </h3>
                     <h4>-{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
@@ -364,7 +373,10 @@ export const Transactions = () => {
                     alt="transaction icon"
                   />
                   <div className="amountChildExpense" key={value._id}>
-                    <h3> {value.category.categoryName}</h3>
+                    <h3 className="categoryName">
+                      {" "}
+                      {value.category.categoryName}
+                    </h3>
                     <h4>-{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>

@@ -34,20 +34,20 @@
 }
 
 .amountChildIncome h3 {
-  margin-left: 20%;
+  margin-left: 20px;
   font-size: 16px;
   padding: 0;
   color: #7d7c8d;
 }
 .amountChildIncome h4 {
-  margin-left: 20%;
+  margin-left: 20px;
   color: #32ae1b;
   font-size: 18px;
   font-weight: bold;
 }
 
 .amountChildExpense h3 {
-  margin-left: 20%;
+  margin-left: 20px;
   font-size: 16px;
   padding: 0;
 
@@ -56,7 +56,7 @@
   font-weight: regular;
 }
 .amountChildExpense h4 {
-  margin-left: 20%;
+  margin-left: 20px;
   color: #3f3d56;
   font-size: 18px;
   font-weight: bold;
