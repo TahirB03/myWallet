@@ -84,6 +84,7 @@ const CostumFlow = () => {
         credentials.password
       );
       console.log(user);
+      window.location.reload();
     } catch (error) {
       if (error.message === "Incorrect username or password."){
         setLogInError(true)
