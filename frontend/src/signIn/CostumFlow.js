@@ -137,7 +137,7 @@ const CostumFlow = () => {
   if (flowStep === "confirmSignUp") {
     return (
       <div className="signUp authentication_screen">
-        <div className="imageLogo">This is a image</div>
+          <img style={{width:"100%"}} src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Image.png" alt="" />
         <div className="signInForm">
           <div className="appName">
             <h1>My Wallet</h1>
@@ -201,7 +201,9 @@ const CostumFlow = () => {
   if (flowStep === "forgotPassword1") {
     return (
       <div className="signUp authentication_screen">
-        <div className="imageLogo">This is a image</div>
+        <div className="imageLogo">
+        <img style={{width:"100%"}} src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Image.png" alt="" />
+        </div>
         <div className="signInForm">
           <div className="appName">
             <h1>My Wallet</h1>
@@ -242,7 +244,7 @@ const CostumFlow = () => {
   if (flowStep === "forgotPassword2") {
     return (
       <div className="signUp authentication_screen">
-        <div className="imageLogo">This is a image</div>
+          <img style={{width:"100%"}} src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Image.png" alt="" />
         <div className="signInForm">
           <div className="appName">
             <h1>My Wallet</h1>
@@ -311,7 +313,9 @@ const CostumFlow = () => {
   if (flowStep === "signUp") {
     return (
       <div className="signUp authentication_screen">
-        <div className="imageLogo">This is a image</div>
+        <div className="imageLogo">
+        <img style={{width:"100%"}} src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Image.png" alt="" />
+        </div>
         <div className="signInForm">
           <div className="appName">
             <h1>My Wallet</h1>
@@ -379,7 +383,9 @@ const CostumFlow = () => {
   }
   return (
     <div className="signIn authentication_screen">
-      <div className="imageLogo">This is a image</div>
+      <div className="imageLogo">
+        <img style={{width:"100%"}} src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Image.png" alt="" />
+      </div>
       <div className="signInForm">
         <div className="appName">
           <h1>My Wallet</h1>
