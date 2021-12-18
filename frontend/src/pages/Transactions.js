@@ -17,21 +17,62 @@ export const Transactions = () => {
   const [eventValues, setEventValues] = useState(null);
   const [loading, setLoading] = useState(false);
   const [month, setMonth] = useState("December");
+  const [incomeList, setIncomeList] = useState([]);
+  const [outcomeList, setOutcomeList] = useState([]);
 
+  const fetchEvents = async () => {
+    try {
+      const res = await axios.get(url);
+      setEventValues(res.data.events);
+      setLoading(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const fetchIncomes = async () => {
+    try {
+      const res = await axios.get(
+        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getDeposits/${userId}`
+      );
+      setIncomeList(res.data.events);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const fetchOutcomes = async () => {
+    try {
+      const res = await axios.get(
+        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getAllWithdraws/${userId}`
+      );
+      setOutcomeList(res.data.events);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const res = await axios.get(url);
-        setEventValues(res.data.events);
-        setLoading(true);
-      } catch (err) {
-        console.log(err);
-      }
-    };
     fetchEvents();
+    fetchIncomes();
+    fetchOutcomes();
   }, []);
 
-  const [incomeList, setIncomeList] = useState(0);
+  console.log(incomeList);
+  // let sum = 0;
+  // const deposit = incomeList.map((vlere) => {
+  //   return vlere.amount;
+  // });
+
+  //deposit();
+
+  let incomeSum = 0;
+  let outcomeSum = 0;
+  // incomeList.events.map((vlere) => {
+  //   if (moment(vlere.createdAt).format("MMMM") === month) {
+  //     incomeSum = incomeSum + vlere.amount;
+  //   }
+  // });
+  // setIncome(incomeSum);
+  // console.log(income);
 
   const [outcome, setOutcome] = useState(0);
 
@@ -42,7 +83,7 @@ export const Transactions = () => {
     slidesToShow: 5,
     slidesToScroll: 2,
   };
-  let outcomeSum = 0;
+
   return (
     <div className="monthContainer">
       <Navbar />
@@ -86,8 +127,65 @@ export const Transactions = () => {
       </Slider>
 
       <div className="stats">
-        <Income />
-        <Outcome />
+        <Box
+          className="boxContainer"
+          sx={{
+            marginTop: "15px",
+            width: 160,
+            height: 70,
+            border: "1px solid lightgray",
+            borderRadius: "25px",
+            padding: "0 0 0 5px",
+          }}
+        >
+          {incomeList.map((incomee) => {
+            if (moment(incomee.createdAt).format("MMMM") === month) {
+              incomeSum = incomeSum + incomee.amount;
+            }
+          })}
+          <img
+            src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/income.png"
+            style={{ marginTop: "10px" }}
+            width={45}
+            height={45}
+          ></img>
+
+          <div className="boxContainer_text">
+            <p style={{ display: "block", color: "green" }}>Income</p>
+            <p>$ {incomeSum}</p>
+          </div>
+        </Box>
+        <Box
+          className="boxContainer"
+          sx={{
+            marginTop: "15px",
+            width: 160,
+            height: 70,
+            border: "1px solid lightgray",
+            borderRadius: "25px",
+            padding: "0 0 0 5px",
+          }}
+        >
+          {outcomeList.map((outcomee) => {
+            if (
+              outcomee.category.isDeposit !== true &&
+              moment(outcomee.createdAt).format("MMMM") === month
+            ) {
+              outcomeSum = outcomeSum + outcomee.amount;
+            }
+          })}
+          <img
+            src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/outcome.png"
+            style={{ marginTop: "10px" }}
+            width={45}
+            height={45}
+          ></img>
+
+          <div className="boxContainer_text">
+            <p style={{ display: "block", color: "green" }}>Outcome</p>
+            <p>$ {outcomeSum}</p>
+          </div>
+        </Box>
       </div>
 
       <div className="arrows">
@@ -103,28 +201,6 @@ export const Transactions = () => {
           eventValues.map((value) => {
             if (
               value.category.categoryName === "Gift" &&
-              value.category.isDeposit === true &&
-              moment(value.createdAt).format("MMMM") === month
-            ) {
-              return (
-                <div className="transactionsContainer">
-                  <img
-                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/gift.png"
-                    className="categoryLogo"
-                    alt="transaction icon"
-                  />
-                  <div className="amountChildIncome" key={value._id}>
-                    <h3 className="categoryName">
-                      {" "}
-                      {value.category.categoryName}
-                    </h3>
-                    <h4 className="valueAmount">+{value.amount}$</h4>
-                  </div>
-                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
-                </div>
-              );
-            } else if (
-              value.category.categoryName === "Gift" &&
               value.category.isDeposit !== true &&
               moment(value.createdAt).format("MMMM") === month
             ) {
@@ -141,28 +217,6 @@ export const Transactions = () => {
                       {value.category.categoryName}
                     </h3>
                     <h4>-{value.amount}$</h4>
-                  </div>
-                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
-                </div>
-              );
-            } else if (
-              value.category.categoryName === "Clothing" &&
-              value.category.isDeposit === true &&
-              moment(value.createdAt).format("MMMM") === month
-            ) {
-              return (
-                <div className="transactionsContainer">
-                  <img
-                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/clothes.png"
-                    className="categoryLogo"
-                    alt="transaction icon"
-                  />
-                  <div className="amountChildIncome" key={value._id}>
-                    <h3 className="categoryName">
-                      {" "}
-                      {value.category.categoryName}
-                    </h3>
-                    <h4 className="valueAmount">+{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -191,28 +245,6 @@ export const Transactions = () => {
               );
             } else if (
               value.category.categoryName === "Communcation" &&
-              value.category.isDeposit === true &&
-              moment(value.createdAt).format("MMMM") === month
-            ) {
-              return (
-                <div className="transactionsContainer">
-                  <img
-                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/communication.png"
-                    className="categoryLogo"
-                    alt="transaction icon"
-                  />
-                  <div className="amountChildIncome" key={value._id}>
-                    <h3 className="categoryName">
-                      {" "}
-                      {value.category.categoryName}
-                    </h3>
-                    <h4 className="valueAmount">+{value.amount}$</h4>
-                  </div>
-                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
-                </div>
-              );
-            } else if (
-              value.category.categoryName === "Communcation" &&
               value.category.isDeposit !== true &&
               moment(value.createdAt).format("MMMM") === month
             ) {
@@ -235,28 +267,6 @@ export const Transactions = () => {
               );
             } else if (
               value.category.categoryName === "Healthcare" &&
-              value.category.isDeposit === true &&
-              moment(value.createdAt).format("MMMM") === month
-            ) {
-              return (
-                <div className="transactionsContainer">
-                  <img
-                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/health.png"
-                    className="categoryLogo"
-                    alt="transaction icon"
-                  />
-                  <div className="amountChildIncome" key={value._id}>
-                    <h3 className="categoryName">
-                      {" "}
-                      {value.category.categoryName}
-                    </h3>
-                    <h4 className="valueAmount">+{value.amount}$</h4>
-                  </div>
-                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
-                </div>
-              );
-            } else if (
-              value.category.categoryName === "Healthcare" &&
               value.category.isDeposit !== true &&
               moment(value.createdAt).format("MMMM") === month
             ) {
@@ -273,28 +283,6 @@ export const Transactions = () => {
                       {value.category.categoryName}
                     </h3>
                     <h4>-{value.amount}$</h4>
-                  </div>
-                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
-                </div>
-              );
-            } else if (
-              value.category.categoryName === "Entertainment" &&
-              value.category.isDeposit === true &&
-              moment(value.createdAt).format("MMMM") === month
-            ) {
-              return (
-                <div className="transactionsContainer">
-                  <img
-                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/entertainment.png"
-                    className="categoryLogo"
-                    alt="transaction icon"
-                  />
-                  <div className="amountChildIncome" key={value._id}>
-                    <h3 className="categoryName">
-                      {" "}
-                      {value.category.categoryName}
-                    </h3>
-                    <h4 className="valueAmount">+{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -323,28 +311,6 @@ export const Transactions = () => {
               );
             } else if (
               value.category.categoryName === "Transportation" &&
-              value.category.isDeposit === true &&
-              moment(value.createdAt).format("MMMM") === month
-            ) {
-              return (
-                <div className="transactionsContainer">
-                  <img
-                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/transport.png"
-                    className="categoryLogo"
-                    alt="transaction icon"
-                  />
-                  <div className="amountChildIncome" key={value._id}>
-                    <h3 className="categoryName">
-                      {" "}
-                      {value.category.categoryName}
-                    </h3>
-                    <h4 className="valueAmount">+{value.amount}$</h4>
-                  </div>
-                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
-                </div>
-              );
-            } else if (
-              value.category.categoryName === "Transportation" &&
               value.category.isDeposit !== true &&
               moment(value.createdAt).format("MMMM") === month
             ) {
@@ -358,28 +324,6 @@ export const Transactions = () => {
                   <div className="amountChildExpense" key={value._id}>
                     <h3> {value.category.categoryName}</h3>
                     <h4>-{value.amount}$</h4>
-                  </div>
-                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
-                </div>
-              );
-            } else if (
-              value.category.categoryName === "Other" &&
-              value.category.isDeposit === true &&
-              moment(value.createdAt).format("MMMM") === month
-            ) {
-              return (
-                <div className="transactionsContainer">
-                  <img
-                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Other Deposits.png"
-                    className="categoryLogo"
-                    alt="transaction icon"
-                  />
-                  <div className="amountChildIncome" key={value._id}>
-                    <h3 className="categoryName">
-                      {" "}
-                      {value.category.categoryName}
-                    </h3>
-                    <h4 className="valueAmount">+{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -405,28 +349,6 @@ export const Transactions = () => {
               );
             } else if (
               value.category.categoryName === "Food" &&
-              value.category.isDeposit === true &&
-              moment(value.createdAt).format("MMMM") === month
-            ) {
-              return (
-                <div className="transactionsContainer">
-                  <img
-                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/food.png"
-                    className="categoryLogo"
-                    alt="transaction icon"
-                  />
-                  <div className="amountChildIncome" key={value._id}>
-                    <h3 className="categoryName">
-                      {" "}
-                      {value.category.categoryName}
-                    </h3>
-                    <h4 className="valueAmount">+{value.amount}$</h4>
-                  </div>
-                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
-                </div>
-              );
-            } else if (
-              value.category.categoryName === "Food" &&
               value.category.isDeposit !== true &&
               moment(value.createdAt).format("MMMM") === month
             ) {
@@ -440,28 +362,6 @@ export const Transactions = () => {
                   <div className="amountChildExpense" key={value._id}>
                     <h3> {value.category.categoryName}</h3>
                     <h4>-{value.amount}$</h4>
-                  </div>
-                  <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
-                </div>
-              );
-            } else if (
-              value.category.categoryName === "Sport" &&
-              value.category.isDeposit === true &&
-              moment(value.createdAt).format("MMMM") === month
-            ) {
-              return (
-                <div className="transactionsContainer">
-                  <img
-                    src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/sport.png"
-                    className="categoryLogo"
-                    alt="transaction icon"
-                  />
-                  <div className="amountChildIncome" key={value._id}>
-                    <h3 className="categoryName">
-                      {" "}
-                      {value.category.categoryName}
-                    </h3>
-                    <h4 className="valueAmount">+{value.amount}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
