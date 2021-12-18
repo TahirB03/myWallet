@@ -30,7 +30,7 @@ const Navbar = () => {
   return (
     <div className="dashboardNavbar">
       <div className="dashboardNavbar_header">
-        <Link to="/">
+        <Link to="/" style={{ textDecoration: "none" }}>
           <p
             style={{
               fontSize: "18px",
