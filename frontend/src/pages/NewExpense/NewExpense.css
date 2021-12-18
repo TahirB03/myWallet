@@ -1,5 +1,5 @@
 .addExpense_wrapper{
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     color:#3F3D56;
@@ -27,6 +27,7 @@
 }
 .inputs{
     padding: 20px;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;

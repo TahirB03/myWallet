@@ -3,6 +3,10 @@ import { Auth } from "aws-amplify";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import FormControl from "@mui/material/FormControl";
+import InputAdornment from '@mui/material/InputAdornment';
+import OutlinedInput from '@mui/material/OutlinedInput';
+
 import "./SignIn.css";
 
 const initialCredentials = {
@@ -123,7 +127,7 @@ const CostumFlow = () => {
         const user = await axios.get(
           `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/addUser/${attributes.sub}`
         );
-        console.log(user);
+        window.location.reload()
       }
     } catch (error) {
       if (

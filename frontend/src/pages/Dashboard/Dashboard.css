@@ -35,3 +35,27 @@
   background-color: #3F3D56 !important;
   opacity: 0.75 !important;
 }
+
+.NoExpenseChart{
+  width: 100%;
+  margin-top: 40px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.noExpenseHeader{
+  color: #3F3D56 ;
+  font-size: 32px;
+}
+.noExpenseButton{
+  width: 100%;
+  max-width: 250px;
+  height: 30px;
+  border-radius: 40px;
+  color: white;
+  background-color: #2B32BD;
+  font-size: 16px;
+  font-weight: 400;
+  border: solid 1px black;
+  margin-top: 10px;
+}

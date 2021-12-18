@@ -75,7 +75,7 @@ const ProfileNavbar = () => {
           >
             $
           </span>
-          {userDetails.balance > 0 && (
+          {userDetails.balance >= 0 && (
             <h1 style={{ fontSize: '32px', display: 'inline-block' }}>
               {userDetails.balance.toFixed(2)}
             </h1>

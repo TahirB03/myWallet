@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../../src/context/UserContext";
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell, } from "recharts";
 import moment from "moment";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
@@ -12,6 +12,7 @@ import Drawer from '@mui/material/Drawer';
 import DashboardNavbar from "./DashboardNavbar";
 import Modal from "react-modal";
 import Sidebar from '../../components/Sidebar.js/Sidebar'
+import NoExpenseChart from "./NoExpenseChart";
 
 const floatingByttonStyles = {
   margin: 0,
@@ -48,6 +49,7 @@ const customStyles = {
     backgroundColor: "transparent",
   },
 };
+
 const COLORS = [
   "#69D6C5",
   "#7C6FF1",
@@ -63,9 +65,9 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const userId = useContext(UserContext);
   const [user, setUser] = useState(null);
+  const [isDepositModal,setIsDepositModal]=useState(false)
   const [userIncome, setUserIncome] = useState(0);
   const [userExpenses, setUserExpenses] = useState(0);
-  const [expenses, setExpenses] = useState(null);
   const [userExpensesData, setUserExpensesData] = useState([]);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [sideBar,setSideBar]=useState(false)
@@ -74,9 +76,6 @@ const Dashboard = () => {
 
   
   const RADIAN = Math.PI / 180;
-  // First day of the month to make the api calls
-  const fd = moment().startOf("month").format("YYYY-MM-DD");
-
   const renderCustomizedLabel = ({
     cx,
     cy,
@@ -110,6 +109,10 @@ const Dashboard = () => {
         `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${userId}`
       );
       setUser(data.user);
+      console.log(data.user);
+      if(data.user.nrOfDeposits===0 && data.user.nrOfWithdraws===0){
+        setIsDepositModal(true)
+      }
     } catch (error) {
       console.log(error);
     }
@@ -164,6 +167,7 @@ const Dashboard = () => {
               size="medium"
               aria-label="add"
               onClick={() => navigate(`/addIncome/${userId}`)}
+              sx={{background:"rgba(255,255,255,1)"}}
             >
               <img
                 src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Up.png"
@@ -177,6 +181,7 @@ const Dashboard = () => {
               size="medium"
               aria-label="add"
               onClick={() => navigate(`/addExspense/${userId}`)}
+              sx={{background:"rgba(255,255,255,1)",opacity:"1 !important"}}
             >
               <img
                 src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Down.png"
@@ -270,6 +275,7 @@ const Dashboard = () => {
         <h3 style={{ marginTop: "20px", fontSize: "20px", color: "#3F3D56" }}>
           Categories
         </h3>
+        {user?.nrOfWithdraws===0 && <NoExpenseChart />}
         <PieChart width={500} height={300}>
           <Pie
             style={{ margin: "0 auto" }}
