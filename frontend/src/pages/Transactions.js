@@ -59,8 +59,7 @@ export const Transactions = () => {
   let incomeSum = 0;
   let outcomeSum = 0;
 
-  const [outcome, setOutcome] = useState(0);
-
+  
   const settings = {
     dots: false,
     infinite: true,
@@ -137,7 +136,7 @@ export const Transactions = () => {
 
           <div className="boxContainer_text">
             <p style={{ display: "block", color: "green" }}>Income</p>
-            <p>$ {incomeSum}</p>
+            <p>$ {incomeSum.toFixed(1)}</p>
           </div>
         </Box>
         <Box
@@ -168,7 +167,7 @@ export const Transactions = () => {
 
           <div className="boxContainer_text">
             <p style={{ display: "block", color: "red" }}>Outcome</p>
-            <p>$ {outcomeSum}</p>
+            <p>$ {outcomeSum.toFixed(1)}</p>
           </div>
         </Box>
       </div>
@@ -201,7 +200,7 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}$</h4>
+                    <h4>-{value.amount.toFixed(1)}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -223,7 +222,7 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}$</h4>
+                    <h4>-{value.amount.toFixed(1)}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -245,7 +244,7 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}$</h4>
+                    <h4>-{value.amount.toFixed(1)}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -267,7 +266,7 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}$</h4>
+                    <h4>-{value.amount.toFixed(1)}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -289,7 +288,7 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}$</h4>
+                    <h4>-{value.amount.toFixed(1)}$</h4>
                   </div>
                   <h5> {moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -311,7 +310,7 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}$</h4>
+                    <h4>-{value.amount.toFixed(1)}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -333,7 +332,7 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}$</h4>
+                    <h4>-{value.amount.toFixed(1)}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -355,7 +354,7 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}$</h4>
+                    <h4>-{value.amount.toFixed(1)}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -399,7 +398,7 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4 className="valueAmount">+{value.amount}$</h4>
+                    <h4 className="valueAmount">+{value.amount.toFixed(1)}$</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>

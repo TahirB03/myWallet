@@ -15,8 +15,7 @@ import NewIncome from './pages/NewIncome/NewIcome'
 import About from './pages/about';
 import Policy from './pages/policy';
 
-Amplify.configure(poolData);
-Auth.configure(poolData)
+Amplify.Auth.configure(poolData);
 
 
 const App =  ()=> {

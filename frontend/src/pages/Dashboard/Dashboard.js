@@ -99,7 +99,7 @@ const Dashboard = () => {
         dominantBaseline="central"
         fontSize={"13px"}
       >
-        {`${userExpensesData[index].name} `}
+        {`${userExpensesData[index].name} ${(percent * 100).toFixed(0)}%`}
       </text>
     );
   };
@@ -282,7 +282,7 @@ const Dashboard = () => {
             dataKey="amount"
             isAnimationActive={false}
             label={renderCustomizedLabel}
-            style={{overflow:"visible"}}
+            style={{overflow:"visible",margin:"0 auto"}}
           >
             {userExpensesData.map((index) => (
               <Cell
