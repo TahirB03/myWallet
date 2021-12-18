@@ -57,22 +57,9 @@ export const Transactions = () => {
   }, []);
 
   console.log(incomeList);
-  // let sum = 0;
-  // const deposit = incomeList.map((vlere) => {
-  //   return vlere.amount;
-  // });
-
-  //deposit();
 
   let incomeSum = 0;
   let outcomeSum = 0;
-  // incomeList.events.map((vlere) => {
-  //   if (moment(vlere.createdAt).format("MMMM") === month) {
-  //     incomeSum = incomeSum + vlere.amount;
-  //   }
-  // });
-  // setIncome(incomeSum);
-  // console.log(income);
 
   const [outcome, setOutcome] = useState(0);
 
