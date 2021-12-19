@@ -19,14 +19,14 @@ const ChangePassword = () => {
 
   const passwordChange = (e) => {
     if (e.target.name === "confirmedNewPassword") {
-      if (e.target.value == password.newPassword) {
+      if (e.target.value === password.newPassword) {
         setErrors({ ...errors, unMatchedPassword: false });
       } else {
         setErrors({ ...errors, unMatchedPassword: true });
       }
     }
-    if (e.target.name==="oldPassword"){
-      setErrors({...errors,wrongPassword:false})
+    if (e.target.name === "oldPassword") {
+      setErrors({ ...errors, wrongPassword: false });
     }
     setPassword({ ...password, [e.target.name]: e.target.value });
   };
@@ -46,7 +46,7 @@ const ChangePassword = () => {
           }
         }
       } catch (error) {
-          setErrors({...errors,wrongPassword:true})
+        setErrors({ ...errors, wrongPassword: true });
       }
     }
   };
@@ -63,10 +63,12 @@ const ChangePassword = () => {
             name="oldPassword"
             className="costumPasswordInput"
             onChange={passwordChange}
-          />{errors.wrongPassword &&
-          <p style={{ color: "red", fontSize: "14px", marginLeft: "40px" }}>
+          />
+          {errors.wrongPassword && (
+            <p style={{ color: "red", fontSize: "14px", marginLeft: "40px" }}>
               Your old password was incorrect
-            </p>}
+            </p>
+          )}
         </div>
         <div>
           <input

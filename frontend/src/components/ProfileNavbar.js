@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
@@ -7,25 +7,25 @@ import "./navbar.css";
 import Avatar from "../images/Avatar.png";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
-const ProfileNavbar = ({currency}) => {
+const ProfileNavbar = ({ currency }) => {
   const navigate = useNavigate();
   const user = useContext(UserContext);
   console.log(user);
   const [userDetails, setUserDetails] = useState("");
 
-  const fetchUserDetails = async () => {
-    try {
-      const { data } = await axios.get(
-        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${user}`
-      );
-      setUserDetails(...userDetails, data.user);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const { data } = await axios.get(
+          `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${user}`
+        );
+        setUserDetails(...userDetails, data.user);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchUserDetails();
-  }, []);
+  }, [user, userDetails]);
 
   return (
     <div className="dashboardNavbar">
@@ -57,7 +57,7 @@ const ProfileNavbar = ({currency}) => {
               )}
             </div>
           </div>
-          <img src={Avatar} width="35"></img>
+          <img alt="profile" src={Avatar} width="35"></img>
         </div>
       </div>
       <div className="dashboardNavbar_body">
@@ -75,7 +75,7 @@ const ProfileNavbar = ({currency}) => {
             {currency}
           </span>
           {userDetails.balance !== undefined && (
-            <h1 style={{ fontSize: '32px', display: 'inline-block' }}>
+            <h1 style={{ fontSize: "32px", display: "inline-block" }}>
               {userDetails.balance.toFixed(2)}
             </h1>
           )}

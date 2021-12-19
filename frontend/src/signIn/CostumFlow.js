@@ -3,9 +3,6 @@ import { Auth } from "aws-amplify";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import FormControl from "@mui/material/FormControl";
-import InputAdornment from '@mui/material/InputAdornment';
-import OutlinedInput from '@mui/material/OutlinedInput';
 
 import "./SignIn.css";
 
@@ -19,7 +16,7 @@ const CostumFlow = () => {
   const [flowStep, setFlowStep] = useState("signIn");
   const [code, setCode] = useState("");
   const [codeError, setCodeError] = useState(false);
-  const [logInError,setLogInError]=useState(false)
+  const [logInError, setLogInError] = useState(false);
   const [credentials, setCredential] = useState(initialCredentials);
   const [forgotPasswordCredentials, setForgotPasswordCredentials] = useState({
     username: "",
@@ -27,14 +24,14 @@ const CostumFlow = () => {
     newPassword: "",
     userEmail: "",
   });
-  const [forgotPasswordError,setForgotPasswordError]=useState({
-    code:false,
-    password:false
-  })
+  const [forgotPasswordError, setForgotPasswordError] = useState({
+    code: false,
+    password: false,
+  });
 
   const handleChange = (e) => {
     setCredential({ ...credentials, [e.target.name]: e.target.value });
-    setLogInError(false)
+    setLogInError(false);
   };
   const handleChangepassword = (e) => {
     setForgotPasswordCredentials({
@@ -42,9 +39,9 @@ const CostumFlow = () => {
       [e.target.name]: e.target.value,
     });
     setForgotPasswordError({
-      code:false,
-      password:false
-    })
+      code: false,
+      password: false,
+    });
   };
 
   let buttonIsDisabled =
@@ -69,17 +66,24 @@ const CostumFlow = () => {
     }
   };
 
-  const handlePasswordUpdate = async ()=>{
-        try {
-          const response = await Auth.forgotPasswordSubmit(forgotPasswordCredentials.username,forgotPasswordCredentials.code,forgotPasswordCredentials.newPassword)
-          console.log(response);
-        } catch (error) {
-          console.log(error.message);
-          if (error.message === "Invalid verification code provided, please try again."){
-            setForgotPasswordError({...setForgotPasswordError,code:true})
-          }
-        }
-  }
+  const handlePasswordUpdate = async () => {
+    try {
+      const response = await Auth.forgotPasswordSubmit(
+        forgotPasswordCredentials.username,
+        forgotPasswordCredentials.code,
+        forgotPasswordCredentials.newPassword
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error.message);
+      if (
+        error.message ===
+        "Invalid verification code provided, please try again."
+      ) {
+        setForgotPasswordError({ ...setForgotPasswordError, code: true });
+      }
+    }
+  };
 
   const handleSignIn = async () => {
     try {
@@ -90,8 +94,8 @@ const CostumFlow = () => {
       console.log(user);
       window.location.reload();
     } catch (error) {
-      if (error.message === "Incorrect username or password."){
-        setLogInError(true)
+      if (error.message === "Incorrect username or password.") {
+        setLogInError(true);
       }
     }
   };
@@ -127,7 +131,7 @@ const CostumFlow = () => {
         const user = await axios.get(
           `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/addUser/${attributes.sub}`
         );
-        window.location.reload()
+        window.location.reload();
       }
     } catch (error) {
       if (
@@ -141,7 +145,11 @@ const CostumFlow = () => {
   if (flowStep === "confirmSignUp") {
     return (
       <div className="signUp authentication_screen">
-          <img style={{width:"100%"}} src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Image.png" alt="" />
+        <img
+          style={{ width: "100%" }}
+          src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Image.png"
+          alt=""
+        />
         <div className="signInForm">
           <div className="appName">
             <h1>My Wallet</h1>
@@ -154,7 +162,7 @@ const CostumFlow = () => {
               autoFocus={true}
               fullWidth={true}
               value={credentials.username}
-              key='Username'
+              key="Username"
               InputProps={{
                 readOnly: true,
               }}
@@ -206,7 +214,11 @@ const CostumFlow = () => {
     return (
       <div className="signUp authentication_screen">
         <div className="imageLogo">
-        <img style={{width:"100%"}} src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Image.png" alt="" />
+          <img
+            style={{ width: "100%" }}
+            src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Image.png"
+            alt=""
+          />
         </div>
         <div className="signInForm">
           <div className="appName">
@@ -248,7 +260,11 @@ const CostumFlow = () => {
   if (flowStep === "forgotPassword2") {
     return (
       <div className="signUp authentication_screen">
-          <img style={{width:"100%"}} src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Image.png" alt="" />
+        <img
+          style={{ width: "100%" }}
+          src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Image.png"
+          alt=""
+        />
         <div className="signInForm">
           <div className="appName">
             <h1>My Wallet</h1>
@@ -276,20 +292,26 @@ const CostumFlow = () => {
               value={forgotPasswordCredentials.code}
               fullWidth={true}
               onChange={handleChangepassword}
-              sx={{marginTop:"15px"}}
+              sx={{ marginTop: "15px" }}
             />
-            {forgotPasswordError.code===true && <p style={{color:"red",fontSize:"12px",paddingLeft:"10px"}}>Code isn't correct</p>}
+            {forgotPasswordError.code === true && (
+              <p
+                style={{ color: "red", fontSize: "12px", paddingLeft: "10px" }}
+              >
+                Code isn't correct
+              </p>
+            )}
             <TextField
-            id="outlined-password-input"
-            className="inputRounded"
-            label="New Password"
-            name="newPassword"
-            value={forgotPasswordCredentials.newPassword}
-            type="password"
-            fullWidth={true}
-            onChange={handleChangepassword}
-            sx={{ marginTop: "15px" }}
-          />
+              id="outlined-password-input"
+              className="inputRounded"
+              label="New Password"
+              name="newPassword"
+              value={forgotPasswordCredentials.newPassword}
+              type="password"
+              fullWidth={true}
+              onChange={handleChangepassword}
+              sx={{ marginTop: "15px" }}
+            />
           </div>
           <div className="forgotPassword"></div>
           <Button
@@ -318,7 +340,11 @@ const CostumFlow = () => {
     return (
       <div className="signUp authentication_screen">
         <div className="imageLogo">
-        <img style={{width:"100%"}} src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Image.png" alt="" />
+          <img
+            style={{ width: "100%" }}
+            src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Image.png"
+            alt=""
+          />
         </div>
         <div className="signInForm">
           <div className="appName">
@@ -356,12 +382,12 @@ const CostumFlow = () => {
             />
           </div>
           <div className="forgotPassword">
-          <p
-            className="forgotPassword_label"
-            onClick={() => setFlowStep("forgotPassword1")}
-          >
-            Forgot password?
-          </p>
+            <p
+              className="forgotPassword_label"
+              onClick={() => setFlowStep("forgotPassword1")}
+            >
+              Forgot password?
+            </p>
           </div>
           <Button
             variant="contained"
@@ -388,7 +414,11 @@ const CostumFlow = () => {
   return (
     <div className="signIn authentication_screen">
       <div className="imageLogo">
-        <img style={{width:"100%"}} src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Image.png" alt="" />
+        <img
+          style={{ width: "100%" }}
+          src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Image.png"
+          alt=""
+        />
       </div>
       <div className="signInForm">
         <div className="appName">
@@ -418,7 +448,11 @@ const CostumFlow = () => {
             onChange={handleChange}
             sx={{ marginTop: "15px" }}
           />
-          {logInError && <p style={{color:'red',marginTop:"5px",fontSize:"12px"}}>Password wasn't correct.Please check you username and password!</p>}
+          {logInError && (
+            <p style={{ color: "red", marginTop: "5px", fontSize: "12px" }}>
+              Password wasn't correct.Please check you username and password!
+            </p>
+          )}
         </div>
         <div className="forgotPassword">
           <p

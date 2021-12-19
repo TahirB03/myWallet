@@ -15,14 +15,11 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 
-
-
 const signOut = async (e) => {
   e.preventDefault();
   await Auth.signOut();
   window.location.reload();
 };
-
 
 const Profile = () => {
   const userId = useContext(UserContext);
@@ -43,30 +40,35 @@ const Profile = () => {
     }
   };
 
-  const fetchUserDetails = async ()=>{
-    try {
-      const {data} = await axios.get(`https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${userId}`)
-      setCurrency(data?.user?.currency)
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(()=>{
-    fetchUserDetails()
-  },[])
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const { data } = await axios.get(
+          `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${userId}`
+        );
+        setCurrency(data?.user?.currency);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchUserDetails();
+  }, [userId]);
   return (
     <div>
       <ProfileNavbar currency={currency} />
       <p className="settings">Settings</p>
       <div>
-        <button className="currency" onClick={() => {
-          if (isCurrencyShow===false){
-          setIsCurrencyShow(true)}else{
-            setIsCurrencyShow(false)
-            handleUpdate();
-          }
-          }}>
+        <button
+          className="currency"
+          onClick={() => {
+            if (isCurrencyShow === false) {
+              setIsCurrencyShow(true);
+            } else {
+              setIsCurrencyShow(false);
+              handleUpdate();
+            }
+          }}
+        >
           <img
             className="currency-logo"
             width={30}
@@ -76,25 +78,31 @@ const Profile = () => {
           />
           Change currency
         </button>
-        {isCurrencyShow===true && <div className="radioCurrency">
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Select your currency</FormLabel>
-          <RadioGroup
-            row
-            aria-label="currency"
-            name="row-radio-buttons-group"
-            value={currency}
-            onChange={handleCurrency}
-          >
-            <FormControlLabel
-              name="€"
-              control={<Radio checked={currency==='€'}/>}
-              label="€"
-            />
-            <FormControlLabel name="$" control={<Radio checked={currency==='$'} />} label="$" />
-          </RadioGroup>
-        </FormControl>
-      </div>}
+        {isCurrencyShow === true && (
+          <div className="radioCurrency">
+            <FormControl component="fieldset">
+              <FormLabel component="legend">Select your currency</FormLabel>
+              <RadioGroup
+                row
+                aria-label="currency"
+                name="row-radio-buttons-group"
+                value={currency}
+                onChange={handleCurrency}
+              >
+                <FormControlLabel
+                  name="€"
+                  control={<Radio checked={currency === "€"} />}
+                  label="€"
+                />
+                <FormControlLabel
+                  name="$"
+                  control={<Radio checked={currency === "$"} />}
+                  label="$"
+                />
+              </RadioGroup>
+            </FormControl>
+          </div>
+        )}
         <Link style={{ textDecoration: "none" }} to="/changePassword">
           <button className="password">
             <img
@@ -135,7 +143,6 @@ const Profile = () => {
       <button className="logOut" onClick={signOut}>
         Log out
       </button>
-      
     </div>
   );
 };

@@ -1,9 +1,13 @@
-import React, { useState } from "react";
 import "./Sidebar.css";
 import RoundedButtons from "../RoundedButtons";
-import moment from 'moment'
+import moment from "moment";
 
-const Sidebar = ({ setSideBar , filteredTime, setFilteredTime, setTimeFormat}) => {
+const Sidebar = ({
+  setSideBar,
+  filteredTime,
+  setFilteredTime,
+  setTimeFormat,
+}) => {
   return (
     <div className="sidebar">
       <div className="sidebar_label">
@@ -29,11 +33,45 @@ const Sidebar = ({ setSideBar , filteredTime, setFilteredTime, setTimeFormat}) =
           />
         </div>
       </div>
-      <RoundedButtons name="Day" setTime={setFilteredTime} time={filteredTime} setSideBar={setSideBar} value={moment().startOf('day').format('YYYY-MM-DD')} setTimeFormat={setTimeFormat} />
-      <RoundedButtons name="Week" setTime={setFilteredTime} time={filteredTime} setSideBar={setSideBar} value={moment().startOf('week').format('YYYY-MM-DD')} setTimeFormat={setTimeFormat} />
-      <RoundedButtons name="Month" setTime={setFilteredTime} time={filteredTime} setSideBar={setSideBar} value={moment().startOf('month').format('YYYY-MM-DD')} setTimeFormat={setTimeFormat} />
-      <RoundedButtons name="Year" setTime={setFilteredTime} time={filteredTime} setSideBar={setSideBar} value={moment().startOf('year').format('YYYY-MM-DD')} setTimeFormat={setTimeFormat} />
-      <RoundedButtons name="Costum date" setTime={setFilteredTime} time={filteredTime} setSideBar={setSideBar} disabled="true" />
+      <RoundedButtons
+        name="Day"
+        setTime={setFilteredTime}
+        time={filteredTime}
+        setSideBar={setSideBar}
+        value={moment().startOf("day").format("YYYY-MM-DD")}
+        setTimeFormat={setTimeFormat}
+      />
+      <RoundedButtons
+        name="Week"
+        setTime={setFilteredTime}
+        time={filteredTime}
+        setSideBar={setSideBar}
+        value={moment().startOf("week").format("YYYY-MM-DD")}
+        setTimeFormat={setTimeFormat}
+      />
+      <RoundedButtons
+        name="Month"
+        setTime={setFilteredTime}
+        time={filteredTime}
+        setSideBar={setSideBar}
+        value={moment().startOf("month").format("YYYY-MM-DD")}
+        setTimeFormat={setTimeFormat}
+      />
+      <RoundedButtons
+        name="Year"
+        setTime={setFilteredTime}
+        time={filteredTime}
+        setSideBar={setSideBar}
+        value={moment().startOf("year").format("YYYY-MM-DD")}
+        setTimeFormat={setTimeFormat}
+      />
+      <RoundedButtons
+        name="Costum date"
+        setTime={setFilteredTime}
+        time={filteredTime}
+        setSideBar={setSideBar}
+        disabled="true"
+      />
     </div>
   );
 };

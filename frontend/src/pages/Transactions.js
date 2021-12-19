@@ -16,7 +16,7 @@ export const Transactions = () => {
   const [month, setMonth] = useState("December");
   const [incomeList, setIncomeList] = useState([]);
   const [outcomeList, setOutcomeList] = useState([]);
-  const [user,setUser] = useState('')
+  const [user, setUser] = useState("");
   const getUser = async () => {
     try {
       const { data } = await axios.get(
@@ -41,9 +41,8 @@ export const Transactions = () => {
       }
     };
     fetchEvents();
-    getUser()
+    getUser();
   }, [userId]);
-
 
   let incomeSum = 0;
   let outcomeSum = 0;
@@ -111,13 +110,14 @@ export const Transactions = () => {
           }}
         >
           {eventValues?.map((event) => {
-            if (event?.category?.isDeposit === true){
-            if (moment(event.createdAt).format("MMMM") === month) {
-              incomeSum = incomeSum + event.amount;
-            }} else{
-                if (moment(event.createdAt).format("MMMM") === month){
-                  outcomeSum = outcomeSum + event.amount;
-                }
+            if (event?.category?.isDeposit === true) {
+              if (moment(event.createdAt).format("MMMM") === month) {
+                incomeSum = incomeSum + event.amount;
+              }
+            } else {
+              if (moment(event.createdAt).format("MMMM") === month) {
+                outcomeSum = outcomeSum + event.amount;
+              }
             }
             return null;
           })}
@@ -131,7 +131,9 @@ export const Transactions = () => {
 
           <div className="boxContainer_text">
             <p style={{ display: "block", color: "green" }}>Income</p>
-            <p key={incomeList._id}>{user?.currency} {incomeSum.toFixed(1)}</p>
+            <p key={incomeList._id}>
+              {user?.currency} {incomeSum.toFixed(1)}
+            </p>
           </div>
         </Box>
         <Box
@@ -155,7 +157,9 @@ export const Transactions = () => {
 
           <div className="boxContainer_text">
             <p style={{ display: "block", color: "red" }}>Outcome</p>
-            <p key={outcomeList._id}>{user?.currency} {outcomeSum.toFixed(1)}</p>
+            <p key={outcomeList._id}>
+              {user?.currency} {outcomeSum.toFixed(1)}
+            </p>
           </div>
         </Box>
       </div>
@@ -188,7 +192,10 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}{user?.currency}</h4>
+                    <h4>
+                      -{value.amount}
+                      {user?.currency}
+                    </h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -210,7 +217,10 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}{user?.currency}</h4>
+                    <h4>
+                      -{value.amount}
+                      {user?.currency}
+                    </h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -232,7 +242,10 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}{user?.currency}</h4>
+                    <h4>
+                      -{value.amount}
+                      {user?.currency}
+                    </h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -254,7 +267,10 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}{user?.currency}</h4>
+                    <h4>
+                      -{value.amount}
+                      {user?.currency}
+                    </h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -276,7 +292,10 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}{user?.currency}</h4>
+                    <h4>
+                      -{value.amount}
+                      {user?.currency}
+                    </h4>
                   </div>
                   <h5> {moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -298,7 +317,10 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}{user?.currency}</h4>
+                    <h4>
+                      -{value.amount}
+                      {user?.currency}
+                    </h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -320,7 +342,10 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}{user?.currency}</h4>
+                    <h4>
+                      -{value.amount}
+                      {user?.currency}
+                    </h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -342,7 +367,10 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}{user?.currency}</h4>
+                    <h4>
+                      -{value.amount}
+                      {user?.currency}
+                    </h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -364,7 +392,10 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}{user?.currency}</h4>
+                    <h4>
+                      -{value.amount}
+                      {user?.currency}
+                    </h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -386,7 +417,10 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4 className="valueAmount">+{value.amount}{user?.currency}</h4>
+                    <h4 className="valueAmount">
+                      +{value.amount}
+                      {user?.currency}
+                    </h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -408,7 +442,10 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4 className="valueAmount">+{value.amount}{user?.currency}</h4>
+                    <h4 className="valueAmount">
+                      +{value.amount}
+                      {user?.currency}
+                    </h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>

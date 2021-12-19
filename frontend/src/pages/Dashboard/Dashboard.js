@@ -4,14 +4,14 @@ import Box from "@mui/material/Box";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../../src/context/UserContext";
-import { PieChart, Pie, Cell, } from "recharts";
+import { PieChart, Pie, Cell } from "recharts";
 import moment from "moment";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
-import Drawer from '@mui/material/Drawer';
+import Drawer from "@mui/material/Drawer";
 import DashboardNavbar from "./DashboardNavbar";
 import Modal from "react-modal";
-import Sidebar from '../../components/Sidebar.js/Sidebar'
+import Sidebar from "../../components/Sidebar.js/Sidebar";
 import NoExpenseChart from "./NoExpenseChart";
 
 const floatingByttonStyles = {
@@ -50,31 +50,23 @@ const customStyles = {
   },
 };
 
-const COLORS = [
-  "#69D6C5",
-  "#7C6FF1",
-  "#F18F35",
-  "#D44E9A",
-  "#FDB797",
-  "#32AE1B",
-  "#2B32BD",
-];
 Modal.setAppElement("#root");
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const userId = useContext(UserContext);
   const [user, setUser] = useState(null);
-  const [isDepositModal,setIsDepositModal]=useState(false)
+  const [isDepositModal, setIsDepositModal] = useState(false);
   const [userIncome, setUserIncome] = useState(0);
   const [userExpenses, setUserExpenses] = useState(0);
   const [userExpensesData, setUserExpensesData] = useState([]);
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [sideBar,setSideBar]=useState(false)
-  const [filteredTime,setFilteredTime]=useState('Month')
-  const [dateFormat,setTimeFormat]=useState(moment().startOf("month").format('YYYY-MM-DD'))
+  const [sideBar, setSideBar] = useState(false);
+  const [filteredTime, setFilteredTime] = useState("Month");
+  const [dateFormat, setTimeFormat] = useState(
+    moment().startOf("month").format("YYYY-MM-DD")
+  );
 
-  
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
     cx,
@@ -109,29 +101,33 @@ const Dashboard = () => {
         `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${userId}`
       );
       setUser(data.user);
-      if(data.user.nrOfDeposits===0 && data.user.nrOfWithdraws===0){
-        setIsDepositModal(true)
+      if (data.user.nrOfDeposits === 0 && data.user.nrOfWithdraws === 0) {
+        setIsDepositModal(true);
       }
     } catch (error) {
       console.log(error);
     }
   };
-  const getUserFiltered = async ()=>{
-      try {
-        const {data} = await axios.post(`https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getEventByDate/${userId}`,{startingDate: dateFormat})
-        setUserExpenses(0);
-        setUserIncome(0);
-        data.events.map(x=>{
-          if (x.category.isDeposit === true){
-            setUserIncome(prevState => prevState+x.amount)
-          }else{
-            setUserExpenses(prevState => prevState+x.amount)
-          }
-        })
-      } catch (error) {
-        console.log(error);
-      }
-  }
+  const getUserFiltered = async () => {
+    try {
+      const { data } = await axios.post(
+        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getEventByDate/${userId}`,
+        { startingDate: dateFormat }
+      );
+      setUserExpenses(0);
+      setUserIncome(0);
+      data.events.map((x) => {
+        if (x.category.isDeposit === true) {
+          setUserIncome((prevState) => prevState + x.amount);
+        } else {
+          setUserExpenses((prevState) => prevState + x.amount);
+        }
+        return null;
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const getUserExpensesData = async () => {
     try {
       const { data } = await axios.post(
@@ -149,41 +145,74 @@ const Dashboard = () => {
     getUserExpensesData();
   }, [dateFormat]);
 
-
-
   return (
     <div className="dashboardWrapper">
       <Modal
         isOpen={modalIsOpen}
-        onRequestClose={()=> setIsOpen(false)}
+        onRequestClose={() => setIsOpen(false)}
         style={customStyles}
         contentLabel="Example Modal"
       >
         <div className="floatedButtons" style={floatingByttonStyles2}>
-          <div className="createDeposit" style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-            <p style={{display:"inline-block",color:"white",marginRight:"10px"}}>Add income</p>
+          <div
+            className="createDeposit"
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <p
+              style={{
+                display: "inline-block",
+                color: "white",
+                marginRight: "10px",
+              }}
+            >
+              Add income
+            </p>
             <Fab
               size="medium"
               aria-label="add"
               onClick={() => navigate(`/addIncome/${userId}`)}
-              sx={{background:"rgba(255,255,255,1)"}}
+              sx={{ background: "rgba(255,255,255,1)" }}
             >
               <img
                 src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Up.png"
+                alt="up arrow"
                 style={{ width: "60%" }}
               />
             </Fab>
           </div>
-          <div className="createWithdraw" style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-          <p style={{display:"inline-block",color:"white",marginRight:"10px"}}>Add expense</p>
+          <div
+            className="createWithdraw"
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <p
+              style={{
+                display: "inline-block",
+                color: "white",
+                marginRight: "10px",
+              }}
+            >
+              Add expense
+            </p>
             <Fab
               size="medium"
               aria-label="add"
               onClick={() => navigate(`/addExspense/${userId}`)}
-              sx={{background:"rgba(255,255,255,1)",opacity:"1 !important"}}
+              sx={{
+                background: "rgba(255,255,255,1)",
+                opacity: "1 !important",
+              }}
             >
               <img
                 src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Down.png"
+                alt="down arrow"
                 style={{ width: "60%" }}
               />
             </Fab>
@@ -204,17 +233,22 @@ const Dashboard = () => {
             {moment().format(" ddd, MMMM Do ")}
           </h3>
           <img
-            onClick={()=> setSideBar(true)}
+            onClick={() => setSideBar(true)}
             src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Filter.png"
-            alt=""
+            alt="filter"
             width="25"
           />
           <Drawer
             anchor="right"
             open={sideBar}
-            onClose={()=> setSideBar(false)}
+            onClose={() => setSideBar(false)}
           >
-            <Sidebar setTimeFormat={setTimeFormat} filteredTime={filteredTime} setFilteredTime={setFilteredTime} setSideBar={setSideBar} />
+            <Sidebar
+              setTimeFormat={setTimeFormat}
+              filteredTime={filteredTime}
+              setFilteredTime={setFilteredTime}
+              setSideBar={setSideBar}
+            />
           </Drawer>
         </div>
         <div className="events_byMonth">
@@ -232,13 +266,16 @@ const Dashboard = () => {
           >
             <img
               src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/income.png"
+              alt="income logo"
               style={{ marginTop: "10px" }}
               width={50}
               height={50}
             ></img>
             <div className="boxContainer_text">
               <p style={{ display: "block", color: "green" }}>Income</p>
-              <p>{user?.currency} {userIncome.toFixed(1)}</p>
+              <p>
+                {user?.currency} {userIncome.toFixed(1)}
+              </p>
             </div>
           </Box>
           <Box
@@ -255,13 +292,16 @@ const Dashboard = () => {
           >
             <img
               src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/outcome.png"
+              alt="outcome logo"
               style={{ marginTop: "10px" }}
               width={50}
               height={50}
             ></img>
             <div className="boxContainer_text">
               <p style={{ display: "block", color: "red" }}>Outcome</p>
-              <p>{user?.currency} {userExpenses.toFixed(1)}</p>
+              <p>
+                {user?.currency} {userExpenses.toFixed(1)}
+              </p>
             </div>
           </Box>
         </div>
@@ -274,8 +314,12 @@ const Dashboard = () => {
         <h3 style={{ marginTop: "20px", fontSize: "20px", color: "#3F3D56" }}>
           Categories
         </h3>
-        {user?.nrOfWithdraws===0 && <NoExpenseChart />}
-        <PieChart width={500} height={300} style={{maxWidth:"400px",margin:"0 auto"}}>
+        {user?.nrOfWithdraws === 0 && <NoExpenseChart />}
+        <PieChart
+          width={500}
+          height={300}
+          style={{ maxWidth: "400px", margin: "0 auto" }}
+        >
           <Pie
             style={{ margin: "0 auto" }}
             data={userExpensesData}
@@ -287,13 +331,10 @@ const Dashboard = () => {
             dataKey="amount"
             isAnimationActive={false}
             label={renderCustomizedLabel}
-            style={{overflow:"visible",margin:"0 auto"}}
+            style={{ overflow: "visible", margin: "0 auto" }}
           >
             {userExpensesData.map((index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={index.color}
-              />
+              <Cell key={`cell-${index}`} fill={index.color} />
             ))}
           </Pie>
         </PieChart>
@@ -303,14 +344,15 @@ const Dashboard = () => {
           aria-label="add"
           style={floatingByttonStyles}
         >
-          {modalIsOpen && 
-            <img 
-            src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Close.png" 
-            width="20"
-            onClick={()=> setIsOpen(false)}
+          {modalIsOpen && (
+            <img
+              src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Close.png"
+              alt="close windows"
+              width="20"
+              onClick={() => setIsOpen(false)}
             />
-            }
-          {modalIsOpen===false && <AddIcon onClick={()=> setIsOpen(true)} />}
+          )}
+          {modalIsOpen === false && <AddIcon onClick={() => setIsOpen(true)} />}
         </Fab>
         <Fab
           size="medium"
@@ -319,6 +361,7 @@ const Dashboard = () => {
           onClick={() => navigate("/profile")}
         >
           <img
+            alt="settings"
             src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Settings.png"
             style={{ width: "80%" }}
           />

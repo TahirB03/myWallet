@@ -7,25 +7,25 @@ import "./navbar.css";
 import Avatar from "../images/Avatar.png";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
-const Navbar = ({symbol}) => {
+const Navbar = ({ symbol }) => {
   const navigate = useNavigate();
   const user = useContext(UserContext);
 
   const [userDetails, setUserDetails] = useState("");
 
-  const fetchUserDetails = async () => {
-    try {
-      const { data } = await axios.get(
-        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${user}`
-      );
-      setUserDetails(...userDetails, data.user);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const { data } = await axios.get(
+          `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${user}`
+        );
+        setUserDetails(...userDetails, data.user);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchUserDetails();
-  }, []);
+  }, [userDetails, user]);
 
   return (
     <div className="dashboardNavbar">
@@ -57,7 +57,7 @@ const Navbar = ({symbol}) => {
               )}
             </div>
           </div>
-          <img src={Avatar} width="35"></img>
+          <img alt="profile" src={Avatar} width="35"></img>
         </div>
       </div>
       <div className="dashboardNavbar_body">
