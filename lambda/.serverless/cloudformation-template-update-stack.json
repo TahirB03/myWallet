@@ -179,6 +179,18 @@
         "LogGroupName": "/aws/lambda/myWallet-dev-getExpensesByUserMonth"
       }
     },
+    "GetUploadUrlLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/myWallet-dev-getUploadUrl"
+      }
+    },
+    "UploadImageLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/myWallet-dev-uploadImage"
+      }
+    },
     "IamRoleLambdaExecution": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -263,7 +275,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639869103181-2021-12-18T23:11:43.181Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639936667178-2021-12-19T17:57:47.178Z/myWallet.zip"
         },
         "Handler": "app.getAllUsers",
         "Runtime": "nodejs12.x",
@@ -288,7 +300,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639869103181-2021-12-18T23:11:43.181Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639936667178-2021-12-19T17:57:47.178Z/myWallet.zip"
         },
         "Handler": "app.getUserById",
         "Runtime": "nodejs12.x",
@@ -313,7 +325,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639869103181-2021-12-18T23:11:43.181Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639936667178-2021-12-19T17:57:47.178Z/myWallet.zip"
         },
         "Handler": "app.updateUser",
         "Runtime": "nodejs12.x",
@@ -338,7 +350,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639869103181-2021-12-18T23:11:43.181Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639936667178-2021-12-19T17:57:47.178Z/myWallet.zip"
         },
         "Handler": "app.createUser",
         "Runtime": "nodejs12.x",
@@ -363,7 +375,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639869103181-2021-12-18T23:11:43.181Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639936667178-2021-12-19T17:57:47.178Z/myWallet.zip"
         },
         "Handler": "app.deleteUser",
         "Runtime": "nodejs12.x",
@@ -388,7 +400,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639869103181-2021-12-18T23:11:43.181Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639936667178-2021-12-19T17:57:47.178Z/myWallet.zip"
         },
         "Handler": "app.getAllCategories",
         "Runtime": "nodejs12.x",
@@ -413,7 +425,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639869103181-2021-12-18T23:11:43.181Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639936667178-2021-12-19T17:57:47.178Z/myWallet.zip"
         },
         "Handler": "app.getCategoryFromId",
         "Runtime": "nodejs12.x",
@@ -438,7 +450,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639869103181-2021-12-18T23:11:43.181Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639936667178-2021-12-19T17:57:47.178Z/myWallet.zip"
         },
         "Handler": "app.deleteCategory",
         "Runtime": "nodejs12.x",
@@ -463,7 +475,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639869103181-2021-12-18T23:11:43.181Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639936667178-2021-12-19T17:57:47.178Z/myWallet.zip"
         },
         "Handler": "app.getAllEvents",
         "Runtime": "nodejs12.x",
@@ -488,7 +500,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639869103181-2021-12-18T23:11:43.181Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639936667178-2021-12-19T17:57:47.178Z/myWallet.zip"
         },
         "Handler": "app.getEventById",
         "Runtime": "nodejs12.x",
@@ -513,7 +525,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639869103181-2021-12-18T23:11:43.181Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639936667178-2021-12-19T17:57:47.178Z/myWallet.zip"
         },
         "Handler": "app.getEventbyUser",
         "Runtime": "nodejs12.x",
@@ -538,7 +550,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639869103181-2021-12-18T23:11:43.181Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639936667178-2021-12-19T17:57:47.178Z/myWallet.zip"
         },
         "Handler": "app.getEventsByUserCategory",
         "Runtime": "nodejs12.x",
@@ -563,7 +575,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639869103181-2021-12-18T23:11:43.181Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639936667178-2021-12-19T17:57:47.178Z/myWallet.zip"
         },
         "Handler": "app.getAllDeposit",
         "Runtime": "nodejs12.x",
@@ -588,7 +600,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639869103181-2021-12-18T23:11:43.181Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639936667178-2021-12-19T17:57:47.178Z/myWallet.zip"
         },
         "Handler": "app.getAllWithdraws",
         "Runtime": "nodejs12.x",
@@ -613,7 +625,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639869103181-2021-12-18T23:11:43.181Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639936667178-2021-12-19T17:57:47.178Z/myWallet.zip"
         },
         "Handler": "app.createEvent",
         "Runtime": "nodejs12.x",
@@ -638,7 +650,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639869103181-2021-12-18T23:11:43.181Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639936667178-2021-12-19T17:57:47.178Z/myWallet.zip"
         },
         "Handler": "app.deleteEvent",
         "Runtime": "nodejs12.x",
@@ -663,7 +675,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639869103181-2021-12-18T23:11:43.181Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639936667178-2021-12-19T17:57:47.178Z/myWallet.zip"
         },
         "Handler": "app.getEventByDate",
         "Runtime": "nodejs12.x",
@@ -688,7 +700,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/myWallet/dev/1639869103181-2021-12-18T23:11:43.181Z/myWallet.zip"
+          "S3Key": "serverless/myWallet/dev/1639936667178-2021-12-19T17:57:47.178Z/myWallet.zip"
         },
         "Handler": "app.getExpensesByUserMonth",
         "Runtime": "nodejs12.x",
@@ -706,184 +718,254 @@
         "GetExpensesByUserMonthLogGroup"
       ]
     },
-    "GetAllUsersLambdaVersionN68ohtkTz9e62spbTOFVLDBufFoJhVfUIY9YuaFC8": {
+    "GetUploadUrlLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/myWallet/dev/1639936667178-2021-12-19T17:57:47.178Z/myWallet.zip"
+        },
+        "Handler": "app.getUploadUrl",
+        "Runtime": "nodejs12.x",
+        "FunctionName": "myWallet-dev-getUploadUrl",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetUploadUrlLogGroup"
+      ]
+    },
+    "UploadImageLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/myWallet/dev/1639936667178-2021-12-19T17:57:47.178Z/myWallet.zip"
+        },
+        "Handler": "app.uploadImage",
+        "Runtime": "nodejs12.x",
+        "FunctionName": "myWallet-dev-uploadImage",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "UploadImageLogGroup"
+      ]
+    },
+    "GetAllUsersLambdaVersionxfXHZyTeosa2thrBNM04RR8Hyie0S16wWrwsEEDBI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetAllUsersLambdaFunction"
         },
-        "CodeSha256": "8wPWK0Qbzla53NMjU5IwoJbvjFLnSXQm4Beav0OqYn0="
+        "CodeSha256": "2Wup3JuEFoduRcILY9S7F57CkyljtrS+lK6ZJhqgoqY="
       }
     },
-    "GetUserByIdLambdaVersion0mxY36tD1QEMSlFPApOVfaO3osqNPryetB2FG23BiZ4": {
+    "GetUserByIdLambdaVersion2cAXfuzj86AJjtx7rneMdm96OTIKBogr9yfORQs1L8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetUserByIdLambdaFunction"
         },
-        "CodeSha256": "8wPWK0Qbzla53NMjU5IwoJbvjFLnSXQm4Beav0OqYn0="
+        "CodeSha256": "2Wup3JuEFoduRcILY9S7F57CkyljtrS+lK6ZJhqgoqY="
       }
     },
-    "UpdateUserLambdaVersionMS0vXgskF0bQL48WYGytoPwOtnuP5OwLpM0kpzBFI": {
+    "UpdateUserLambdaVersionGz2UzsCZw0uzTvLmXcCkKG4TjYY59IK86bnDQJM4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UpdateUserLambdaFunction"
         },
-        "CodeSha256": "8wPWK0Qbzla53NMjU5IwoJbvjFLnSXQm4Beav0OqYn0="
+        "CodeSha256": "2Wup3JuEFoduRcILY9S7F57CkyljtrS+lK6ZJhqgoqY="
       }
     },
-    "CreateUserLambdaVersionAVheJ4GKNxE65gntwzZqhs7wyfC0Vu3cjjL3HGap28": {
+    "CreateUserLambdaVersionYk1PmQTEM3p7WywbEcAJoSMkSgLR1ZANM7EMoYlo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CreateUserLambdaFunction"
         },
-        "CodeSha256": "8wPWK0Qbzla53NMjU5IwoJbvjFLnSXQm4Beav0OqYn0="
+        "CodeSha256": "2Wup3JuEFoduRcILY9S7F57CkyljtrS+lK6ZJhqgoqY="
       }
     },
-    "DeleteUserLambdaVersionihdOBUv0XLMKGimSlwQuhNmQuO3Ibqbt0jlMo6l39jY": {
+    "DeleteUserLambdaVersionpFozOdXrryKecXZN2D8LK4BekExweoQkhKcVpZUBuhg": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "DeleteUserLambdaFunction"
         },
-        "CodeSha256": "8wPWK0Qbzla53NMjU5IwoJbvjFLnSXQm4Beav0OqYn0="
+        "CodeSha256": "2Wup3JuEFoduRcILY9S7F57CkyljtrS+lK6ZJhqgoqY="
       }
     },
-    "GetAllCategoriesLambdaVersion0Y52dfpIX2E2w4CavJoBLDw1D6c01gKxnMEerF8nk": {
+    "GetAllCategoriesLambdaVersiontAJ6cfuIhlWBe6cAX0ImvFGNCpJbJoUlE0KbDUcms": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetAllCategoriesLambdaFunction"
         },
-        "CodeSha256": "8wPWK0Qbzla53NMjU5IwoJbvjFLnSXQm4Beav0OqYn0="
+        "CodeSha256": "2Wup3JuEFoduRcILY9S7F57CkyljtrS+lK6ZJhqgoqY="
       }
     },
-    "GetCategoryFromIdLambdaVersionqk4mf6OcBtvO9ao6laKgalkbkaJApxLXNG9d6kiK4": {
+    "GetCategoryFromIdLambdaVersion5aHVZVHIN99d4QI8HJAc4bFCFOKtL5w84Q2gKPs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetCategoryFromIdLambdaFunction"
         },
-        "CodeSha256": "8wPWK0Qbzla53NMjU5IwoJbvjFLnSXQm4Beav0OqYn0="
+        "CodeSha256": "2Wup3JuEFoduRcILY9S7F57CkyljtrS+lK6ZJhqgoqY="
       }
     },
-    "DeleteCategoryLambdaVersionrVauBXB8gZylplOTXK2hnXykycerhfB9m8FRDDXE": {
+    "DeleteCategoryLambdaVersiont1RwSkeR4DpI0v4iaIHg95dMJp8ohzY4aXU3Vl8Ms": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "DeleteCategoryLambdaFunction"
         },
-        "CodeSha256": "8wPWK0Qbzla53NMjU5IwoJbvjFLnSXQm4Beav0OqYn0="
+        "CodeSha256": "2Wup3JuEFoduRcILY9S7F57CkyljtrS+lK6ZJhqgoqY="
       }
     },
-    "GetAllEventsLambdaVersion9RbUZcJ57DMStfRZcFhcNq1myQOj2kt8ALWILLHOicA": {
+    "GetAllEventsLambdaVersionOw96UtmYtQ8foF2u8VI5eqv39f5EdnuUJuCFWJXwMHE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetAllEventsLambdaFunction"
         },
-        "CodeSha256": "8wPWK0Qbzla53NMjU5IwoJbvjFLnSXQm4Beav0OqYn0="
+        "CodeSha256": "2Wup3JuEFoduRcILY9S7F57CkyljtrS+lK6ZJhqgoqY="
       }
     },
-    "GetEventByIdLambdaVersionMBmxlIoYrMT5wfHM9IRf0sBd0cbWRA2hy0Pf9egOnY": {
+    "GetEventByIdLambdaVersionX5eOdyyqAIyUaTYm56hW7OmlxI3AJChYPLuFENrQVkI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetEventByIdLambdaFunction"
         },
-        "CodeSha256": "8wPWK0Qbzla53NMjU5IwoJbvjFLnSXQm4Beav0OqYn0="
+        "CodeSha256": "2Wup3JuEFoduRcILY9S7F57CkyljtrS+lK6ZJhqgoqY="
       }
     },
-    "GetEventbyUserLambdaVersion1Ud3WNFin2zDQLQVRQvqcFqWAiTrj29b8HtCMogJw": {
+    "GetEventbyUserLambdaVersionTbh4DKnadB2pAMCeZaF1uMi6TxOnWqma6geangTV7uI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetEventbyUserLambdaFunction"
         },
-        "CodeSha256": "8wPWK0Qbzla53NMjU5IwoJbvjFLnSXQm4Beav0OqYn0="
+        "CodeSha256": "2Wup3JuEFoduRcILY9S7F57CkyljtrS+lK6ZJhqgoqY="
       }
     },
-    "GetEventsByuserCategoryLambdaVersionpvcTSpWJRtFOuNgii7ykwgUHs4kEy2DmQi46W7C9PY": {
+    "GetEventsByuserCategoryLambdaVersionkdrfhNJL0RtoITH7XmXX6mEkc1GkjmsAhDPSUDGZGDQ": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetEventsByuserCategoryLambdaFunction"
         },
-        "CodeSha256": "8wPWK0Qbzla53NMjU5IwoJbvjFLnSXQm4Beav0OqYn0="
+        "CodeSha256": "2Wup3JuEFoduRcILY9S7F57CkyljtrS+lK6ZJhqgoqY="
       }
     },
-    "GetAllDepositLambdaVersionsvKaW8mW9Mn2VND3s1GwLAOLxY4vzn3NIad0wCQLIhI": {
+    "GetAllDepositLambdaVersionyXLEnPVNeUrjep5cyppX7C0nIgPBNuUm44mLIxt0SI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetAllDepositLambdaFunction"
         },
-        "CodeSha256": "8wPWK0Qbzla53NMjU5IwoJbvjFLnSXQm4Beav0OqYn0="
+        "CodeSha256": "2Wup3JuEFoduRcILY9S7F57CkyljtrS+lK6ZJhqgoqY="
       }
     },
-    "GetAllWithdrawsLambdaVersionW0WFVRGM1IURTf52SpGNzDf5pGl4E2HCOFmbn6Ac": {
+    "GetAllWithdrawsLambdaVersion26S4hNngU3zGgMQYKyU4ZSsDxvAVRyBJFrXmrzRw": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetAllWithdrawsLambdaFunction"
         },
-        "CodeSha256": "8wPWK0Qbzla53NMjU5IwoJbvjFLnSXQm4Beav0OqYn0="
+        "CodeSha256": "2Wup3JuEFoduRcILY9S7F57CkyljtrS+lK6ZJhqgoqY="
       }
     },
-    "CreateEventLambdaVersion0sPJ9N5SGkzrgROVbBM2zUg5y3ZRQIBPUlcdVrfjrWo": {
+    "CreateEventLambdaVersionCe80srOK8xmDyKmbEH44voJI3DIASfBZIO8qJOulSU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CreateEventLambdaFunction"
         },
-        "CodeSha256": "8wPWK0Qbzla53NMjU5IwoJbvjFLnSXQm4Beav0OqYn0="
+        "CodeSha256": "2Wup3JuEFoduRcILY9S7F57CkyljtrS+lK6ZJhqgoqY="
       }
     },
-    "DeleteEventLambdaVersion0ZkS6i0T2VW738iMNo4REHTxYtSWJK4gHL5Kf1fY": {
+    "DeleteEventLambdaVersionGuECwnjd2JLgVMhRrOvpwHk0a6I5MVyNkg3GPloZYrU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "DeleteEventLambdaFunction"
         },
-        "CodeSha256": "8wPWK0Qbzla53NMjU5IwoJbvjFLnSXQm4Beav0OqYn0="
+        "CodeSha256": "2Wup3JuEFoduRcILY9S7F57CkyljtrS+lK6ZJhqgoqY="
       }
     },
-    "GetEventByDateLambdaVersiondi4fD07iAtcmXm2lxWvDhcMNv6vgpGzSaAhhFs7CFo": {
+    "GetEventByDateLambdaVersionjz0fMH9g2ea3bUkHpm5kxmSq5OZuhOyoWSVnAi0E": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetEventByDateLambdaFunction"
         },
-        "CodeSha256": "8wPWK0Qbzla53NMjU5IwoJbvjFLnSXQm4Beav0OqYn0="
+        "CodeSha256": "2Wup3JuEFoduRcILY9S7F57CkyljtrS+lK6ZJhqgoqY="
       }
     },
-    "GetExpensesByUserMonthLambdaVersionLSNAyIIsbcblJto7YV2Nj5BXtd9JrBuKyWRobDA88": {
+    "GetExpensesByUserMonthLambdaVersiondakyxs49dlkJsP7Gl8zor3A2b1G1QHeYXj6sO1SI0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetExpensesByUserMonthLambdaFunction"
         },
-        "CodeSha256": "8wPWK0Qbzla53NMjU5IwoJbvjFLnSXQm4Beav0OqYn0="
+        "CodeSha256": "2Wup3JuEFoduRcILY9S7F57CkyljtrS+lK6ZJhqgoqY="
+      }
+    },
+    "GetUploadUrlLambdaVersionqBnBj43OP5EH3xTB8yTo82itFjOrzmtn6Ej6XFjg0M": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetUploadUrlLambdaFunction"
+        },
+        "CodeSha256": "2Wup3JuEFoduRcILY9S7F57CkyljtrS+lK6ZJhqgoqY="
+      }
+    },
+    "UploadImageLambdaVersionvCpYiBGKl1MVvAwYoUTEkj6bJOixVisGkijQoYhN7I": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "UploadImageLambdaFunction"
+        },
+        "CodeSha256": "2Wup3JuEFoduRcILY9S7F57CkyljtrS+lK6ZJhqgoqY="
       }
     },
     "ApiGatewayRestApi": {
@@ -1301,6 +1383,57 @@
           "Ref": "ApiGatewayResourceEventsGetexpensesbyusermonth"
         },
         "PathPart": "{id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceUpload": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "upload",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceUploadGetuploadurl": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceUpload"
+        },
+        "PathPart": "getUploadUrl",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceUploadGetuploadurlExtentionsVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceUploadGetuploadurl"
+        },
+        "PathPart": "{extentions}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceUploadUploadimage": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceUpload"
+        },
+        "PathPart": "uploadImage",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -2110,6 +2243,96 @@
         },
         "ResourceId": {
           "Ref": "ApiGatewayResourceEventsGetexpensesbyusermonthIdVar"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodUploadGetuploadurlExtentionsVarOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceUploadGetuploadurlExtentionsVar"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodUploadUploadimageOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,PUT'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceUploadUploadimage"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -2944,7 +3167,99 @@
         "GetExpensesByUserMonthLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1639869099954": {
+    "ApiGatewayMethodUploadGetuploadurlExtentionsVarGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceUploadGetuploadurlExtentionsVar"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetUploadUrlLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "GetUploadUrlLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayMethodUploadUploadimagePut": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "PUT",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceUploadUploadimage"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "UploadImageLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "UploadImageLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayDeployment1639936661328": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -2971,6 +3286,8 @@
         "ApiGatewayMethodEventsDeleteeventIdVarOptions",
         "ApiGatewayMethodEventsGeteventbydateIdVarOptions",
         "ApiGatewayMethodEventsGetexpensesbyusermonthIdVarOptions",
+        "ApiGatewayMethodUploadGetuploadurlExtentionsVarOptions",
+        "ApiGatewayMethodUploadUploadimageOptions",
         "ApiGatewayMethodUsersGetallusersGet",
         "ApiGatewayMethodUsersGetuserbyidIdVarGet",
         "ApiGatewayMethodUserUpdateuserIdVarPost",
@@ -2988,7 +3305,9 @@
         "ApiGatewayMethodEventsCreateeventUseridVarCategoryidVarPost",
         "ApiGatewayMethodEventsDeleteeventIdVarDelete",
         "ApiGatewayMethodEventsGeteventbydateIdVarPost",
-        "ApiGatewayMethodEventsGetexpensesbyusermonthIdVarPost"
+        "ApiGatewayMethodEventsGetexpensesbyusermonthIdVarPost",
+        "ApiGatewayMethodUploadGetuploadurlExtentionsVarGet",
+        "ApiGatewayMethodUploadUploadimagePut"
       ]
     },
     "GetAllUsersLambdaPermissionApiGateway": {
@@ -3656,6 +3975,80 @@
           ]
         }
       }
+    },
+    "GetUploadUrlLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetUploadUrlLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "UploadImageLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "UploadImageLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
     }
   },
   "Outputs": {
@@ -3670,7 +4063,7 @@
     "GetAllUsersLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetAllUsersLambdaVersionN68ohtkTz9e62spbTOFVLDBufFoJhVfUIY9YuaFC8"
+        "Ref": "GetAllUsersLambdaVersionxfXHZyTeosa2thrBNM04RR8Hyie0S16wWrwsEEDBI"
       },
       "Export": {
         "Name": "sls-myWallet-dev-GetAllUsersLambdaFunctionQualifiedArn"
@@ -3679,7 +4072,7 @@
     "GetUserByIdLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetUserByIdLambdaVersion0mxY36tD1QEMSlFPApOVfaO3osqNPryetB2FG23BiZ4"
+        "Ref": "GetUserByIdLambdaVersion2cAXfuzj86AJjtx7rneMdm96OTIKBogr9yfORQs1L8"
       },
       "Export": {
         "Name": "sls-myWallet-dev-GetUserByIdLambdaFunctionQualifiedArn"
@@ -3688,7 +4081,7 @@
     "UpdateUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UpdateUserLambdaVersionMS0vXgskF0bQL48WYGytoPwOtnuP5OwLpM0kpzBFI"
+        "Ref": "UpdateUserLambdaVersionGz2UzsCZw0uzTvLmXcCkKG4TjYY59IK86bnDQJM4"
       },
       "Export": {
         "Name": "sls-myWallet-dev-UpdateUserLambdaFunctionQualifiedArn"
@@ -3697,7 +4090,7 @@
     "CreateUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CreateUserLambdaVersionAVheJ4GKNxE65gntwzZqhs7wyfC0Vu3cjjL3HGap28"
+        "Ref": "CreateUserLambdaVersionYk1PmQTEM3p7WywbEcAJoSMkSgLR1ZANM7EMoYlo"
       },
       "Export": {
         "Name": "sls-myWallet-dev-CreateUserLambdaFunctionQualifiedArn"
@@ -3706,7 +4099,7 @@
     "DeleteUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "DeleteUserLambdaVersionihdOBUv0XLMKGimSlwQuhNmQuO3Ibqbt0jlMo6l39jY"
+        "Ref": "DeleteUserLambdaVersionpFozOdXrryKecXZN2D8LK4BekExweoQkhKcVpZUBuhg"
       },
       "Export": {
         "Name": "sls-myWallet-dev-DeleteUserLambdaFunctionQualifiedArn"
@@ -3715,7 +4108,7 @@
     "GetAllCategoriesLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetAllCategoriesLambdaVersion0Y52dfpIX2E2w4CavJoBLDw1D6c01gKxnMEerF8nk"
+        "Ref": "GetAllCategoriesLambdaVersiontAJ6cfuIhlWBe6cAX0ImvFGNCpJbJoUlE0KbDUcms"
       },
       "Export": {
         "Name": "sls-myWallet-dev-GetAllCategoriesLambdaFunctionQualifiedArn"
@@ -3724,7 +4117,7 @@
     "GetCategoryFromIdLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetCategoryFromIdLambdaVersionqk4mf6OcBtvO9ao6laKgalkbkaJApxLXNG9d6kiK4"
+        "Ref": "GetCategoryFromIdLambdaVersion5aHVZVHIN99d4QI8HJAc4bFCFOKtL5w84Q2gKPs"
       },
       "Export": {
         "Name": "sls-myWallet-dev-GetCategoryFromIdLambdaFunctionQualifiedArn"
@@ -3733,7 +4126,7 @@
     "DeleteCategoryLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "DeleteCategoryLambdaVersionrVauBXB8gZylplOTXK2hnXykycerhfB9m8FRDDXE"
+        "Ref": "DeleteCategoryLambdaVersiont1RwSkeR4DpI0v4iaIHg95dMJp8ohzY4aXU3Vl8Ms"
       },
       "Export": {
         "Name": "sls-myWallet-dev-DeleteCategoryLambdaFunctionQualifiedArn"
@@ -3742,7 +4135,7 @@
     "GetAllEventsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetAllEventsLambdaVersion9RbUZcJ57DMStfRZcFhcNq1myQOj2kt8ALWILLHOicA"
+        "Ref": "GetAllEventsLambdaVersionOw96UtmYtQ8foF2u8VI5eqv39f5EdnuUJuCFWJXwMHE"
       },
       "Export": {
         "Name": "sls-myWallet-dev-GetAllEventsLambdaFunctionQualifiedArn"
@@ -3751,7 +4144,7 @@
     "GetEventByIdLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetEventByIdLambdaVersionMBmxlIoYrMT5wfHM9IRf0sBd0cbWRA2hy0Pf9egOnY"
+        "Ref": "GetEventByIdLambdaVersionX5eOdyyqAIyUaTYm56hW7OmlxI3AJChYPLuFENrQVkI"
       },
       "Export": {
         "Name": "sls-myWallet-dev-GetEventByIdLambdaFunctionQualifiedArn"
@@ -3760,7 +4153,7 @@
     "GetEventbyUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetEventbyUserLambdaVersion1Ud3WNFin2zDQLQVRQvqcFqWAiTrj29b8HtCMogJw"
+        "Ref": "GetEventbyUserLambdaVersionTbh4DKnadB2pAMCeZaF1uMi6TxOnWqma6geangTV7uI"
       },
       "Export": {
         "Name": "sls-myWallet-dev-GetEventbyUserLambdaFunctionQualifiedArn"
@@ -3769,7 +4162,7 @@
     "GetEventsByuserCategoryLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetEventsByuserCategoryLambdaVersionpvcTSpWJRtFOuNgii7ykwgUHs4kEy2DmQi46W7C9PY"
+        "Ref": "GetEventsByuserCategoryLambdaVersionkdrfhNJL0RtoITH7XmXX6mEkc1GkjmsAhDPSUDGZGDQ"
       },
       "Export": {
         "Name": "sls-myWallet-dev-GetEventsByuserCategoryLambdaFunctionQualifiedArn"
@@ -3778,7 +4171,7 @@
     "GetAllDepositLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetAllDepositLambdaVersionsvKaW8mW9Mn2VND3s1GwLAOLxY4vzn3NIad0wCQLIhI"
+        "Ref": "GetAllDepositLambdaVersionyXLEnPVNeUrjep5cyppX7C0nIgPBNuUm44mLIxt0SI"
       },
       "Export": {
         "Name": "sls-myWallet-dev-GetAllDepositLambdaFunctionQualifiedArn"
@@ -3787,7 +4180,7 @@
     "GetAllWithdrawsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetAllWithdrawsLambdaVersionW0WFVRGM1IURTf52SpGNzDf5pGl4E2HCOFmbn6Ac"
+        "Ref": "GetAllWithdrawsLambdaVersion26S4hNngU3zGgMQYKyU4ZSsDxvAVRyBJFrXmrzRw"
       },
       "Export": {
         "Name": "sls-myWallet-dev-GetAllWithdrawsLambdaFunctionQualifiedArn"
@@ -3796,7 +4189,7 @@
     "CreateEventLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CreateEventLambdaVersion0sPJ9N5SGkzrgROVbBM2zUg5y3ZRQIBPUlcdVrfjrWo"
+        "Ref": "CreateEventLambdaVersionCe80srOK8xmDyKmbEH44voJI3DIASfBZIO8qJOulSU"
       },
       "Export": {
         "Name": "sls-myWallet-dev-CreateEventLambdaFunctionQualifiedArn"
@@ -3805,7 +4198,7 @@
     "DeleteEventLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "DeleteEventLambdaVersion0ZkS6i0T2VW738iMNo4REHTxYtSWJK4gHL5Kf1fY"
+        "Ref": "DeleteEventLambdaVersionGuECwnjd2JLgVMhRrOvpwHk0a6I5MVyNkg3GPloZYrU"
       },
       "Export": {
         "Name": "sls-myWallet-dev-DeleteEventLambdaFunctionQualifiedArn"
@@ -3814,7 +4207,7 @@
     "GetEventByDateLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetEventByDateLambdaVersiondi4fD07iAtcmXm2lxWvDhcMNv6vgpGzSaAhhFs7CFo"
+        "Ref": "GetEventByDateLambdaVersionjz0fMH9g2ea3bUkHpm5kxmSq5OZuhOyoWSVnAi0E"
       },
       "Export": {
         "Name": "sls-myWallet-dev-GetEventByDateLambdaFunctionQualifiedArn"
@@ -3823,10 +4216,28 @@
     "GetExpensesByUserMonthLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetExpensesByUserMonthLambdaVersionLSNAyIIsbcblJto7YV2Nj5BXtd9JrBuKyWRobDA88"
+        "Ref": "GetExpensesByUserMonthLambdaVersiondakyxs49dlkJsP7Gl8zor3A2b1G1QHeYXj6sO1SI0"
       },
       "Export": {
         "Name": "sls-myWallet-dev-GetExpensesByUserMonthLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetUploadUrlLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetUploadUrlLambdaVersionqBnBj43OP5EH3xTB8yTo82itFjOrzmtn6Ej6XFjg0M"
+      },
+      "Export": {
+        "Name": "sls-myWallet-dev-GetUploadUrlLambdaFunctionQualifiedArn"
+      }
+    },
+    "UploadImageLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "UploadImageLambdaVersionvCpYiBGKl1MVvAwYoUTEkj6bJOixVisGkijQoYhN7I"
+      },
+      "Export": {
+        "Name": "sls-myWallet-dev-UploadImageLambdaFunctionQualifiedArn"
       }
     },
     "ServiceEndpoint": {

@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const userSchema = mongoose.Schema(
   {
     _id: String,
-    image: { type: String , default: ''},
+    image: { type: String , default: 'https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Avatar.png'},
     balance: {
       type: Number,
       default: 0

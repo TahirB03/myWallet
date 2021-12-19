@@ -132,3 +132,17 @@ functions:
           path: /events/getExpensesByUserMonth/{id}
           method: POST
           cors: true
+  getUploadUrl:
+    handler: app.getUploadUrl
+    events:
+      - http:
+          path: /upload/getUploadUrl/{extentions}
+          method: GET
+          cors: true
+  uploadImage:
+    handler: app.uploadImage
+    events:
+      - http:
+          path: /upload/uploadImage
+          method: PUT
+          cors: true

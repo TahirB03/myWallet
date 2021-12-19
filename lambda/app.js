@@ -7,12 +7,21 @@ const validator = require("email-validator");
 const { phone } = require("phone");
 const user = require("./user");
 const mongoose = require('mongoose')
+const AWS = require('aws-sdk')
 
 const cors = {
   "Access-Control-Allow-Headers": "Content-Type",
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
 };
+
+const s3 = new AWS.S3({
+  region: 'eu-south-1',
+  accessKeyId: process.env.ACCESKEYID,
+  secretAccessKey: process.env.ACCESSECRET
+})
+
+
 
 //Get all the users (This is only for dev)
 const getAllUsers = async () => {
@@ -871,6 +880,55 @@ const getExpensesByUserMonth = async (event)=>{
   }
 }
 
+const getUploadUrl = async (event) => {
+  const bucketParams = {
+    Bucket: process.env.BUCKET_NAME,
+    Key: Date.now() + "." + event.pathParameters.extentions,
+    Expires: 60,
+  };
+  const uploadUrl = await s3.getSignedUrlPromise("putObject", bucketParams);
+  return {
+    statusCode: 201,
+    headers: {
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+    },
+    body: JSON.stringify({ link: uploadUrl }),
+  };
+};
+const uploadImage = async (event) => {
+  const key = event.queryStringParameters.path;
+  const params = {
+    Bucket: process.env.BUCKET_NAME,
+    Key: key,
+    ContentType: "multipart/form-data",
+    ACL: "public-read",
+    Expires: 120,
+  };
+  try {
+    const preSigned = await s3.getSignedUrl("putObject", params);
+    let returnObject = {
+      statusCode: 201,
+      header: {
+        "acces-control-allow-origin": "*",
+      },
+      Body: JSON.stringify({
+        fileUploadURL: preSigned,
+      }),
+    };
+    return returnObject;
+  } catch (error) {
+    return {
+      err: error.message,
+      header: {
+        "acces-control-allow-origin": "*",
+      },
+      body: JSON.stringify({ error: err }),
+    };
+  }
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
@@ -890,4 +948,6 @@ module.exports = {
   getEventByDate,
   getExpensesByUserMonth,
   updateUser,
+  getUploadUrl,
+  uploadImage
 };
