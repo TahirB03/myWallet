@@ -28,18 +28,20 @@ export const Transactions = () => {
     }
   };
 
+  const fetchEvents = async () => {
+    try {
+      const res = await axios.get(
+        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getEventByUser/${userId}`
+      );
+      setEventValues(res.data.events);
+      setLoading(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const res = await axios.get(
-          `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getEventByUser/${userId}`
-        );
-        setEventValues(res.data.events);
-        setLoading(true);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+  
     fetchEvents();
     getUser();
   }, [userId]);

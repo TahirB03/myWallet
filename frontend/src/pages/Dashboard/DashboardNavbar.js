@@ -12,19 +12,21 @@ const DashboardNavbar = () => {
   const user = useContext(UserContext);
   const [userDetails, setUserDetails] = useState("");
 
+  const fetchUserDetails = async () => {
+    try {
+      const { data } = await axios.get(
+        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${user}`
+      );
+      setUserDetails(data.user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchUserDetails = async () => {
-      try {
-        const { data } = await axios.get(
-          `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${user}`
-        );
-        setUserDetails(data.user);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+
     fetchUserDetails();
-  }, [user, userDetails]);
+  }, [user]);
 
   return (
     <div className="dashboardNavbar">
@@ -42,7 +44,7 @@ const DashboardNavbar = () => {
         </Link>
         <div
           className="dashboardNavbar_user"
-          onClick={() => navigate("/profile")}
+          onClick={() => navigate(`/uploadImage/${user}`)}
         >
           <div
             style={{ marginRight: "10px", fontWeight: "400", textAlign: "end" }}
@@ -54,7 +56,7 @@ const DashboardNavbar = () => {
               )}
             </div>
           </div>
-          <img alt="profile" src={userDetails?.image} width="35"></img>
+          <img style={{clipPath: "circle(50% at 50% 50%)"}} alt="Profile" src={userDetails?.image} width="35" onError={(e)=> {e.target.onError=null; e.target.src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Avatar.png"}}></img>
         </div>
       </div>
       <div className="dashboardNavbar_body">

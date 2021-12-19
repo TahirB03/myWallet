@@ -1,0 +1,66 @@
+.updateWrraper{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.userUpdate{
+    margin-top: 20px;
+    padding: 0 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 50px;
+    justify-content: space-between;
+}
+.imageUpload{
+    width: 100px;
+    height: 100px;
+    clip-path: circle(50% at 50% 50%);
+    overflow: hidden;
+}
+.uploadButton{
+    width: 100%;
+    height: 30px;
+    background-color: #3F3D56;
+    opacity: .7;
+    position: relative;
+    bottom: 30px;
+}
+.photoSymbol{
+    margin-left: 35px;
+}
+
+.userCredentialsInput{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 120px;
+}
+
+.userCredentialsInput fieldset, button{
+    border-radius: 27px !important;
+    height: 48px;   
+}
+
+.userCredentialsInput input{
+    padding: 10px 25px;
+}
+.userCredentialsInput legend{
+    width: 0px;
+}
+.userCredentialsInput label{
+    background-color: white;
+    width: 50px;
+    text-align: center;
+    margin-left: 5px;
+    
+}
+.updateButtonWrapper{
+    width: 80%;
+    flex: .5;
+}
+.updateButton{
+   margin-top: 50px;
+   border-radius: 27px;
+}

@@ -12,6 +12,7 @@ import { withAuthenticator } from "aws-amplify-react";
 import ChangePassword from "./pages/ChangePassword";
 import NewExpense from "./pages/NewExpense/NewExpense";
 import NewIncome from "./pages/NewIncome/NewIcome";
+import UploadPhoto from './pages/uploadPhoto/UploadPhoto'
 import About from "./pages/about";
 import Policy from "./pages/policy";
 import Loader from "react-loader-spinner";
@@ -39,6 +40,7 @@ const App = () => {
                 <Route path='/addExspense/:id' element={<NewExpense />} />
                 <Route path='/addIncome/:id' element={<NewIncome />} />
                 <Route path='/transactions' element={<Transactions />}></Route>
+                <Route path='/uploadImage/:id' element={<UploadPhoto />}></Route>
                 <Route path='/about' element={<About />}></Route>
                 <Route path='/policy' element={<Policy />}></Route>
                 <Route

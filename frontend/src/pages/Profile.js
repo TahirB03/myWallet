@@ -40,17 +40,19 @@ const Profile = () => {
     }
   };
 
+  const fetchUserDetails = async () => {
+    try {
+      const { data } = await axios.get(
+        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${userId}`
+      );
+      setCurrency(data?.user?.currency);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchUserDetails = async () => {
-      try {
-        const { data } = await axios.get(
-          `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${userId}`
-        );
-        setCurrency(data?.user?.currency);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+   
     fetchUserDetails();
   }, [userId]);
   return (
