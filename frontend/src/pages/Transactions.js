@@ -102,7 +102,7 @@ export const Transactions = () => {
           className="boxContainer"
           sx={{
             marginTop: "15px",
-            width: 160,
+            width: 170,
             height: 70,
             border: "1px solid lightgray",
             borderRadius: "25px",
@@ -140,7 +140,7 @@ export const Transactions = () => {
           className="boxContainer"
           sx={{
             marginTop: "15px",
-            width: 160,
+            width: 170,
             height: 70,
             border: "1px solid lightgray",
             borderRadius: "25px",

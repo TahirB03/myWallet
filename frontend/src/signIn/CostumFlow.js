@@ -152,7 +152,7 @@ const CostumFlow = () => {
         />
         <div className="signInForm">
           <div className="appName">
-            <h1>My Wallet</h1>
+            <h1>Habilis</h1>
           </div>
           <div className="form">
             <TextField
@@ -222,7 +222,7 @@ const CostumFlow = () => {
         </div>
         <div className="signInForm">
           <div className="appName">
-            <h1>My Wallet</h1>
+            <h1>Habilis</h1>
           </div>
           <div className="form">
             <TextField
@@ -348,7 +348,7 @@ const CostumFlow = () => {
         </div>
         <div className="signInForm">
           <div className="appName">
-            <h1>My Wallet</h1>
+            <h1>Habilis</h1>
           </div>
           <div className="form">
             <TextField
@@ -422,7 +422,7 @@ const CostumFlow = () => {
       </div>
       <div className="signInForm">
         <div className="appName">
-          <h1>My Wallet</h1>
+          <h1>Habilis</h1>
         </div>
         <div className="form">
           <TextField

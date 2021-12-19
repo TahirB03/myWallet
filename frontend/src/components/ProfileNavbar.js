@@ -10,7 +10,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 const ProfileNavbar = ({ currency }) => {
   const navigate = useNavigate();
   const user = useContext(UserContext);
-  console.log(user);
+
   const [userDetails, setUserDetails] = useState("");
 
   useEffect(() => {

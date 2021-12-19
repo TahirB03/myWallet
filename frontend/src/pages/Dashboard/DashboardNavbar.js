@@ -37,7 +37,7 @@ const DashboardNavbar = () => {
               textDecoration: "underline",
             }}
           >
-            My wallet
+            Habilis
           </p>
         </Link>
         <div
