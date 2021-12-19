@@ -16,6 +16,17 @@ export const Transactions = () => {
   const [month, setMonth] = useState("December");
   const [incomeList, setIncomeList] = useState([]);
   const [outcomeList, setOutcomeList] = useState([]);
+  const [user,setUser] = useState('')
+  const getUser = async () => {
+    try {
+      const { data } = await axios.get(
+        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${userId}`
+      );
+      setUser(data.user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -30,36 +41,9 @@ export const Transactions = () => {
       }
     };
     fetchEvents();
+    getUser()
   }, [userId]);
 
-  useEffect(() => {
-    const fetchIncomes = async () => {
-      try {
-        const res = await axios.get(
-          `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getDeposits/${userId}`
-        );
-        setIncomeList(res.data.events);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchIncomes();
-  }, [userId]);
-
-  useEffect(() => {
-    const fetchOutcomes = async () => {
-      try {
-        const res = await axios.get(
-          `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getAllWithdraws/${userId}`
-        );
-
-        setOutcomeList(res.data.events);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchOutcomes();
-  }, [userId]);
 
   let incomeSum = 0;
   let outcomeSum = 0;
@@ -74,7 +58,7 @@ export const Transactions = () => {
 
   return (
     <div className="monthContainer">
-      <Navbar />
+      <Navbar symbol={user?.currency} />
       <Slider className="slider" {...settings}>
         <button className="months" onClick={() => setMonth("Januray")}>
           Jan
@@ -126,9 +110,14 @@ export const Transactions = () => {
             padding: "0 0 0 5px",
           }}
         >
-          {incomeList.map((incomee) => {
-            if (moment(incomee.createdAt).format("MMMM") === month) {
-              incomeSum = incomeSum + incomee.amount;
+          {eventValues?.map((event) => {
+            if (event?.category?.isDeposit === true){
+            if (moment(event.createdAt).format("MMMM") === month) {
+              incomeSum = incomeSum + event.amount;
+            }} else{
+                if (moment(event.createdAt).format("MMMM") === month){
+                  outcomeSum = outcomeSum + event.amount;
+                }
             }
             return null;
           })}
@@ -142,7 +131,7 @@ export const Transactions = () => {
 
           <div className="boxContainer_text">
             <p style={{ display: "block", color: "green" }}>Income</p>
-            <p key={incomeList._id}>$ {incomeSum.toFixed(1)}</p>
+            <p key={incomeList._id}>{user?.currency} {incomeSum.toFixed(1)}</p>
           </div>
         </Box>
         <Box
@@ -156,15 +145,6 @@ export const Transactions = () => {
             padding: "0 0 0 5px",
           }}
         >
-          {outcomeList.map((outcomee) => {
-            if (
-              outcomee.category.isDeposit !== true &&
-              moment(outcomee.createdAt).format("MMMM") === month
-            ) {
-              outcomeSum = outcomeSum + outcomee.amount;
-            }
-            return null;
-          })}
           <img
             src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/outcome.png"
             style={{ marginTop: "10px" }}
@@ -175,7 +155,7 @@ export const Transactions = () => {
 
           <div className="boxContainer_text">
             <p style={{ display: "block", color: "red" }}>Outcome</p>
-            <p key={outcomeList._id}>$ {outcomeSum.toFixed(1)}</p>
+            <p key={outcomeList._id}>{user?.currency} {outcomeSum.toFixed(1)}</p>
           </div>
         </Box>
       </div>
@@ -208,7 +188,7 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}$</h4>
+                    <h4>-{value.amount}{user?.currency}</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -230,7 +210,7 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}$</h4>
+                    <h4>-{value.amount}{user?.currency}</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -252,7 +232,7 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}$</h4>
+                    <h4>-{value.amount}{user?.currency}</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -274,7 +254,7 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}$</h4>
+                    <h4>-{value.amount}{user?.currency}</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -296,7 +276,7 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}$</h4>
+                    <h4>-{value.amount}{user?.currency}</h4>
                   </div>
                   <h5> {moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -318,7 +298,7 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}$</h4>
+                    <h4>-{value.amount}{user?.currency}</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -340,7 +320,7 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}$</h4>
+                    <h4>-{value.amount}{user?.currency}</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -362,7 +342,7 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}$</h4>
+                    <h4>-{value.amount}{user?.currency}</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -384,7 +364,7 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4>-{value.amount}$</h4>
+                    <h4>-{value.amount}{user?.currency}</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -406,7 +386,7 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4 className="valueAmount">+{value.amount}$</h4>
+                    <h4 className="valueAmount">+{value.amount}{user?.currency}</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>
@@ -428,7 +408,7 @@ export const Transactions = () => {
                       {" "}
                       {value.category.categoryName}
                     </h3>
-                    <h4 className="valueAmount">+{value.amount}$</h4>
+                    <h4 className="valueAmount">+{value.amount}{user?.currency}</h4>
                   </div>
                   <h5>{moment(value.createdAt).format(" DD MMM")}</h5>
                 </div>

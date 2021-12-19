@@ -4,6 +4,7 @@
   flex-direction: column;
   width: 100vw;
   padding: 33px 20px;
+  position: relative;
 }
 .events_byMonth {
   display: flex;

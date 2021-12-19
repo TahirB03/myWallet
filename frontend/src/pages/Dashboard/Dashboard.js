@@ -109,7 +109,6 @@ const Dashboard = () => {
         `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${userId}`
       );
       setUser(data.user);
-      console.log(data.user);
       if(data.user.nrOfDeposits===0 && data.user.nrOfWithdraws===0){
         setIsDepositModal(true)
       }
@@ -239,7 +238,7 @@ const Dashboard = () => {
             ></img>
             <div className="boxContainer_text">
               <p style={{ display: "block", color: "green" }}>Income</p>
-              <p>$ {userIncome.toFixed(1)}</p>
+              <p>{user?.currency} {userIncome.toFixed(1)}</p>
             </div>
           </Box>
           <Box
@@ -262,7 +261,7 @@ const Dashboard = () => {
             ></img>
             <div className="boxContainer_text">
               <p style={{ display: "block", color: "red" }}>Outcome</p>
-              <p>$ {userExpenses.toFixed(1)}</p>
+              <p>{user?.currency} {userExpenses.toFixed(1)}</p>
             </div>
           </Box>
         </div>
@@ -276,11 +275,11 @@ const Dashboard = () => {
           Categories
         </h3>
         {user?.nrOfWithdraws===0 && <NoExpenseChart />}
-        <PieChart width={500} height={300}>
+        <PieChart width={500} height={300} style={{maxWidth:"400px",margin:"0 auto"}}>
           <Pie
             style={{ margin: "0 auto" }}
             data={userExpensesData}
-            cx={180}
+            cx={200}
             cy={150}
             innerRadius={65}
             outerRadius={90}

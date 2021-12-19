@@ -12,6 +12,7 @@ const userSchema = mongoose.Schema(
     nrOfWithdraws: { type: Number, min: 0, default: 0 },
     biggestDeposit: { type: Number, min: 0, default: 0 },
     biggestWithdraw: { type: Number, min: 0, default: 0 },
+    currency:{type: String, default:"$"}
   },
   { timestamps: true }
 );

@@ -47,6 +47,35 @@ const getAllUsers = async () => {
     };
   }
 };
+const updateUser = async (event)=>{
+  const userId = event.pathParameters.id;
+  let body;
+  if (event.body !== null && event.body !== undefined) {
+    body = JSON.parse(event.body);
+  }else{
+    return {
+      statusCode: 400,
+      headers: cors,
+      body: JSON.stringify({
+        message: "Provide a body for the request",
+      }),
+    };
+  }
+  try {
+    const user = await User.findOneAndUpdate({_id : userId},body)
+    return {
+      statusCode: 201,
+        body: JSON.stringify({
+          message: "User updated succesfully",
+        }),
+    }
+  } catch (error) {
+    return {statusCode: 404,
+      body: JSON.stringify({
+        message: error,
+      }),}
+  }
+}
 //Get user by ID
 const getUserById = async (event) => {
   const userId = event.pathParameters.id;
@@ -859,5 +888,6 @@ module.exports = {
   createEvent,
   deleteEvent,
   getEventByDate,
-  getExpensesByUserMonth
+  getExpensesByUserMonth,
+  updateUser,
 };

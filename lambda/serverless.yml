@@ -20,6 +20,13 @@ functions:
           path: /users/getUserById/{id}
           method: GET
           cors: true
+  updateUser:
+    handler: app.updateUser
+    events: 
+      - http:
+          path: /user/updateUser/{id}
+          method: POST
+          cors: true
   createUser:
     handler: app.createUser
     events:

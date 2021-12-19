@@ -7,7 +7,7 @@ import "./navbar.css";
 import Avatar from "../images/Avatar.png";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
-const Navbar = () => {
+const Navbar = ({symbol}) => {
   const navigate = useNavigate();
   const user = useContext(UserContext);
 
@@ -72,9 +72,9 @@ const Navbar = () => {
               fontSize: "25px",
             }}
           >
-            $
+            {symbol}
           </span>
-          {userDetails.balance >= 0 && (
+          {userDetails.balance !== undefined && (
             <h1 style={{ fontSize: "32px", display: "inline-block" }}>
               {userDetails.balance.toFixed(2)}
             </h1>
