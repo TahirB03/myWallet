@@ -11,7 +11,7 @@ import { Button } from "@mui/material";
 const UploadPhoto = () => {
     const navigate = useNavigate()
     const inputFile = useRef(null)
-  const userId = useContext(UserContext);
+    const userDetails = useContext(UserContext)
   const [userCredentials, setUserCredentials] = useState("");
   const [userinformation, setUserInformation] = useState("");
   const [isButtonDisabled, setIsButtonDisabeld] = useState(true);
@@ -46,8 +46,7 @@ const UploadPhoto = () => {
         })
       } catch (error) {
           console.log(error);
-      }
-     
+      }  
   }
 
   const updateUser = async ()=>{
@@ -56,9 +55,9 @@ const UploadPhoto = () => {
           const user = await Auth.currentAuthenticatedUser()
           const res = await Auth.updateUserAttributes(user,userCredentials?.attributes)
           if (file!==''){
-          const {data} = await axios.post(`https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/user/updateUser/${userId}`,{
+          const {data} = await axios.post(`https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/user/updateUser/${userDetails?.user}`,{
               image: postUrl.split("?")[0]
-          })}
+          },{headers:{"Authorization":userDetails?.token}})}
           if (res==="SUCCESS"){
                 navigate('/')
           }
@@ -74,7 +73,7 @@ const UploadPhoto = () => {
   const fetchUser = async () => {
     try {
       const { data } = await axios.get(
-        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${userId}`
+        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${userDetails?.user}`,{headers:{"Authorization":userDetails?.token}}
       );
       setUserInformation(data?.user);
     } catch (error) {
@@ -97,7 +96,7 @@ const UploadPhoto = () => {
   }, []);
   return (
     <div className="updateWrraper">
-      <DashboardNavbar />
+      <DashboardNavbar userDetail={userinformation} />
       <div className="userUpdate">
           <div>
         <div className="imageUpload">

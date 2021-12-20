@@ -7,28 +7,11 @@ import "./navbar.css";
 import Avatar from "../images/Avatar.png";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
-const ProfileNavbar = ({ currency }) => {
+const ProfileNavbar = ({ currency , userDetails}) => {
   const navigate = useNavigate();
-  const user = useContext(UserContext);
 
-  const [userDetails, setUserDetails] = useState("");
-
-  const fetchUserDetails = async () => {
-    try {
-      const { data } = await axios.get(
-        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${user}`
-      );
-      setUserDetails(data.user);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
+  const [userDetail, setUserDetails] = useState(userDetails);
   
-    fetchUserDetails();
-  }, [user]);
-
   return (
     <div className="dashboardNavbar">
       <div className="dashboardNavbar_header">
@@ -59,7 +42,7 @@ const ProfileNavbar = ({ currency }) => {
               )}
             </div>
           </div>
-          <img style={{clipPath: "circle(50% at 50% 50%)"}} alt="Profile" src={userDetails?.image} width="35" onError={(e)=> {e.target.onError=null; e.target.src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Avatar.png"}}></img>
+          <img style={{clipPath: "circle(50% at 50% 50%)"}} alt="Profile" src={userDetail?.image} width="35" onError={(e)=> {e.target.onError=null; e.target.src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Avatar.png"}}></img>
         </div>
       </div>
       <div className="dashboardNavbar_body">
@@ -76,9 +59,9 @@ const ProfileNavbar = ({ currency }) => {
           >
             {currency}
           </span>
-          {userDetails.balance !== undefined && (
+          {userDetail.balance !== undefined && (
             <h1 style={{ fontSize: "32px", display: "inline-block" }}>
-              {userDetails.balance.toFixed(2)}
+              {userDetail.balance.toFixed(2)}
             </h1>
           )}
         </div>

@@ -22,17 +22,18 @@ const signOut = async (e) => {
 };
 
 const Profile = () => {
-  const userId = useContext(UserContext);
+  const userDetails = useContext(UserContext)
   const [currency, setCurrency] = useState("$");
   const [isCurrencyShow, setIsCurrencyShow] = useState(false);
+  const [user,setUser]=useState('')
   const handleCurrency = (e) => {
     setCurrency(e.target.name);
   };
   const handleUpdate = async () => {
     try {
       const response = await axios.post(
-        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/user/updateUser/${userId}`,
-        { currency: currency }
+        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/user/updateUser/${userDetails?.user}`,
+        { currency: currency },{headers:{"Authorization":userDetails?.token}}
       );
       console.log(response);
     } catch (error) {
@@ -43,21 +44,21 @@ const Profile = () => {
   const fetchUserDetails = async () => {
     try {
       const { data } = await axios.get(
-        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${userId}`
+        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${userDetails?.user}`,{headers:{"Authorization":userDetails?.token}}
       );
       setCurrency(data?.user?.currency);
+      setUser(data?.user)
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-   
     fetchUserDetails();
-  }, [userId]);
+  }, [userDetails?.user]);
   return (
     <div>
-      <ProfileNavbar currency={currency} />
+      {user!=='' && <ProfileNavbar userDetails={user} currency={currency} />}
       <p className="settings">Settings</p>
       <div>
         <button

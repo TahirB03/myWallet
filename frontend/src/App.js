@@ -20,17 +20,20 @@ import Loader from "react-loader-spinner";
 Amplify.Auth.configure(poolData);
 
 const App = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState('');
+  const [token,setToken] = useState('')
   const setUserSub = async () => {
     const { attributes } = await Auth.currentAuthenticatedUser();
     setUser(attributes.sub);
+    const {idToken} = await Auth.currentSession();
+    setToken(idToken?.jwtToken)
   };
   useEffect(() => {
     setUserSub();
   }, []);
-    if (user !== null ){
+    if (user !== '' && token!== '' ){
     return (
-      <UserContext.Provider value={user}>
+      <UserContext.Provider value={{user,token}}>
         <div className='App'>
           <div>
             <Router>

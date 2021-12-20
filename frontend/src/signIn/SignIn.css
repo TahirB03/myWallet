@@ -52,3 +52,18 @@
 label{
     margin-left: 15px;
 }
+.inputRounded legend{
+    width: 0px;
+}
+.inputRounded label{
+    text-align: center;
+  margin-left: 5px;
+  background-color: white;
+  width: 100px;
+}
+
+.emailInputSignUp label{
+    text-align : center;
+    margin-left: 10px;
+    width: 50px;
+}

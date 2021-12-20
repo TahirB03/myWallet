@@ -158,6 +158,7 @@ const CostumFlow = () => {
             <TextField
               id="outlined-read-only-input"
               className="inputRounded"
+              notched={false}
               label="Username"
               autoFocus={true}
               fullWidth={true}
@@ -362,13 +363,14 @@ const CostumFlow = () => {
             />
             <TextField
               id="outlined-required"
-              className="inputRounded"
+              className="inputRounded emailInputSignUp"
               label="Email"
               value={credentials.email}
               name="email"
               fullWidth={true}
               onChange={handleChange}
               sx={{ marginTop: "15px" }}
+              
             />
             <TextField
               id="outlined-password-input"

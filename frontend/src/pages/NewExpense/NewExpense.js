@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./NewExpense.css";
 import { useParams, useNavigate } from "react-router-dom";
+import {UserContext} from '../../context/UserContext'
 import moment from "moment";
 import axios from "axios";
 import InputLabel from "@mui/material/InputLabel";
@@ -12,6 +13,8 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 
 const NewExpense = () => {
   const { id } = useParams();
+  console.log(id);
+  const userDetails = useContext(UserContext)
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [categoryId, setcategoryId] = useState(null);
@@ -35,7 +38,7 @@ const NewExpense = () => {
   const fetchCategories = async () => {
     try {
       const { data } = await axios.get(
-        "https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/category"
+        "https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/category",{headers:{"Authorization":userDetails?.token}}
       );
       data.allCategories.map((x) => {
         if (x.isDeposit === false) {
@@ -94,7 +97,7 @@ const NewExpense = () => {
         {
           amount: amount,
           description: description,
-        }
+        },{headers:{"Authorization":userDetails?.token}}
       );
       if (data) {
         navigate("/");

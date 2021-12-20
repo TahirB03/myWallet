@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import { UserContext } from "../context/UserContext";
 
 export const Transactions = () => {
-  const userId = useContext(UserContext);
+  const userDetails = useContext(UserContext);
   const [eventValues, setEventValues] = useState(null);
   const [loading, setLoading] = useState(false);
   const [month, setMonth] = useState("December");
@@ -20,7 +20,7 @@ export const Transactions = () => {
   const getUser = async () => {
     try {
       const { data } = await axios.get(
-        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${userId}`
+        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${userDetails?.user}`,{headers:{"Authorization":userDetails?.token}}
       );
       setUser(data.user);
     } catch (error) {
@@ -31,7 +31,7 @@ export const Transactions = () => {
   const fetchEvents = async () => {
     try {
       const res = await axios.get(
-        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getEventByUser/${userId}`
+        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getEventByUser/${userDetails?.user}`,{headers:{"Authorization":userDetails?.token}}
       );
       setEventValues(res.data.events);
       setLoading(true);
@@ -44,7 +44,7 @@ export const Transactions = () => {
   
     fetchEvents();
     getUser();
-  }, [userId]);
+  }, []);
 
   let incomeSum = 0;
   let outcomeSum = 0;
@@ -59,7 +59,7 @@ export const Transactions = () => {
 
   return (
     <div className="monthContainer">
-      <Navbar symbol={user?.currency} />
+      {user!=='' && <Navbar userData={user} symbol={user?.currency} />}
       <Slider className="slider" {...settings}>
         <button className="months" onClick={() => setMonth("Januray")}>
           Jan

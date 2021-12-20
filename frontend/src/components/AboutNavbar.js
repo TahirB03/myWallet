@@ -10,13 +10,12 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 const AboutNavbar = () => {
   const navigate = useNavigate();
   const user = useContext(UserContext);
-  console.log(user);
   const [userDetails, setUserDetails] = useState("");
 
   const fetchUserDetails = async () => {
     try {
       const { data } = await axios.get(
-        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${user}`
+        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${user.user}`,{headers:{"Authorization":user?.token}}
       );
       setUserDetails(...userDetails, data.user);
       console.log(data);

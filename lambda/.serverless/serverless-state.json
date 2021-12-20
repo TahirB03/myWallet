@@ -288,7 +288,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z/myWallet.zip"
               },
               "Handler": "app.getAllUsers",
               "Runtime": "nodejs12.x",
@@ -313,7 +313,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z/myWallet.zip"
               },
               "Handler": "app.getUserById",
               "Runtime": "nodejs12.x",
@@ -338,7 +338,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z/myWallet.zip"
               },
               "Handler": "app.updateUser",
               "Runtime": "nodejs12.x",
@@ -363,7 +363,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z/myWallet.zip"
               },
               "Handler": "app.createUser",
               "Runtime": "nodejs12.x",
@@ -388,7 +388,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z/myWallet.zip"
               },
               "Handler": "app.deleteUser",
               "Runtime": "nodejs12.x",
@@ -413,7 +413,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z/myWallet.zip"
               },
               "Handler": "app.getAllCategories",
               "Runtime": "nodejs12.x",
@@ -438,7 +438,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z/myWallet.zip"
               },
               "Handler": "app.getCategoryFromId",
               "Runtime": "nodejs12.x",
@@ -463,7 +463,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z/myWallet.zip"
               },
               "Handler": "app.deleteCategory",
               "Runtime": "nodejs12.x",
@@ -488,7 +488,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z/myWallet.zip"
               },
               "Handler": "app.getAllEvents",
               "Runtime": "nodejs12.x",
@@ -513,7 +513,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z/myWallet.zip"
               },
               "Handler": "app.getEventById",
               "Runtime": "nodejs12.x",
@@ -538,7 +538,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z/myWallet.zip"
               },
               "Handler": "app.getEventbyUser",
               "Runtime": "nodejs12.x",
@@ -563,7 +563,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z/myWallet.zip"
               },
               "Handler": "app.getEventsByUserCategory",
               "Runtime": "nodejs12.x",
@@ -588,7 +588,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z/myWallet.zip"
               },
               "Handler": "app.getAllDeposit",
               "Runtime": "nodejs12.x",
@@ -613,7 +613,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z/myWallet.zip"
               },
               "Handler": "app.getAllWithdraws",
               "Runtime": "nodejs12.x",
@@ -638,7 +638,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z/myWallet.zip"
               },
               "Handler": "app.createEvent",
               "Runtime": "nodejs12.x",
@@ -663,7 +663,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z/myWallet.zip"
               },
               "Handler": "app.deleteEvent",
               "Runtime": "nodejs12.x",
@@ -688,7 +688,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z/myWallet.zip"
               },
               "Handler": "app.getEventByDate",
               "Runtime": "nodejs12.x",
@@ -713,7 +713,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z/myWallet.zip"
               },
               "Handler": "app.getExpensesByUserMonth",
               "Runtime": "nodejs12.x",
@@ -738,7 +738,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z/myWallet.zip"
               },
               "Handler": "app.getUploadUrl",
               "Runtime": "nodejs12.x",
@@ -763,7 +763,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z/myWallet.zip"
+                "S3Key": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z/myWallet.zip"
               },
               "Handler": "app.uploadImage",
               "Runtime": "nodejs12.x",
@@ -2410,7 +2410,10 @@
                 "Ref": "ApiGatewayRestApi"
               },
               "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
+              "AuthorizationType": "COGNITO_USER_POOLS",
+              "AuthorizerId": {
+                "Ref": "AuthorizerApiGatewayAuthorizer"
+              },
               "Integration": {
                 "IntegrationHttpMethod": "POST",
                 "Type": "AWS_PROXY",
@@ -2440,9 +2443,7 @@
               },
               "MethodResponses": []
             },
-            "DependsOn": [
-              "GetUserByIdLambdaPermissionApiGateway"
-            ]
+            "DependsOn": "AuthorizerApiGatewayAuthorizer"
           },
           "ApiGatewayMethodUserUpdateuserIdVarPost": {
             "Type": "AWS::ApiGateway::Method",
@@ -2456,7 +2457,10 @@
                 "Ref": "ApiGatewayRestApi"
               },
               "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
+              "AuthorizationType": "COGNITO_USER_POOLS",
+              "AuthorizerId": {
+                "Ref": "AuthorizerApiGatewayAuthorizer"
+              },
               "Integration": {
                 "IntegrationHttpMethod": "POST",
                 "Type": "AWS_PROXY",
@@ -2486,9 +2490,7 @@
               },
               "MethodResponses": []
             },
-            "DependsOn": [
-              "UpdateUserLambdaPermissionApiGateway"
-            ]
+            "DependsOn": "AuthorizerApiGatewayAuthorizer"
           },
           "ApiGatewayMethodUsersAdduserIdVarGet": {
             "Type": "AWS::ApiGateway::Method",
@@ -2502,7 +2504,10 @@
                 "Ref": "ApiGatewayRestApi"
               },
               "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
+              "AuthorizationType": "COGNITO_USER_POOLS",
+              "AuthorizerId": {
+                "Ref": "AuthorizerApiGatewayAuthorizer"
+              },
               "Integration": {
                 "IntegrationHttpMethod": "POST",
                 "Type": "AWS_PROXY",
@@ -2532,9 +2537,7 @@
               },
               "MethodResponses": []
             },
-            "DependsOn": [
-              "CreateUserLambdaPermissionApiGateway"
-            ]
+            "DependsOn": "AuthorizerApiGatewayAuthorizer"
           },
           "ApiGatewayMethodUsersDeleteuserIdVarDelete": {
             "Type": "AWS::ApiGateway::Method",
@@ -2594,7 +2597,10 @@
                 "Ref": "ApiGatewayRestApi"
               },
               "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
+              "AuthorizationType": "COGNITO_USER_POOLS",
+              "AuthorizerId": {
+                "Ref": "AuthorizerApiGatewayAuthorizer"
+              },
               "Integration": {
                 "IntegrationHttpMethod": "POST",
                 "Type": "AWS_PROXY",
@@ -2624,9 +2630,7 @@
               },
               "MethodResponses": []
             },
-            "DependsOn": [
-              "GetAllCategoriesLambdaPermissionApiGateway"
-            ]
+            "DependsOn": "AuthorizerApiGatewayAuthorizer"
           },
           "ApiGatewayMethodCategoryIdVarGet": {
             "Type": "AWS::ApiGateway::Method",
@@ -2824,7 +2828,10 @@
                 "Ref": "ApiGatewayRestApi"
               },
               "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
+              "AuthorizationType": "COGNITO_USER_POOLS",
+              "AuthorizerId": {
+                "Ref": "AuthorizerApiGatewayAuthorizer"
+              },
               "Integration": {
                 "IntegrationHttpMethod": "POST",
                 "Type": "AWS_PROXY",
@@ -2854,9 +2861,7 @@
               },
               "MethodResponses": []
             },
-            "DependsOn": [
-              "GetEventbyUserLambdaPermissionApiGateway"
-            ]
+            "DependsOn": "AuthorizerApiGatewayAuthorizer"
           },
           "ApiGatewayMethodEventsGeteventbyuserIdVarCategoryidVarGet": {
             "Type": "AWS::ApiGateway::Method",
@@ -2870,7 +2875,10 @@
                 "Ref": "ApiGatewayRestApi"
               },
               "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
+              "AuthorizationType": "COGNITO_USER_POOLS",
+              "AuthorizerId": {
+                "Ref": "AuthorizerApiGatewayAuthorizer"
+              },
               "Integration": {
                 "IntegrationHttpMethod": "POST",
                 "Type": "AWS_PROXY",
@@ -2900,9 +2908,7 @@
               },
               "MethodResponses": []
             },
-            "DependsOn": [
-              "GetEventsByuserCategoryLambdaPermissionApiGateway"
-            ]
+            "DependsOn": "AuthorizerApiGatewayAuthorizer"
           },
           "ApiGatewayMethodEventsGetdepositsIdVarGet": {
             "Type": "AWS::ApiGateway::Method",
@@ -2916,7 +2922,10 @@
                 "Ref": "ApiGatewayRestApi"
               },
               "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
+              "AuthorizationType": "COGNITO_USER_POOLS",
+              "AuthorizerId": {
+                "Ref": "AuthorizerApiGatewayAuthorizer"
+              },
               "Integration": {
                 "IntegrationHttpMethod": "POST",
                 "Type": "AWS_PROXY",
@@ -2946,9 +2955,7 @@
               },
               "MethodResponses": []
             },
-            "DependsOn": [
-              "GetAllDepositLambdaPermissionApiGateway"
-            ]
+            "DependsOn": "AuthorizerApiGatewayAuthorizer"
           },
           "ApiGatewayMethodEventsGetallwithdrawsIdVarGet": {
             "Type": "AWS::ApiGateway::Method",
@@ -2962,7 +2969,10 @@
                 "Ref": "ApiGatewayRestApi"
               },
               "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
+              "AuthorizationType": "COGNITO_USER_POOLS",
+              "AuthorizerId": {
+                "Ref": "AuthorizerApiGatewayAuthorizer"
+              },
               "Integration": {
                 "IntegrationHttpMethod": "POST",
                 "Type": "AWS_PROXY",
@@ -2992,9 +3002,7 @@
               },
               "MethodResponses": []
             },
-            "DependsOn": [
-              "GetAllWithdrawsLambdaPermissionApiGateway"
-            ]
+            "DependsOn": "AuthorizerApiGatewayAuthorizer"
           },
           "ApiGatewayMethodEventsCreateeventUseridVarCategoryidVarPost": {
             "Type": "AWS::ApiGateway::Method",
@@ -3008,7 +3016,10 @@
                 "Ref": "ApiGatewayRestApi"
               },
               "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
+              "AuthorizationType": "COGNITO_USER_POOLS",
+              "AuthorizerId": {
+                "Ref": "AuthorizerApiGatewayAuthorizer"
+              },
               "Integration": {
                 "IntegrationHttpMethod": "POST",
                 "Type": "AWS_PROXY",
@@ -3038,9 +3049,7 @@
               },
               "MethodResponses": []
             },
-            "DependsOn": [
-              "CreateEventLambdaPermissionApiGateway"
-            ]
+            "DependsOn": "AuthorizerApiGatewayAuthorizer"
           },
           "ApiGatewayMethodEventsDeleteeventIdVarDelete": {
             "Type": "AWS::ApiGateway::Method",
@@ -3054,7 +3063,10 @@
                 "Ref": "ApiGatewayRestApi"
               },
               "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
+              "AuthorizationType": "COGNITO_USER_POOLS",
+              "AuthorizerId": {
+                "Ref": "AuthorizerApiGatewayAuthorizer"
+              },
               "Integration": {
                 "IntegrationHttpMethod": "POST",
                 "Type": "AWS_PROXY",
@@ -3084,9 +3096,7 @@
               },
               "MethodResponses": []
             },
-            "DependsOn": [
-              "DeleteEventLambdaPermissionApiGateway"
-            ]
+            "DependsOn": "AuthorizerApiGatewayAuthorizer"
           },
           "ApiGatewayMethodEventsGeteventbydateIdVarPost": {
             "Type": "AWS::ApiGateway::Method",
@@ -3100,7 +3110,10 @@
                 "Ref": "ApiGatewayRestApi"
               },
               "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
+              "AuthorizationType": "COGNITO_USER_POOLS",
+              "AuthorizerId": {
+                "Ref": "AuthorizerApiGatewayAuthorizer"
+              },
               "Integration": {
                 "IntegrationHttpMethod": "POST",
                 "Type": "AWS_PROXY",
@@ -3130,9 +3143,7 @@
               },
               "MethodResponses": []
             },
-            "DependsOn": [
-              "GetEventByDateLambdaPermissionApiGateway"
-            ]
+            "DependsOn": "AuthorizerApiGatewayAuthorizer"
           },
           "ApiGatewayMethodEventsGetexpensesbyusermonthIdVarPost": {
             "Type": "AWS::ApiGateway::Method",
@@ -3146,7 +3157,10 @@
                 "Ref": "ApiGatewayRestApi"
               },
               "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
+              "AuthorizationType": "COGNITO_USER_POOLS",
+              "AuthorizerId": {
+                "Ref": "AuthorizerApiGatewayAuthorizer"
+              },
               "Integration": {
                 "IntegrationHttpMethod": "POST",
                 "Type": "AWS_PROXY",
@@ -3176,9 +3190,7 @@
               },
               "MethodResponses": []
             },
-            "DependsOn": [
-              "GetExpensesByUserMonthLambdaPermissionApiGateway"
-            ]
+            "DependsOn": "AuthorizerApiGatewayAuthorizer"
           },
           "ApiGatewayMethodUploadGetuploadurlExtentionsVarGet": {
             "Type": "AWS::ApiGateway::Method",
@@ -3272,7 +3284,22 @@
               "UploadImageLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1639953591327": {
+          "AuthorizerApiGatewayAuthorizer": {
+            "Type": "AWS::ApiGateway::Authorizer",
+            "Properties": {
+              "AuthorizerResultTtlInSeconds": 300,
+              "IdentitySource": "method.request.header.Authorization",
+              "Name": "Authorizer",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "Type": "COGNITO_USER_POOLS",
+              "ProviderARNs": [
+                "arn:aws:cognito-idp:eu-north-1:875637363269:userpool/eu-north-1_dXZP6cEzw"
+              ]
+            }
+          },
+          "ApiGatewayDeployment1640036243192": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -4425,6 +4452,14 @@
                 ],
                 "allowCredentials": false
               },
+              "authorizer": {
+                "name": "Authorizer",
+                "arn": "arn:aws:cognito-idp:eu-north-1:875637363269:userpool/eu-north-1_dXZP6cEzw",
+                "managedExternally": false,
+                "resultTtlInSeconds": 300,
+                "identitySource": "method.request.header.Authorization",
+                "claims": []
+              },
               "integration": "AWS_PROXY"
             }
           }
@@ -4460,6 +4495,14 @@
                 ],
                 "allowCredentials": false
               },
+              "authorizer": {
+                "name": "Authorizer",
+                "arn": "arn:aws:cognito-idp:eu-north-1:875637363269:userpool/eu-north-1_dXZP6cEzw",
+                "managedExternally": false,
+                "resultTtlInSeconds": 300,
+                "identitySource": "method.request.header.Authorization",
+                "claims": []
+              },
               "integration": "AWS_PROXY"
             }
           }
@@ -4494,6 +4537,14 @@
                   "X-Amz-User-Agent"
                 ],
                 "allowCredentials": false
+              },
+              "authorizer": {
+                "name": "Authorizer",
+                "arn": "arn:aws:cognito-idp:eu-north-1:875637363269:userpool/eu-north-1_dXZP6cEzw",
+                "managedExternally": false,
+                "resultTtlInSeconds": 300,
+                "identitySource": "method.request.header.Authorization",
+                "claims": []
               },
               "integration": "AWS_PROXY"
             }
@@ -4564,6 +4615,14 @@
                   "X-Amz-User-Agent"
                 ],
                 "allowCredentials": false
+              },
+              "authorizer": {
+                "name": "Authorizer",
+                "arn": "arn:aws:cognito-idp:eu-north-1:875637363269:userpool/eu-north-1_dXZP6cEzw",
+                "managedExternally": false,
+                "resultTtlInSeconds": 300,
+                "identitySource": "method.request.header.Authorization",
+                "claims": []
               },
               "integration": "AWS_PROXY"
             }
@@ -4740,6 +4799,14 @@
                 ],
                 "allowCredentials": false
               },
+              "authorizer": {
+                "name": "Authorizer",
+                "arn": "arn:aws:cognito-idp:eu-north-1:875637363269:userpool/eu-north-1_dXZP6cEzw",
+                "managedExternally": false,
+                "resultTtlInSeconds": 300,
+                "identitySource": "method.request.header.Authorization",
+                "claims": []
+              },
               "integration": "AWS_PROXY"
             }
           }
@@ -4774,6 +4841,14 @@
                   "X-Amz-User-Agent"
                 ],
                 "allowCredentials": false
+              },
+              "authorizer": {
+                "name": "Authorizer",
+                "arn": "arn:aws:cognito-idp:eu-north-1:875637363269:userpool/eu-north-1_dXZP6cEzw",
+                "managedExternally": false,
+                "resultTtlInSeconds": 300,
+                "identitySource": "method.request.header.Authorization",
+                "claims": []
               },
               "integration": "AWS_PROXY"
             }
@@ -4810,6 +4885,14 @@
                 ],
                 "allowCredentials": false
               },
+              "authorizer": {
+                "name": "Authorizer",
+                "arn": "arn:aws:cognito-idp:eu-north-1:875637363269:userpool/eu-north-1_dXZP6cEzw",
+                "managedExternally": false,
+                "resultTtlInSeconds": 300,
+                "identitySource": "method.request.header.Authorization",
+                "claims": []
+              },
               "integration": "AWS_PROXY"
             }
           }
@@ -4844,6 +4927,14 @@
                   "X-Amz-User-Agent"
                 ],
                 "allowCredentials": false
+              },
+              "authorizer": {
+                "name": "Authorizer",
+                "arn": "arn:aws:cognito-idp:eu-north-1:875637363269:userpool/eu-north-1_dXZP6cEzw",
+                "managedExternally": false,
+                "resultTtlInSeconds": 300,
+                "identitySource": "method.request.header.Authorization",
+                "claims": []
               },
               "integration": "AWS_PROXY"
             }
@@ -4880,6 +4971,14 @@
                 ],
                 "allowCredentials": false
               },
+              "authorizer": {
+                "name": "Authorizer",
+                "arn": "arn:aws:cognito-idp:eu-north-1:875637363269:userpool/eu-north-1_dXZP6cEzw",
+                "managedExternally": false,
+                "resultTtlInSeconds": 300,
+                "identitySource": "method.request.header.Authorization",
+                "claims": []
+              },
               "integration": "AWS_PROXY"
             }
           }
@@ -4914,6 +5013,14 @@
                   "X-Amz-User-Agent"
                 ],
                 "allowCredentials": false
+              },
+              "authorizer": {
+                "name": "Authorizer",
+                "arn": "arn:aws:cognito-idp:eu-north-1:875637363269:userpool/eu-north-1_dXZP6cEzw",
+                "managedExternally": false,
+                "resultTtlInSeconds": 300,
+                "identitySource": "method.request.header.Authorization",
+                "claims": []
               },
               "integration": "AWS_PROXY"
             }
@@ -4950,6 +5057,14 @@
                 ],
                 "allowCredentials": false
               },
+              "authorizer": {
+                "name": "Authorizer",
+                "arn": "arn:aws:cognito-idp:eu-north-1:875637363269:userpool/eu-north-1_dXZP6cEzw",
+                "managedExternally": false,
+                "resultTtlInSeconds": 300,
+                "identitySource": "method.request.header.Authorization",
+                "claims": []
+              },
               "integration": "AWS_PROXY"
             }
           }
@@ -4984,6 +5099,14 @@
                   "X-Amz-User-Agent"
                 ],
                 "allowCredentials": false
+              },
+              "authorizer": {
+                "name": "Authorizer",
+                "arn": "arn:aws:cognito-idp:eu-north-1:875637363269:userpool/eu-north-1_dXZP6cEzw",
+                "managedExternally": false,
+                "resultTtlInSeconds": 300,
+                "identitySource": "method.request.header.Authorization",
+                "claims": []
               },
               "integration": "AWS_PROXY"
             }
@@ -5020,6 +5143,7 @@
                 ],
                 "allowCredentials": false
               },
+              "authorizer": null,
               "integration": "AWS_PROXY"
             }
           }
@@ -5055,6 +5179,7 @@
                 ],
                 "allowCredentials": false
               },
+              "authorizer": null,
               "integration": "AWS_PROXY"
             }
           }
@@ -5087,7 +5212,7 @@
     "artifact": "/home/tahir/Desktop/myWallet/myWallet/lambda/.serverless/myWallet.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/myWallet/dev/1639953597694-2021-12-19T22:39:57.694Z",
+    "artifactDirectoryName": "serverless/myWallet/dev/1640036249207-2021-12-20T21:37:29.207Z",
     "artifact": "myWallet.zip"
   }
 }

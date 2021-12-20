@@ -7,25 +7,11 @@ import "./dashboardNavbar.css";
 
 import Logo from "../../images/Image.png";
 
-const DashboardNavbar = () => {
+const DashboardNavbar = ({userDetail}) => {
+  const userDetails = userDetail;
   const navigate = useNavigate();
   const user = useContext(UserContext);
-  const [userDetails, setUserDetails] = useState("");
-
-  const fetchUserDetails = async () => {
-    try {
-      const { data } = await axios.get(
-        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${user}`
-      );
-      setUserDetails(data.user);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchUserDetails();
-  }, [user]);
+ 
 
   return (
     <div className="dashboardNavbar">
@@ -43,7 +29,7 @@ const DashboardNavbar = () => {
         </Link>
         <div
           className="dashboardNavbar_user"
-          onClick={() => navigate(`/uploadImage/${user}`)}
+          onClick={() => navigate(`/uploadImage/${user.user}`)}
         >
           <div
             style={{ marginRight: "10px", fontWeight: "400", textAlign: "end" }}
@@ -96,9 +82,9 @@ const DashboardNavbar = () => {
           >
             {userDetails?.currency}
           </span>
-          {userDetails.balance !== undefined && (
+          {userDetails?.balance !== undefined && (
             <h1 style={{ fontSize: "32px", display: "inline-block" }}>
-              {userDetails.balance.toFixed(2)}
+              {userDetails?.balance.toFixed(2)}
             </h1>
           )}
         </div>

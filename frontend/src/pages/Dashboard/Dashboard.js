@@ -54,7 +54,7 @@ Modal.setAppElement("#root");
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const userId = useContext(UserContext);
+  const userCredentials = useContext(UserContext);
   const [user, setUser] = useState(null);
   const [isDepositModal, setIsDepositModal] = useState(false);
   const [userIncome, setUserIncome] = useState(0);
@@ -95,24 +95,12 @@ const Dashboard = () => {
     );
   };
 
-  const getUser = async () => {
-    try {
-      const { data } = await axios.get(
-        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${userId}`
-      );
-      setUser(data.user);
-      if (data.user.nrOfDeposits === 0 && data.user.nrOfWithdraws === 0) {
-        setIsDepositModal(true);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
   const getUserFiltered = async () => {
     try {
       const { data } = await axios.post(
-        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getEventByDate/${userId}`,
-        { startingDate: dateFormat }
+        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getEventByDate/${userCredentials?.user}`,
+        { startingDate: dateFormat },{headers:{"Authorization":userCredentials?.token}}
       );
       setUserExpenses(0);
       setUserIncome(0);
@@ -128,11 +116,24 @@ const Dashboard = () => {
       console.log(error);
     }
   };
+  const getUser = async () => {
+    try {
+      const { data } = await axios.get(
+        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${userCredentials?.user}`,{headers:{"Authorization":userCredentials.token}}
+      );
+      setUser(data?.user);
+      if (data.user.nrOfDeposits === 0 && data.user.nrOfWithdraws === 0) {
+        setIsDepositModal(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const getUserExpensesData = async () => {
     try {
       const { data } = await axios.post(
-        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getExpensesByUserMonth/${userId}`,
-        { startingDate: dateFormat }
+        `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/events/getExpensesByUserMonth/${userCredentials?.user}`,
+        { startingDate: dateFormat },{headers:{"Authorization":userCredentials?.token}}
       );
       setUserExpensesData(data.events);
     } catch (error) {
@@ -140,9 +141,9 @@ const Dashboard = () => {
     }
   };
   useEffect(() => {
-    getUser();
     getUserFiltered();
     getUserExpensesData();
+    getUser();
   }, [dateFormat]);
 
   return (
@@ -174,7 +175,7 @@ const Dashboard = () => {
             <Fab
               size="medium"
               aria-label="add"
-              onClick={() => navigate(`/addIncome/${userId}`)}
+              onClick={() => navigate(`/addIncome/${userCredentials?.user}`)}
               sx={{ background: "rgba(255,255,255,1)" }}
             >
               <img
@@ -204,7 +205,7 @@ const Dashboard = () => {
             <Fab
               size="medium"
               aria-label="add"
-              onClick={() => navigate(`/addExspense/${userId}`)}
+              onClick={() => navigate(`/addExspense/${userCredentials?.user}`)}
               sx={{
                 background: "rgba(255,255,255,1)",
                 opacity: "1 !important",
@@ -219,7 +220,7 @@ const Dashboard = () => {
           </div>
         </div>
       </Modal>
-      <DashboardNavbar />
+      <DashboardNavbar userDetail={user} />
       <div className="dashboard">
         <div className="dashboardMonth">
           <h3
@@ -253,7 +254,6 @@ const Dashboard = () => {
         </div>
         <div className="events_byMonth">
           <Box
-            onClick={() => navigate("/s")}
             className="boxContainer"
             sx={{
               marginTop: "30px",
@@ -279,7 +279,6 @@ const Dashboard = () => {
             </div>
           </Box>
           <Box
-            onClick={() => navigate("/sa")}
             className="boxContainer"
             sx={{
               marginTop: "30px",
