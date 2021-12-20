@@ -24,7 +24,6 @@ const DashboardNavbar = () => {
   };
 
   useEffect(() => {
-
     fetchUserDetails();
   }, [user]);
 
@@ -36,7 +35,7 @@ const DashboardNavbar = () => {
             style={{
               fontSize: "18px",
               color: "white",
-              textDecoration: "underline",
+              textDecoration: "none",
             }}
           >
             Habilis
@@ -49,14 +48,32 @@ const DashboardNavbar = () => {
           <div
             style={{ marginRight: "10px", fontWeight: "400", textAlign: "end" }}
           >
-            <div className="dashboardNavbar_user_greetin">Hello</div>
-            <div className="dashboardNavbar_user_greetin">
+            <div
+              className="dashboardNavbar_user_greetin"
+              style={{ cursor: "pointer " }}
+            >
+              Hello
+            </div>
+            <div
+              className="dashboardNavbar_user_greetin"
+              style={{ cursor: "pointer" }}
+            >
               {localStorage.getItem(
                 "CognitoIdentityServiceProvider.3ae3cn84i7v4j30cg0v9o8bp50.LastAuthUser"
               )}
             </div>
           </div>
-          <img style={{clipPath: "circle(50% at 50% 50%)"}} alt="Profile" src={userDetails?.image} width="35" onError={(e)=> {e.target.onError=null; e.target.src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Avatar.png"}}></img>
+          <img
+            style={{ clipPath: "circle(50% at 50% 50%)" }}
+            alt="Profile"
+            src={userDetails?.image}
+            width="35"
+            onError={(e) => {
+              e.target.onError = null;
+              e.target.src =
+                "https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Avatar.png";
+            }}
+          ></img>
         </div>
       </div>
       <div className="dashboardNavbar_body">
