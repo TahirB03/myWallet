@@ -65,7 +65,7 @@ export const Transactions = () => {
           Jan
         </button>
         <button className="months" onClick={() => setMonth("February ")}>
-          Fec
+          Feb
         </button>
         <button className="months" onClick={() => setMonth("March ")}>
           Mar
