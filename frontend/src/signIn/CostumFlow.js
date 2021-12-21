@@ -248,6 +248,7 @@ const CostumFlow = () => {
           <div className="registerNow">
             <p className="registerNow_label">Already have an account </p>
             <span
+              style={{ cursor: "pointer" }}
               className="registerNow_span"
               onClick={() => setFlowStep("signIn")}
             >
@@ -326,6 +327,7 @@ const CostumFlow = () => {
           <div className="registerNow">
             <p className="registerNow_label">Already have an account </p>
             <span
+              style={{ cursor: "pointer" }}
               className="registerNow_span"
               onClick={() => setFlowStep("signIn")}
             >
@@ -370,7 +372,6 @@ const CostumFlow = () => {
               fullWidth={true}
               onChange={handleChange}
               sx={{ marginTop: "15px" }}
-              
             />
             <TextField
               id="outlined-password-input"
@@ -385,6 +386,7 @@ const CostumFlow = () => {
           </div>
           <div className="forgotPassword">
             <p
+              style={{ cursor: "pointer" }}
               className="forgotPassword_label"
               onClick={() => setFlowStep("forgotPassword1")}
             >
@@ -395,7 +397,7 @@ const CostumFlow = () => {
             variant="contained"
             disabled={buttonIsDisabled}
             color="warning"
-            sx={{ borderRadius: "40px", height: "45px" }}
+            sx={{ borderRadius: "40px", height: "45px", cursor: "pointer" }}
             onClick={handleSignUp}
           >
             Register
@@ -403,6 +405,7 @@ const CostumFlow = () => {
           <div className="registerNow">
             <p className="registerNow_label">Already have an account </p>
             <span
+              style={{ cursor: "pointer" }}
               className="registerNow_span"
               onClick={() => setFlowStep("signIn")}
             >
@@ -458,6 +461,7 @@ const CostumFlow = () => {
         </div>
         <div className="forgotPassword">
           <p
+            style={{ cursor: "pointer" }}
             className="forgotPassword_label"
             onClick={() => setFlowStep("forgotPassword1")}
           >
@@ -476,6 +480,7 @@ const CostumFlow = () => {
         <div className="registerNow">
           <p className="registerNow_label">Don't have an account yet? </p>
           <span
+            style={{ cursor: "pointer" }}
             className="registerNow_span"
             onClick={() => {
               setCredential(initialCredentials);

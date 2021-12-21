@@ -7,11 +7,10 @@ import "./navbar.css";
 import Avatar from "../images/Avatar.png";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
-const Navbar = ({ symbol,userData }) => {
+const Navbar = ({ symbol, userData }) => {
   const navigate = useNavigate();
 
   const [userDetails, setUserDetails] = useState(userData);
-
 
   return (
     <div className="dashboardNavbar">
@@ -34,7 +33,12 @@ const Navbar = ({ symbol,userData }) => {
           onClick={() => navigate("/profile")}
         >
           <div
-            style={{ marginRight: "10px", fontWeight: "400", textAlign: "end" }}
+            style={{
+              marginRight: "10px",
+              fontWeight: "400",
+              textAlign: "end",
+              cursor: "pointer",
+            }}
           >
             <div className="dashboardNavbar_user_greetin">Hello</div>
             <div className="dashboardNavbar_user_greetin">
@@ -43,7 +47,17 @@ const Navbar = ({ symbol,userData }) => {
               )}
             </div>
           </div>
-          <img style={{clipPath: "circle(50% at 50% 50%)"}} alt="Profile" src={userDetails?.image} width="35" onError={(e)=> {e.target.onError=null; e.target.src="https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Avatar.png"}}></img>
+          <img
+            style={{ clipPath: "circle(50% at 50% 50%)" }}
+            alt="Profile"
+            src={userDetails?.image}
+            width="35"
+            onError={(e) => {
+              e.target.onError = null;
+              e.target.src =
+                "https://mywalletimages.s3.eu-central-1.amazonaws.com/images/Avatar.png";
+            }}
+          ></img>
         </div>
       </div>
       <div className="dashboardNavbar_body">
