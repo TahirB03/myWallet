@@ -62,9 +62,9 @@ const Dashboard = () => {
   const [userExpensesData, setUserExpensesData] = useState([]);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [sideBar, setSideBar] = useState(false);
-  const [filteredTime, setFilteredTime] = useState("Month");
+  const [filteredTime, setFilteredTime] = useState("Week");
   const [dateFormat, setTimeFormat] = useState(
-    moment().startOf("month").format("YYYY-MM-DD")
+    moment().startOf("week").format("YYYY-MM-DD")
   );
 
   const RADIAN = Math.PI / 180;

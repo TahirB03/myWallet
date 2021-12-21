@@ -70,7 +70,7 @@ const Sidebar = ({
         setTime={setFilteredTime}
         time={filteredTime}
         setSideBar={setSideBar}
-        disabled="true"
+        disabled={true}
       />
     </div>
   );

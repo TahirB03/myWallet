@@ -40,9 +40,6 @@ functions:
           path: /users/addUser/{id}
           method: GET
           cors: true
-          authorizer: 
-            name: Authorizer
-            arn: arn:aws:cognito-idp:eu-north-1:875637363269:userpool/eu-north-1_dXZP6cEzw
   deleteUser:
     handler: app.deleteUser
     events: 

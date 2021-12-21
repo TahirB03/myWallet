@@ -4,7 +4,6 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import "./navbar.css";
-import Avatar from "../images/Avatar.png";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 const ChangePasswordNavbar = () => {
@@ -25,8 +24,8 @@ const ChangePasswordNavbar = () => {
   };
 
   useEffect(() => {
-    
     fetchUserDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ user]);
 
   return (

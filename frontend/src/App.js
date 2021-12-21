@@ -20,7 +20,7 @@ import Loader from "react-loader-spinner";
 Amplify.Auth.configure(poolData);
 
 const App = () => {
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState('')
   const [token,setToken] = useState('')
   const setUserSub = async () => {
     const { attributes } = await Auth.currentAuthenticatedUser();
