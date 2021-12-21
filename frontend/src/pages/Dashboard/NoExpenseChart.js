@@ -7,7 +7,7 @@ const NoExpenseChart = ()=> {
     const userId = useContext(UserContext)
     return (
         <div className="NoExpenseChart">
-            <h1 className='noExpenseHeader'>Try adding an expspense</h1>
+            <h1 className='noExpenseHeader'>Try adding an expense</h1>
             <button className="noExpenseButton" onClick={()=> navigate(`/addExspense/${userId}`)}>Get started!</button>
         </div>
     )
