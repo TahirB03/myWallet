@@ -4,11 +4,11 @@ import {UserContext} from '../../context/UserContext'
 
 const NoExpenseChart = ()=> {
     const navigate = useNavigate();
-    const userId = useContext(UserContext)
+    const {user} = useContext(UserContext)
     return (
         <div className="NoExpenseChart">
             <h1 className='noExpenseHeader'>Try adding an expense</h1>
-            <button className="noExpenseButton" onClick={()=> navigate(`/addExspense/${userId}`)}>Get started!</button>
+            <button className="noExpenseButton" onClick={()=> navigate(`/addExspense/${user}`)}>Get started!</button>
         </div>
     )
 }

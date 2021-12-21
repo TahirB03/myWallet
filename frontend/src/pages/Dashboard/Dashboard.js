@@ -313,7 +313,7 @@ const Dashboard = () => {
         <h3 style={{ marginTop: "20px", fontSize: "20px", color: "#3F3D56" }}>
           Categories
         </h3>
-        {user?.nrOfWithdraws === 0 && <NoExpenseChart />}
+        {user?.nrOfWithdraws === 0 && <NoExpenseChart userId={userCredentials.user} />}
         <PieChart
           width={500}
           height={300}
