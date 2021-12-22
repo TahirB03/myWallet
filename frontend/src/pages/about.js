@@ -21,9 +21,6 @@ const About = () => {
             <p>For any problem that you may have contact us at our email : </p>
             <h3>habilis.me@gmail.com</h3>
           </div>
-          <Link to="/profile">
-            <button className="back-buttonAbout">Back</button>
-          </Link>
         </div>
       </div>
     </div>

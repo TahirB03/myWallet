@@ -199,11 +199,6 @@ const Policy = () => {
           encourage you to contact us immediately and we will do our best
           efforts to promptly remove such information from our records.
         </p>
-        <div className='button'>
-          <Link to='/profile'>
-            <button className='back-buttonPolicy '>Back</button>
-          </Link>
-        </div>
       </div>
     </div>
   );

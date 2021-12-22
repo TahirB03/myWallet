@@ -23,7 +23,7 @@ const NewExpense = () => {
   const [errors, setErrors] = useState({
     amount: {
       state: false,
-      message: "Amount should be greater tha 0",
+      message: "Amount should be greater than 0",
     },
     category: {
       state: false,

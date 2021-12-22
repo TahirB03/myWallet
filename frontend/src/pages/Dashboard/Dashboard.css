@@ -4,7 +4,6 @@
   flex-direction: column;
   width: 100vw;
   padding: 33px 20px;
-  position: relative;
 }
 .events_byMonth {
   display: flex;
@@ -35,6 +34,7 @@
 .ReactModal__Overlay--after-open{
   background-color: #3F3D56 !important;
   opacity: 0.75 !important;
+  /* z-index: 1; */
 }
 
 .NoExpenseChart{
@@ -46,7 +46,8 @@
 }
 .noExpenseHeader{
   color: #3F3D56 ;
-  font-size: 32px;
+  font-size: 18px;
+  font-weight: 300;
 }
 .noExpenseButton{
   width: 100%;
@@ -59,4 +60,7 @@
   font-weight: 400;
   border: solid 1px black;
   margin-top: 10px;
+}
+.floatingButtons{
+  position: absolute;
 }

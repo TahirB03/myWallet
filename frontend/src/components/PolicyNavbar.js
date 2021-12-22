@@ -18,7 +18,6 @@ const PolicyNavbar = () => {
         `https://nx1qh9klx1.execute-api.eu-south-1.amazonaws.com/dev/users/getUserById/${user.user}`,{headers:{"Authorization":user?.token}}
       );
       setUserDetails(data.user);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }

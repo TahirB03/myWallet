@@ -15,30 +15,23 @@ import Sidebar from "../../components/Sidebar.js/Sidebar";
 import NoExpenseChart from "./NoExpenseChart";
 
 const floatingByttonStyles = {
-  margin: 0,
-  top: "auto",
-  right: 20,
-  bottom: 100,
-  left: "auto",
   position: "fixed",
+  right: 20,
+  bottom: 80,
   zIndex: "10",
 };
 const floatingByttonStyles1 = {
-  margin: 0,
-  top: "auto",
-  right: 25,
-  bottom: 40,
-  left: "auto",
   position: "fixed",
-  zIndex: "10",
+  right: 25,
+  bottom: 10,
 };
 const floatingByttonStyles2 = {
+  position: "fixed",
   margin: 0,
   top: "auto",
   right: 25,
   bottom: 180,
   left: "auto",
-  position: "fixed",
   zIndex: "10",
 };
 const customStyles = {
@@ -90,7 +83,8 @@ const Dashboard = () => {
         dominantBaseline="central"
         fontSize={"13px"}
       >
-        {`${userExpensesData[index].name} ${(percent * 100).toFixed(0)}%`}
+        {userExpensesData[index].name.length>=7 ?  `${userExpensesData[index].name?.substring(0,6)}... ${(percent * 100).toFixed(0)}%` : `${userExpensesData[index].name} ${(percent * 100).toFixed(0)}%`}
+        {}
       </text>
     );
   };
@@ -257,7 +251,7 @@ const Dashboard = () => {
             className="boxContainer"
             sx={{
               marginTop: "30px",
-              width: 170,
+              width: 160,
               height: 70,
               border: "1px solid lightgray",
               borderRadius: "25px",
@@ -355,8 +349,10 @@ const Dashboard = () => {
         </Fab>
         <Fab
           size="medium"
+          variant='circular'
           aria-label="add"
           style={floatingByttonStyles1}
+          className="floatingButtonCostumise"
           onClick={() => navigate("/profile")}
         >
           <img

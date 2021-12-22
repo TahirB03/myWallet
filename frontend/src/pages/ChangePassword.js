@@ -103,9 +103,6 @@ const ChangePassword = () => {
       </form>
 
       <div>
-        <Link to="/profile">
-          <button className="back-button ">Back</button>
-        </Link>
         <button className="confirm-button" onClick={handlePassword}>
           Confirm
         </button>
