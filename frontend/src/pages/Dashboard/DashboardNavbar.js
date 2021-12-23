@@ -5,7 +5,6 @@ import { useNavigate, Link } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import "./dashboardNavbar.css";
 
-import Logo from "../../images/Image.png";
 
 const DashboardNavbar = ({userDetail}) => {
   const userDetails = userDetail;
@@ -64,7 +63,7 @@ const DashboardNavbar = ({userDetail}) => {
       </div>
       <div className="dashboardNavbar_body">
         <img
-          src={Logo}
+          src='https://mywalletimages.s3.eu-central-1.amazonaws.com/images/pig.png'
           alt=""
           width="70"
           style={{ borderBottom: "solid 1px white" }}
